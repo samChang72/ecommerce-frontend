@@ -3,6 +3,7 @@ const packageJson = require('./package.json');
 
 module.exports = {
   publicPath: '/ecommerce-frontend/', // 設定基底路徑
+  outputDir: 'docs', // 將輸出目錄改為 docs
   configureWebpack: {
     plugins: [
       new webpack.BannerPlugin({

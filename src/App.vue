@@ -65,33 +65,41 @@ export default {
 </script>
 
 <style>
+/* Tabs 樣式 */
 .tabs {
   display: flex;
   gap: 10px;
   margin-bottom: 20px;
+  flex-wrap: wrap; /* 讓按鈕在小螢幕時自動換行 */
 }
 .tabs button {
   padding: 10px 20px;
   cursor: pointer;
+  flex: 1; /* 讓按鈕在小螢幕時平均分配寬度 */
+  text-align: center;
 }
 .tabs button.active {
   background-color: #007bff;
   color: white;
   border: none;
 }
+
+/* Products 列表樣式 */
 .products ul {
   list-style: none;
   padding: 0;
   display: flex;
-  flex-wrap: wrap;
+  flex-wrap: wrap; /* 讓產品項目在小螢幕時自動換行 */
   gap: 20px;
+  justify-content: center; /* 讓產品在小螢幕時置中 */
 }
 .product-item {
   border: 1px solid #ddd;
   border-radius: 5px;
   padding: 10px;
-  width: 200px;
+  width: calc(33.333% - 20px); /* 預設每行顯示 3 個產品 */
   text-align: center;
+  box-sizing: border-box;
 }
 .product-image {
   width: 100px;
@@ -114,5 +122,22 @@ button {
 }
 button:hover {
   background-color: #0056b3;
+}
+
+/* RWD 媒體查詢 */
+@media (max-width: 768px) {
+  .product-item {
+    width: calc(50% - 20px); /* 平板或小螢幕每行顯示 2 個產品 */
+  }
+}
+
+@media (max-width: 480px) {
+  .product-item {
+    width: 100%; /* 手機螢幕每行顯示 1 個產品 */
+  }
+  .tabs button {
+    flex: none; /* 讓按鈕在手機上不平均分配寬度 */
+    width: 100%; /* 每個按鈕佔滿一行 */
+  }
 }
 </style>
