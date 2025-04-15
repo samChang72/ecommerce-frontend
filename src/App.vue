@@ -34,12 +34,12 @@ export default {
       tabs: ['飲料', '3C', '零食'],
       activeTab: '飲料',
       products: [
-        { id: 1, name: '可樂', price: 30, type: '飲料', image: '/ecommerce-frontend/image/coke.png' },
-        { id: 2, name: '綠茶', price: 25, type: '飲料', image: '/ecommerce-frontend/image/green.png' },
-        { id: 3, name: '手機', price: 15000, type: '3C', image: '/ecommerce-frontend/image/phone.png' },
-        { id: 4, name: '筆電', price: 45000, type: '3C', image: '/ecommerce-frontend/image/notebook.png' },
-        { id: 5, name: '洋芋片', price: 50, type: '零食', image: '/ecommerce-frontend/image/chips.png' },
-        { id: 6, name: '巧克力', price: 60, type: '零食', image: '/ecommerce-frontend/image/chocolate.png' },
+        { id: 1, name: '可樂', price: 30, type: '飲料', image: '/image/coke.png' },
+        { id: 2, name: '綠茶', price: 25, type: '飲料', image: '/image/green.png' },
+        { id: 3, name: '手機', price: 15000, type: '3C', image: '/image/phone.png' },
+        { id: 4, name: '筆電', price: 45000, type: '3C', image: '/image/notebook.png' },
+        { id: 5, name: '洋芋片', price: 50, type: '零食', image: '/image/chips.png' },
+        { id: 6, name: '巧克力', price: 60, type: '零食', image: '/image/chocolate.png' },
       ],
       cart: [],
     };
