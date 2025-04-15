@@ -7,4 +7,5 @@ export default defineConfig({
   build: {
     outDir: 'docs', // 將輸出目錄改為 docs
   },
+  publicDir: 'public', // 確保 public 資料夾被啟用
 });
