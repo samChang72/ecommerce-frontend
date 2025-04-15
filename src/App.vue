@@ -51,7 +51,13 @@ export default {
   },
   methods: {
     addToCart(product) {
+      // 暫存產品資料到 cart 陣列
       this.cart.push(product);
+
+      // 在控制台輸出產品的完整資料
+      console.log('加入購物車的產品資料:', product);
+
+      // 顯示提示訊息
       alert(`${product.name} 已加入購物車！`);
     },
   },
