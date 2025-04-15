@@ -1,10 +1,7 @@
-import { defineConfig } from 'vite'
-import vue from '@vitejs/plugin-vue'
+import { defineConfig } from 'vite';
+import vue from '@vitejs/plugin-vue';
 
 export default defineConfig({
-  base: '/ecommerce-frontend/',
-  build: {
-    outDir: 'docs'
-  },
-  plugins: [vue()]
-})
+  plugins: [vue()],
+  base: '/ecommerce-frontend/', // 設定基底路徑
+});
