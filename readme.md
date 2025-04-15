@@ -6,3 +6,8 @@ git add .
 git commit -m "build for GitHub Pages"
 git push
 ```
+
+* localhost deubg
+```
+npm run dev
+```
