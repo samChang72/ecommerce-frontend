@@ -140,4 +140,37 @@ button:hover {
     width: 100%; /* 每個按鈕佔滿一行 */
   }
 }
+
+/* 手機 RWD 調整 */
+@media (max-width: 480px) {
+  .tabs button {
+    width: 100%; /* 按鈕佔滿整行 */
+    margin-bottom: 10px; /* 增加按鈕間距 */
+  }
+
+  .products ul {
+    flex-direction: column; /* 產品列表改為垂直排列 */
+    gap: 15px; /* 增加產品間距 */
+  }
+
+  .product-item {
+    width: 100%; /* 產品項目佔滿整行 */
+    padding: 15px; /* 增加內邊距 */
+  }
+
+  .product-image {
+    width: 80px; /* 縮小圖片尺寸 */
+    height: 80px;
+    margin: 0 auto 10px; /* 置中圖片並增加下方間距 */
+  }
+
+  .product-info {
+    text-align: center; /* 文字置中 */
+  }
+
+  button {
+    font-size: 14px; /* 調整按鈕字體大小 */
+    padding: 8px 12px; /* 增加按鈕內邊距 */
+  }
+}
 </style>
