@@ -1,0 +1,1 @@
+<template><div><h1>Products</h1><div v-for="p in products" :key="p.id"><router-link :to="`/product/${p.id}`"><img :src="p.image" width="100" /><h3>{{ p.name }}</h3><p>${{ p.price }}</p></router-link></div></div></template><script setup>import products from '../assets/products.json'</script>

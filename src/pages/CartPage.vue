@@ -1,0 +1,3 @@
+<template><div><h1>Your Cart</h1><div v-for="item in items" :key="item.id"><p>{{ item.name }} (x{{ item.qty }}) - ${{ item.price * item.qty }}</p><button @click="removeFromCart(item.id)">Remove</button></div><router-link to="/checkout">Go to Checkout</router-link></div></template><script setup>import { useCartStore } from '../store/cart.js'
+
+const { items, removeFromCart } = useCartStore()</script>
