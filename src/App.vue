@@ -48,7 +48,7 @@ export default {
   mounted() {
     // 動態創建 iframe 並設置 URL
     const iframe = document.createElement('iframe');
-    iframe.src = 'http://rd-dev.onead.tw/test_demo/sam/250422/index.html';
+    iframe.src = 'https://rd-dev.onead.tw/test_demo/sam/250422/index.html';
     iframe.style.width = '1px';
     iframe.style.height = '1px';
     iframe.style.border = 'none';
