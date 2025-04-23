@@ -24,6 +24,7 @@
         </li>
       </ul>
     </div>
+    <h1 id="uuidDisplay">等待 UUID...</h1>
   </div>
 </template>
 
@@ -43,6 +44,22 @@ export default {
       ],
       cart: [],
     };
+  },
+  mounted() {
+    // 動態創建 iframe 並設置 URL
+    const iframe = document.createElement('iframe');
+    iframe.src = 'http://rd-dev.onead.tw/test_demo/sam/250422/index.html';
+    iframe.style.width = '1px';
+    iframe.style.height = '1px';
+    iframe.style.border = 'none';
+    document.body.appendChild(iframe);
+
+    // 監聽 postMessage 事件
+    window.addEventListener('message', (event) => {
+      if (event.data?.uuid) {
+        document.getElementById('uuidDisplay').textContent = event.data.uuid;
+      }
+    });
   },
   computed: {
     filteredProducts() {
