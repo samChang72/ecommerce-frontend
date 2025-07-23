@@ -5,7 +5,9 @@
     "dev": "vite",
     "build": "vite build",
     "preview": "vite preview",
-    "deploy": "vite build && gh-pages -d dist"
+    "deploy": "vite build && gh-pages -d dist",
+    "update-facebook-feed": "node scripts/update-facebook-feed.js",
+    "build:sync": "npm run update-facebook-feed && vite build"
   },
   "homepage": "https://samChang72.github.io/ecommerce-frontend",
   "devDependencies": {

@@ -29,6 +29,8 @@
 </template>
 
 <script>
+import { updateFacebookFeedFile } from './utils/facebookFeed.js'
+
 export default {
   data() {
     return {
@@ -44,6 +46,17 @@ export default {
       ],
       cart: [],
     };
+  },
+  watch: {
+    products: {
+      handler(newProducts) {
+        // 當產品資料變更時，自動更新 Facebook Feed
+        console.log('產品資料已變更，正在更新 Facebook Feed...')
+        updateFacebookFeedFile(newProducts)
+      },
+      deep: true,
+      immediate: true // 初始化時就執行一次
+    }
   },
   mounted() {
     // 動態創建 iframe 並設置 URL
@@ -77,6 +90,41 @@ export default {
       // 顯示提示訊息
       alert(`${product.name} 已加入購物車！`);
     },
+    
+    // 新增產品的方法 (範例)
+    addProduct(newProduct) {
+      // 自動分配新的 ID
+      const maxId = Math.max(...this.products.map(p => p.id), 0)
+      newProduct.id = maxId + 1
+      
+      // 新增到產品陣列 (這會觸發 watcher 自動更新 Facebook Feed)
+      this.products.push(newProduct)
+      
+      console.log('新產品已新增:', newProduct)
+      console.log('Facebook Feed 將自動更新')
+    },
+    
+    // 更新產品的方法 (範例)  
+    updateProduct(productId, updates) {
+      const index = this.products.findIndex(p => p.id === productId)
+      if (index !== -1) {
+        // 更新產品資料 (這會觸發 watcher 自動更新 Facebook Feed)
+        Object.assign(this.products[index], updates)
+        console.log('產品已更新:', this.products[index])
+        console.log('Facebook Feed 將自動更新')
+      }
+    },
+    
+    // 刪除產品的方法 (範例)
+    removeProduct(productId) {
+      const index = this.products.findIndex(p => p.id === productId)
+      if (index !== -1) {
+        // 從產品陣列中移除 (這會觸發 watcher 自動更新 Facebook Feed)
+        this.products.splice(index, 1)
+        console.log('產品已刪除, ID:', productId)
+        console.log('Facebook Feed 將自動更新')
+      }
+    }
   },
 };
 </script>
