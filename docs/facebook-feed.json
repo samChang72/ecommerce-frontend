@@ -7,7 +7,7 @@
     "condition": "new",
     "price": "30.00 USD",
     "link": "https://samchang72.github.io/ecommerce-frontend/#/product/1",
-    "image_link": "https://samchang72.github.io/ecommerce-frontend/./image/coke.svg",
+    "image_link": "https://samchang72.github.io/ecommerce-frontend/ecommerce-frontend/image/coke.png",
     "brand": "YourBrand",
     "google_product_category": "Food, Beverages & Tobacco > Beverages"
   },
@@ -19,7 +19,7 @@
     "condition": "new",
     "price": "25.00 USD",
     "link": "https://samchang72.github.io/ecommerce-frontend/#/product/2",
-    "image_link": "https://samchang72.github.io/ecommerce-frontend/./image/green.svg",
+    "image_link": "https://samchang72.github.io/ecommerce-frontend/ecommerce-frontend/image/green.png",
     "brand": "YourBrand",
     "google_product_category": "Food, Beverages & Tobacco > Beverages"
   },
@@ -31,7 +31,7 @@
     "condition": "new",
     "price": "15000.00 USD",
     "link": "https://samchang72.github.io/ecommerce-frontend/#/product/3",
-    "image_link": "https://samchang72.github.io/ecommerce-frontend/./image/phone.svg",
+    "image_link": "https://samchang72.github.io/ecommerce-frontend/ecommerce-frontend/image/phone.png",
     "brand": "YourBrand",
     "google_product_category": "Electronics > Communications > Telephony"
   },
@@ -43,7 +43,7 @@
     "condition": "new",
     "price": "45000.00 USD",
     "link": "https://samchang72.github.io/ecommerce-frontend/#/product/4",
-    "image_link": "https://samchang72.github.io/ecommerce-frontend/./image/notebook.svg",
+    "image_link": "https://samchang72.github.io/ecommerce-frontend/ecommerce-frontend/image/notebook.png",
     "brand": "YourBrand",
     "google_product_category": "Electronics > Computers"
   },
@@ -55,7 +55,7 @@
     "condition": "new",
     "price": "50.00 USD",
     "link": "https://samchang72.github.io/ecommerce-frontend/#/product/5",
-    "image_link": "https://samchang72.github.io/ecommerce-frontend/./image/chips.svg",
+    "image_link": "https://samchang72.github.io/ecommerce-frontend/ecommerce-frontend/image/chips.png",
     "brand": "YourBrand",
     "google_product_category": "Food, Beverages & Tobacco > Food Items"
   },
@@ -67,7 +67,7 @@
     "condition": "new",
     "price": "60.00 USD",
     "link": "https://samchang72.github.io/ecommerce-frontend/#/product/6",
-    "image_link": "https://samchang72.github.io/ecommerce-frontend/./image/chocolate.svg",
+    "image_link": "https://samchang72.github.io/ecommerce-frontend/ecommerce-frontend/image/chocolate.png",
     "brand": "YourBrand",
     "google_product_category": "Food, Beverages & Tobacco > Food Items"
   }

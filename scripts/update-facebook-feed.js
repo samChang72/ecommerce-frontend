@@ -38,7 +38,7 @@ const generateFacebookFeed = (products) => {
     condition: 'new',
     price: `${product.price}.00 USD`,
     link: `${baseUrl}/#/product/${product.id}`,
-    image_link: `${baseUrl}/${product.image}`,
+    image_link: `${baseUrl}${product.image}`,
     brand: 'YourBrand',
     google_product_category: getSpecificCategory(product.type, product.name)
   }))

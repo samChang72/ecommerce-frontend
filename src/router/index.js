@@ -1,5 +1,6 @@
-import { createRouter, createWebHistory } from 'vue-router'
+import { createRouter, createWebHashHistory } from 'vue-router'
 import HomePage from '../pages/HomePage.vue'
+import TestHome from '../pages/TestHome.vue'
 import ProductPage from '../pages/ProductPage.vue'
 import CartPage from '../pages/CartPage.vue'
 import CheckoutPage from '../pages/CheckoutPage.vue'
@@ -8,10 +9,16 @@ import ProfilePage from '../pages/ProfilePage.vue'
 import OrderSuccessPage from '../pages/OrderSuccessPage.vue'
 import { useUserStore } from '../store/user'
 
+console.log('Router configuration loading...')
+
 const router = createRouter({
-  history: createWebHistory(),
+  history: createWebHashHistory(),
   routes: [
-    { path: '/', component: HomePage },
+    { 
+      path: '/', 
+      component: TestHome,
+      name: 'Home'
+    },
     { path: '/product/:id', component: ProductPage },
     { path: '/cart', component: CartPage },
     { 
@@ -31,16 +38,28 @@ const router = createRouter({
 
 // 路由守衛
 router.beforeEach((to) => {
-  const userStore = useUserStore()
+  console.log('Router beforeEach:', to.path, to.name)
   
-  // 檢查是否需要登入
-  if (to.meta.requiresAuth && !userStore.isLoggedIn) {
-    // 儲存原本要前往的路由
-    return {
-      path: '/login',
-      query: { redirect: to.fullPath }
+  try {
+    const userStore = useUserStore()
+    console.log('UserStore loaded successfully')
+    
+    // 檢查是否需要登入
+    if (to.meta.requiresAuth && !userStore.isLoggedIn) {
+      console.log('Redirecting to login due to auth requirement')
+      // 儲存原本要前往的路由
+      return {
+        path: '/login',
+        query: { redirect: to.fullPath }
+      }
     }
+  } catch (error) {
+    console.error('Error in router guard:', error)
   }
+  
+  console.log('Route allowed:', to.path)
 })
+
+console.log('Router created:', router)
 
 export default router
