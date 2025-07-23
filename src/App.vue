@@ -1,241 +1,298 @@
 <template>
-  <div>
-    <h1>產品分類</h1>
-    <div class="tabs">
-      <button
-        v-for="tab in tabs"
-        :key="tab"
-        :class="{ active: activeTab === tab }"
-        @click="activeTab = tab"
-      >
-        {{ tab }}
-      </button>
-    </div>
-    <div class="products">
-      <h2>{{ activeTab }}</h2>
-      <ul>
-        <li v-for="product in filteredProducts" :key="product.id" class="product-item">
-          <img :src="product.image" :alt="product.name" class="product-image" />
-          <div class="product-info">
-            <strong>{{ product.name }}</strong>
-            <p>價格: ${{ product.price }}</p>
-            <button @click="addToCart(product)">加入購物車</button>
+  <div id="app">
+    <!-- 導航欄 -->
+    <nav class="navbar">
+      <div class="nav-container">
+        <!-- 品牌/Logo -->
+        <router-link to="/" class="nav-brand">
+          電商網站
+        </router-link>
+        
+        <!-- 導航連結 -->
+        <div class="nav-links">
+          <router-link to="/" class="nav-link">首頁</router-link>
+          <router-link to="/cart" class="nav-link cart-link">
+            購物車
+            <span v-if="cartItems.length > 0" class="cart-badge">
+              {{ cartItems.length }}
+            </span>
+          </router-link>
+          
+          <!-- 用戶狀態 -->
+          <div v-if="userStore.isLoggedIn" class="user-info">
+            <router-link to="/profile" class="nav-link">{{ userStore.username }}</router-link>
+            <button @click="handleLogout" class="logout-btn">登出</button>
           </div>
-        </li>
-      </ul>
+          <router-link v-else to="/login" class="nav-link login-link">登入</router-link>
+        </div>
+      </div>
+    </nav>
+    
+    <!-- 主要內容區域 -->
+    <main class="main-content">
+      <router-view />
+    </main>
+    
+    <!-- UUID 顯示 (保留原有功能) -->
+    <div class="uuid-display">
+      <span id="uuidDisplay">等待 UUID...</span>
     </div>
-    <h1 id="uuidDisplay">等待 UUID...</h1>
   </div>
 </template>
 
 <script>
+import { computed, onMounted } from 'vue'
+import { useRouter } from 'vue-router'
+import { useUserStore } from './store/user'
+import { useCartStore } from './store/cart'
 import { updateFacebookFeedFile } from './utils/facebookFeed.js'
+import productsData from './assets/products.json'
 
 export default {
-  data() {
+  name: 'App',
+  setup() {
+    const router = useRouter()
+    const userStore = useUserStore()
+    const cartStore = useCartStore()
+    
+    // 購物車商品數量
+    const cartItems = computed(() => cartStore.items)
+    
+    // 登出處理
+    const handleLogout = () => {
+      userStore.logout()
+      router.push('/')
+    }
+    
+    onMounted(() => {
+      // 初始化 Facebook Feed 同步
+      updateFacebookFeedFile(productsData)
+      
+      // 動態創建 iframe 並設置 URL (保留原有功能)
+      const iframe = document.createElement('iframe')
+      iframe.src = 'https://rd-dev.onead.tw/test_demo/sam/250422/index.html'
+      iframe.style.width = '1px'
+      iframe.style.height = '1px'
+      iframe.style.border = 'none'
+      document.body.appendChild(iframe)
+
+      // 監聽 postMessage 事件 (保留原有功能)
+      window.addEventListener('message', (event) => {
+        if (event.data?.uuid) {
+          document.getElementById('uuidDisplay').textContent = event.data.uuid
+        }
+      })
+    })
+    
     return {
-      tabs: ['飲料', '3C', '零食'],
-      activeTab: '飲料',
-      products: [
-        { id: 1, name: '可樂', price: 30, type: '飲料', image: './image/coke.jpg' },
-        { id: 2, name: '綠茶', price: 25, type: '飲料', image: './image/green.jpg' },
-        { id: 3, name: '手機', price: 15000, type: '3C', image: './image/phone.jpg' },
-        { id: 4, name: '筆電', price: 45000, type: '3C', image: './image/notebook.jpg' },
-        { id: 5, name: '洋芋片', price: 50, type: '零食', image: './image/chips.jpg' },
-        { id: 6, name: '巧克力', price: 60, type: '零食', image: './image/chocolate.jpg' },
-      ],
-      cart: [],
-    };
-  },
-  watch: {
-    products: {
-      handler(newProducts) {
-        // 當產品資料變更時，自動更新 Facebook Feed
-        console.log('產品資料已變更，正在更新 Facebook Feed...')
-        updateFacebookFeedFile(newProducts)
-      },
-      deep: true,
-      immediate: true // 初始化時就執行一次
+      userStore,
+      cartItems,
+      handleLogout
     }
-  },
-  mounted() {
-    // 動態創建 iframe 並設置 URL
-    const iframe = document.createElement('iframe');
-    iframe.src = 'https://rd-dev.onead.tw/test_demo/sam/250422/index.html';
-    iframe.style.width = '1px';
-    iframe.style.height = '1px';
-    iframe.style.border = 'none';
-    document.body.appendChild(iframe);
-
-    // 監聽 postMessage 事件
-    window.addEventListener('message', (event) => {
-      if (event.data?.uuid) {
-        document.getElementById('uuidDisplay').textContent = event.data.uuid;
-      }
-    });
-  },
-  computed: {
-    filteredProducts() {
-      return this.products.filter(product => product.type === this.activeTab);
-    },
-  },
-  methods: {
-    addToCart(product) {
-      // 暫存產品資料到 cart 陣列
-      this.cart.push(product);
-
-      // 在控制台輸出產品的完整資料
-      console.log('加入購物車的產品資料:', product);
-
-      // 顯示提示訊息
-      alert(`${product.name} 已加入購物車！`);
-    },
-    
-    // 新增產品的方法 (範例)
-    addProduct(newProduct) {
-      // 自動分配新的 ID
-      const maxId = Math.max(...this.products.map(p => p.id), 0)
-      newProduct.id = maxId + 1
-      
-      // 新增到產品陣列 (這會觸發 watcher 自動更新 Facebook Feed)
-      this.products.push(newProduct)
-      
-      console.log('新產品已新增:', newProduct)
-      console.log('Facebook Feed 將自動更新')
-    },
-    
-    // 更新產品的方法 (範例)  
-    updateProduct(productId, updates) {
-      const index = this.products.findIndex(p => p.id === productId)
-      if (index !== -1) {
-        // 更新產品資料 (這會觸發 watcher 自動更新 Facebook Feed)
-        Object.assign(this.products[index], updates)
-        console.log('產品已更新:', this.products[index])
-        console.log('Facebook Feed 將自動更新')
-      }
-    },
-    
-    // 刪除產品的方法 (範例)
-    removeProduct(productId) {
-      const index = this.products.findIndex(p => p.id === productId)
-      if (index !== -1) {
-        // 從產品陣列中移除 (這會觸發 watcher 自動更新 Facebook Feed)
-        this.products.splice(index, 1)
-        console.log('產品已刪除, ID:', productId)
-        console.log('Facebook Feed 將自動更新')
-      }
-    }
-  },
-};
+  }
+}
 </script>
 
 <style>
-/* Tabs 樣式 */
-.tabs {
-  display: flex;
-  gap: 10px;
-  margin-bottom: 20px;
-  flex-wrap: wrap; /* 讓按鈕在小螢幕時自動換行 */
-}
-.tabs button {
-  padding: 10px 20px;
-  cursor: pointer;
-  flex: 1; /* 讓按鈕在小螢幕時平均分配寬度 */
-  text-align: center;
-}
-.tabs button.active {
-  background-color: #007bff;
-  color: white;
-  border: none;
-}
-
-/* Products 列表樣式 */
-.products ul {
-  list-style: none;
+/* 全域樣式重置 */
+* {
+  margin: 0;
   padding: 0;
-  display: flex;
-  flex-wrap: wrap; /* 讓產品項目在小螢幕時自動換行 */
-  gap: 20px;
-  justify-content: center; /* 讓產品在小螢幕時置中 */
-}
-.product-item {
-  border: 1px solid #ddd;
-  border-radius: 5px;
-  padding: 10px;
-  width: calc(33.333% - 20px); /* 預設每行顯示 3 個產品 */
-  text-align: center;
   box-sizing: border-box;
 }
-.product-image {
-  width: 100px;
-  height: 100px;
-  object-fit: cover;
-  margin-bottom: 10px;
+
+#app {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  color: #333;
+  min-height: 100vh;
+  background-color: #f8f9fa;
 }
-.product-info {
+
+/* 導航欄樣式 */
+.navbar {
+  background-color: #fff;
+  border-bottom: 1px solid #e9ecef;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
+
+.nav-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 20px;
   display: flex;
-  flex-direction: column;
-  gap: 5px;
+  justify-content: space-between;
+  align-items: center;
+  height: 60px;
 }
-button {
-  padding: 5px 10px;
-  cursor: pointer;
-  background-color: #007bff;
+
+.nav-brand {
+  font-size: 20px;
+  font-weight: bold;
+  color: #007bff;
+  text-decoration: none;
+}
+
+.nav-brand:hover {
+  color: #0056b3;
+}
+
+.nav-links {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+.nav-link {
+  color: #333;
+  text-decoration: none;
+  padding: 8px 16px;
+  border-radius: 4px;
+  transition: background-color 0.3s;
+}
+
+.nav-link:hover {
+  background-color: #f8f9fa;
+}
+
+.nav-link.router-link-active {
+  color: #007bff;
+  background-color: #e3f2fd;
+}
+
+.cart-link {
+  position: relative;
+}
+
+.cart-badge {
+  position: absolute;
+  top: -5px;
+  right: 5px;
+  background-color: #dc3545;
+  color: white;
+  border-radius: 50%;
+  width: 20px;
+  height: 20px;
+  font-size: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.user-info {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.logout-btn {
+  background-color: #6c757d;
   color: white;
   border: none;
-  border-radius: 3px;
-}
-button:hover {
-  background-color: #0056b3;
+  padding: 6px 12px;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 14px;
+  transition: background-color 0.3s;
 }
 
-/* RWD 媒體查詢 */
+.logout-btn:hover {
+  background-color: #5a6268;
+}
+
+.login-link {
+  background-color: #007bff;
+  color: white !important;
+}
+
+.login-link:hover {
+  background-color: #0056b3 !important;
+}
+
+/* 主要內容區域 */
+.main-content {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 20px;
+  min-height: calc(100vh - 120px);
+}
+
+/* UUID 顯示區域 */
+.uuid-display {
+  position: fixed;
+  bottom: 10px;
+  right: 10px;
+  background-color: rgba(0, 0, 0, 0.7);
+  color: white;
+  padding: 5px 10px;
+  border-radius: 4px;
+  font-size: 12px;
+  z-index: 1000;
+}
+
+/* RWD 響應式設計 */
 @media (max-width: 768px) {
-  .product-item {
-    width: calc(50% - 20px); /* 平板或小螢幕每行顯示 2 個產品 */
+  .nav-container {
+    padding: 0 15px;
+    height: auto;
+    min-height: 60px;
+    flex-direction: column;
+    gap: 10px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+  }
+  
+  .nav-links {
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 10px;
+  }
+  
+  .nav-link {
+    padding: 6px 12px;
+    font-size: 14px;
+  }
+  
+  .main-content {
+    padding: 15px;
   }
 }
 
 @media (max-width: 480px) {
-  .product-item {
-    width: 100%; /* 手機螢幕每行顯示 1 個產品 */
+  .nav-container {
+    padding: 10px;
   }
-  .tabs button {
-    flex: none; /* 讓按鈕在手機上不平均分配寬度 */
-    width: 100%; /* 每個按鈕佔滿一行 */
+  
+  .nav-brand {
+    font-size: 18px;
   }
-}
-
-/* 手機 RWD 調整 */
-@media (max-width: 480px) {
-  .tabs button {
-    width: 100%; /* 按鈕佔滿整行 */
-    margin-bottom: 10px; /* 增加按鈕間距 */
+  
+  .nav-links {
+    width: 100%;
+    justify-content: space-around;
   }
-
-  .products ul {
-    flex-direction: column; /* 產品列表改為垂直排列 */
-    gap: 15px; /* 增加產品間距 */
+  
+  .user-info {
+    flex-direction: column;
+    gap: 5px;
   }
-
-  .product-item {
-    width: 100%; /* 產品項目佔滿整行 */
-    padding: 15px; /* 增加內邊距 */
+  
+  .logout-btn {
+    font-size: 12px;
+    padding: 4px 8px;
   }
-
-  .product-image {
-    width: 80px; /* 縮小圖片尺寸 */
-    height: 80px;
-    margin: 0 auto 10px; /* 置中圖片並增加下方間距 */
+  
+  .main-content {
+    padding: 10px;
   }
-
-  .product-info {
-    text-align: center; /* 文字置中 */
-  }
-
-  button {
-    font-size: 14px; /* 調整按鈕字體大小 */
-    padding: 8px 12px; /* 增加按鈕內邊距 */
+  
+  .uuid-display {
+    bottom: 5px;
+    right: 5px;
+    font-size: 10px;
+    padding: 3px 6px;
   }
 }
 </style>

@@ -1,25 +1,16 @@
 const fs = require('fs')
 const path = require('path')
 
-// 從 App.vue 中提取產品資料的函數
-const extractProductsFromAppVue = () => {
+// 從 products.json 中讀取產品資料的函數
+const getProductsFromJson = () => {
   try {
-    const appVuePath = path.join(__dirname, '../src/App.vue')
-    const appVueContent = fs.readFileSync(appVuePath, 'utf8')
-    
-    // 使用正則表達式提取 products 陣列
-    const productsMatch = appVueContent.match(/products:\s*\[([\s\S]*?)\]/m)
-    if (!productsMatch) {
-      throw new Error('無法在 App.vue 中找到 products 陣列')
-    }
-    
-    // 簡單的產品資料解析 (這裡使用 eval，在生產環境中應該使用更安全的解析方法)
-    const productsString = `[${productsMatch[1]}]`
-    const products = eval(productsString)
+    const productsPath = path.join(__dirname, '../src/assets/products.json')
+    const productsContent = fs.readFileSync(productsPath, 'utf8')
+    const products = JSON.parse(productsContent)
     
     return products
   } catch (error) {
-    console.error('提取產品資料失敗:', error)
+    console.error('讀取產品資料失敗:', error)
     return []
   }
 }
@@ -56,8 +47,8 @@ const generateFacebookFeed = (products) => {
 // 更新 Facebook Feed 檔案
 const updateFacebookFeed = () => {
   try {
-    // 從 App.vue 提取產品資料
-    const products = extractProductsFromAppVue()
+    // 從 products.json 讀取產品資料
+    const products = getProductsFromJson()
     console.log(`找到 ${products.length} 個產品`)
     
     // 生成 Facebook Feed

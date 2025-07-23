@@ -1,1 +1,8 @@
-[{"id": 1, "name": "T-Shirt", "price": 20, "image": "tshirt.jpg"}, {"id": 2, "name": "Jeans", "price": 40, "image": "jeans.jpg"}, {"id": 3, "name": "Sneakers", "price": 60, "image": "sneakers.jpg"}]
+[
+  { "id": 1, "name": "可樂", "price": 30, "type": "飲料", "image": "./image/coke.svg" },
+  { "id": 2, "name": "綠茶", "price": 25, "type": "飲料", "image": "./image/green.svg" },
+  { "id": 3, "name": "手機", "price": 15000, "type": "3C", "image": "./image/phone.svg" },
+  { "id": 4, "name": "筆電", "price": 45000, "type": "3C", "image": "./image/notebook.svg" },
+  { "id": 5, "name": "洋芋片", "price": 50, "type": "零食", "image": "./image/chips.svg" },
+  { "id": 6, "name": "巧克力", "price": 60, "type": "零食", "image": "./image/chocolate.svg" }
+]

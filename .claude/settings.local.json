@@ -3,7 +3,22 @@
     "allow": [
       "Bash(rm:*)",
       "Bash(cp:*)",
-      "Bash(npm run update-facebook-feed:*)"
+      "Bash(npm run update-facebook-feed:*)",
+      "Bash(lsof:*)",
+      "Bash(npx vite:*)",
+      "Bash(curl:*)",
+      "Bash(pkill:*)",
+      "Bash(python3:*)",
+      "Bash(npm run build:*)",
+      "Bash(npm run preview:*)",
+      "Bash(npm run dev:*)",
+      "Bash(npm install:*)",
+      "Bash(node:*)",
+      "Bash(ls:*)",
+      "Bash(true)",
+      "Bash(find:*)",
+      "Bash(mkdir:*)",
+      "Bash(git add:*)"
     ],
     "deny": []
   }
