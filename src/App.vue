@@ -30,54 +30,8 @@
     
     <!-- 主要內容區域 -->
     <main class="main-content">
-      <!-- 直接顯示產品列表測試 -->
-      <div class="homepage">
-        <h1>產品分類</h1>
-        <p>這是測試內容 - 如果你能看到這個，說明 Vue 正在工作</p>
-        
-        <!-- 分類標籤 -->
-        <div class="tabs">
-          <button class="active">飲料</button>
-          <button>3C</button>
-          <button>零食</button>
-        </div>
-        
-        <!-- 產品列表 -->
-        <div class="products">
-          <h2>飲料</h2>
-          <ul>
-            <li class="product-item">
-              <div class="product-link">
-                <div class="product-image" style="background: #007bff; color: white; display: flex; align-items: center; justify-content: center;">可樂</div>
-                <div class="product-info">
-                  <strong>可樂</strong>
-                  <p class="price">價格: $30</p>
-                </div>
-              </div>
-              <button class="add-to-cart-btn">
-                加入購物車
-              </button>
-            </li>
-            <li class="product-item">
-              <div class="product-link">
-                <div class="product-image" style="background: #28a745; color: white; display: flex; align-items: center; justify-content: center;">綠茶</div>
-                <div class="product-info">
-                  <strong>綠茶</strong>
-                  <p class="price">價格: $25</p>
-                </div>
-              </div>
-              <button class="add-to-cart-btn">
-                加入購物車
-              </button>
-            </li>
-          </ul>
-        </div>
-      </div>
-      
-      <!-- 原本的 router-view 保留但暫時隱藏 -->
-      <div style="display: none;">
-        <router-view />
-      </div>
+      <!-- 路由視圖 -->
+      <router-view />
     </main>
     
     <!-- UUID 顯示 (保留原有功能) -->
@@ -88,7 +42,7 @@
 </template>
 
 <script>
-import { computed, onMounted, ref } from 'vue'
+import { computed, onMounted } from 'vue'
 import { useRouter } from 'vue-router'
 import { useUserStore } from './store/user'
 import { useCartStore } from './store/cart'
@@ -105,24 +59,6 @@ export default {
     // 購物車商品數量
     const cartItems = computed(() => cartStore.items)
     
-    // 產品列表相關（直接在 App.vue 中實現）
-    const tabs = ref(['飲料', '3C', '零食'])
-    const activeTab = ref('飲料')
-    const products = ref(productsData)
-    
-    // 篩選產品
-    const filteredProducts = computed(() => {
-      return products.value.filter(product => product.type === activeTab.value)
-    })
-    
-    // 加入購物車
-    const addToCart = (product) => {
-      cartStore.addToCart(product)
-      
-      // 顯示提示訊息
-      alert(`${product.name} 已加入購物車！`)
-    }
-    
     // 登出處理
     const handleLogout = () => {
       userStore.logout()
@@ -132,9 +68,6 @@ export default {
     onMounted(() => {
       // 調試日誌
       console.log('App.vue mounted')
-      console.log('Products data:', productsData)
-      console.log('Filtered products:', filteredProducts.value)
-      console.log('Active tab:', activeTab.value)
       
       // 初始化 Facebook Feed 同步
       updateFacebookFeedFile(productsData)
@@ -158,12 +91,7 @@ export default {
     return {
       userStore,
       cartItems,
-      handleLogout,
-      tabs,
-      activeTab,
-      products,
-      filteredProducts,
-      addToCart
+      handleLogout
     }
   }
 }
@@ -370,127 +298,5 @@ export default {
     font-size: 10px;
     padding: 3px 6px;
   }
-}
-
-/* 首頁產品列表樣式 */
-.homepage {
-  max-width: 1200px;
-  margin: 0 auto;
-}
-
-.homepage h1 {
-  text-align: center;
-  margin-bottom: 30px;
-  color: #333;
-  font-size: 28px;
-}
-
-/* 分類標籤樣式 */
-.tabs {
-  display: flex;
-  gap: 10px;
-  margin-bottom: 20px;
-  flex-wrap: wrap;
-  justify-content: center;
-}
-
-.tabs button {
-  padding: 10px 20px;
-  cursor: pointer;
-  border: 2px solid #007bff;
-  background-color: white;
-  color: #007bff;
-  border-radius: 25px;
-  font-weight: 500;
-  transition: all 0.3s;
-}
-
-.tabs button:hover {
-  background-color: #f8f9fa;
-}
-
-.tabs button.active {
-  background-color: #007bff;
-  color: white;
-}
-
-/* 產品區域 */
-.products h2 {
-  text-align: center;
-  margin-bottom: 20px;
-  color: #495057;
-  font-size: 24px;
-}
-
-.products ul {
-  list-style: none;
-  padding: 0;
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
-  gap: 20px;
-  justify-content: center;
-}
-
-.product-item {
-  border: 1px solid #ddd;
-  border-radius: 8px;
-  padding: 15px;
-  text-align: center;
-  background-color: white;
-  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-  transition: transform 0.3s, box-shadow 0.3s;
-}
-
-.product-item:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 4px 8px rgba(0,0,0,0.15);
-}
-
-.product-link {
-  text-decoration: none;
-  color: inherit;
-  display: block;
-  margin-bottom: 10px;
-}
-
-.product-image {
-  width: 100px;
-  height: 100px;
-  object-fit: cover;
-  margin-bottom: 10px;
-  border-radius: 4px;
-}
-
-.product-info {
-  display: flex;
-  flex-direction: column;
-  gap: 5px;
-}
-
-.product-info strong {
-  font-size: 16px;
-  color: #333;
-}
-
-.price {
-  color: #007bff;
-  font-weight: 600;
-  font-size: 14px;
-}
-
-.add-to-cart-btn {
-  width: 100%;
-  padding: 8px 12px;
-  cursor: pointer;
-  background-color: #28a745;
-  color: white;
-  border: none;
-  border-radius: 4px;
-  font-weight: 500;
-  transition: background-color 0.3s;
-}
-
-.add-to-cart-btn:hover {
-  background-color: #218838;
 }
 </style>

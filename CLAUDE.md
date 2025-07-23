@@ -12,6 +12,20 @@ This is a Vue.js 3 e-commerce frontend application built with Vite. The applicat
 - **Build for production**: `npm run build` 
 - **Preview production build**: `npm run preview`
 - **Deploy to GitHub Pages**: `npm run deploy`
+- **Update Facebook Feed**: `npm run update-facebook-feed`
+- **Test local environment**: `npm run test:local`
+
+## Environment Configuration
+
+### Local Development
+- **URL**: `http://localhost:3000/ecommerce-frontend/`
+- **Base Path**: `/ecommerce-frontend/` (與線上環境一致)
+- **Port**: 3000 (固定端口)
+
+### Production Environment  
+- **URL**: `https://samchang72.github.io/ecommerce-frontend/`
+- **Base Path**: `/ecommerce-frontend/`
+- **Deployment**: GitHub Pages (docs/ 目錄)
 
 ## Architecture
 

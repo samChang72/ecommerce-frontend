@@ -22,7 +22,8 @@
       "Bash(git rm:*)",
       "Bash(git reset:*)",
       "Bash(git push:*)",
-      "WebFetch(domain:samchang72.github.io)"
+      "WebFetch(domain:samchang72.github.io)",
+      "Bash(kill:*)"
     ],
     "deny": []
   }
