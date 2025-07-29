@@ -59,6 +59,25 @@ router.beforeEach((to) => {
   console.log('Route allowed:', to.path)
 })
 
+// GTM 頁面追蹤
+router.afterEach((to) => {
+  // 確保 GTM dataLayer 存在
+  if (typeof window !== 'undefined' && window.dataLayer) {
+    // 發送頁面瀏覽事件到 GTM
+    window.dataLayer.push({
+      event: 'page_view',
+      page_title: to.meta?.title || document.title,
+      page_location: window.location.href,
+      page_path: to.path
+    })
+    
+    console.log('GTM page_view event sent:', {
+      page_path: to.path,
+      page_title: to.meta?.title || document.title
+    })
+  }
+})
+
 console.log('Router created:', router)
 
 export default router

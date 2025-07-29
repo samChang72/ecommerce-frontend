@@ -69,6 +69,11 @@ export default {
       // 調試日誌
       console.log('App.vue mounted')
       
+      // 初始化 GTM dataLayer (如果尚未存在)
+      if (typeof window !== 'undefined' && !window.dataLayer) {
+        window.dataLayer = []
+      }
+      
       // 初始化 Facebook Feed 同步
       updateFacebookFeedFile(productsData)
       
