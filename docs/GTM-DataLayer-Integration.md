@@ -348,7 +348,7 @@ export default router
 | `DLV - Item Quantity` | 資料層變數 | `ecommerce.items.0.quantity` | 商品數量 |
 | `DLV - Ecommerce Value` | 資料層變數 | `ecommerce.value` | 交易總值 |
 | `DLV - Currency` | 資料層變數 | `ecommerce.currency` | 幣別 |
-| `DLV - Event Name` | 資料層變數 | `event` | 事件名稱 |
+| `DLV - Cart Items Count` | 資料層變數 | `ecommerce.items.length` | 購物車商品數量 |
 
 ### GTM 觸發條件設定
 
@@ -377,33 +377,28 @@ OneAD Pixel 也支援電商事件追蹤，以下是對照表：
 ```html
 <!-- AddToCart 事件 -->
 <script>
-if (typeof onead !== 'undefined') {
-  onead('track', 'addToCart', {
-    product_id: '{{DLV - Item ID}}',
+// 確保 OneAD Pixel 已載入
+if (typeof onep !== 'undefined') {
+  // 發送 AddToCart 事件到 OneAD Pixel
+  onep('track', 'AddToCart', {
+    content_ids: ['{{DLV - Item ID}}'],
+    content_name: '{{DLV - Item Name}}',
+    content_category: '{{DLV - Item Category}}',
+    content_type: 'product',
     value: {{DLV - Item Price}},
     currency: 'USD'
   });
-}
-</script>
-
-<!-- ViewContent 事件 -->
-<script>
-if (typeof onead !== 'undefined') {
-  onead('track', 'viewContent', {
-    product_id: '{{DLV - Item ID}}',
-    content_type: 'product'
+  
+  // Debug 資訊
+  console.log('OneAD Pixel AddToCart fired with data:', {
+    content_ids: ['{{DLV - Item ID}}'],
+    content_name: '{{DLV - Item Name}}',
+    content_category: '{{DLV - Item Category}}',
+    value: {{DLV - Item Price}},
+    currency: 'USD'
   });
-}
-</script>
-
-<!-- InitiateCheckout 事件 -->
-<script>
-if (typeof onead !== 'undefined') {
-  onead('track', 'initiateCheckout', {
-    value: {{DLV - Ecommerce Value}},
-    currency: 'USD',
-    num_items: {{DLV - Cart Items Count}}
-  });
+} else {
+  console.warn('OneAD Pixel (onep) not found');
 }
 </script>
 ```
@@ -437,8 +432,8 @@ if (typeof onead !== 'undefined') {
 #### 1. AddToCart 事件 (加入購物車)
 ```html
 <script>
-if (typeof fbq !== 'undefined') {
-  fbq('track', 'AddToCart', {
+if (typeof onep !== 'undefined') {
+  onep('track', 'AddToCart', {
     content_ids: ['{{DLV - Item ID}}'],
     content_name: '{{DLV - Item Name}}',
     content_category: '{{DLV - Item Category}}',
@@ -451,51 +446,7 @@ if (typeof fbq !== 'undefined') {
 </script>
 ```
 
-#### 2. ViewContent 事件 (查看商品)
-```html
-<script>
-if (typeof fbq !== 'undefined') {
-  fbq('track', 'ViewContent', {
-    content_ids: ['{{DLV - Item ID}}'],
-    content_name: '{{DLV - Item Name}}',
-    content_category: '{{DLV - Item Category}}',
-    content_type: 'product',
-    value: {{DLV - Item Price}},
-    currency: 'USD'
-  });
-}
-</script>
-```
 
-#### 3. InitiateCheckout 事件 (開始結帳)
-```html
-<script>
-if (typeof fbq !== 'undefined') {
-  fbq('track', 'InitiateCheckout', {
-    content_ids: [{{DLV - Cart Item IDs}}], // 陣列格式: ['1', '2', '3']
-    value: {{DLV - Ecommerce Value}},
-    currency: 'USD',
-    num_items: {{DLV - Cart Items Count}}
-  });
-}
-</script>
-```
-
-#### 4. 自訂移除購物車事件
-```html
-<script>
-if (typeof fbq !== 'undefined') {
-  fbq('trackCustom', 'RemoveFromCart', {
-    content_ids: ['{{DLV - Item ID}}'],
-    content_name: '{{DLV - Item Name}}',
-    content_category: '{{DLV - Item Category}}',
-    content_type: 'product',
-    value: {{DLV - Item Price}},
-    currency: 'USD'
-  });
-}
-</script>
-```
 
 ## 🧪 測試與除錯
 
@@ -560,52 +511,17 @@ console.log('Last event:', window.dataLayer[window.dataLayer.length - 1]);
 
 ### 3. 第三方工具驗證
 
-#### Facebook Pixel 測試
-1. 安裝 [Facebook Pixel Helper](https://chrome.google.com/webstore/detail/facebook-pixel-helper/fdgfkebogiimcoedlicjlajpkdmockpc) 瀏覽器擴充功能
-2. 執行購物操作並觀察 Pixel Helper 狀態
-3. 檢查 [Facebook Events Manager](https://business.facebook.com/events_manager2) 的測試事件
-
 #### OneAD Pixel 測試
-```javascript
-// 檢查 OneAD Pixel 是否載入
-console.log('OneAD loaded:', typeof onead !== 'undefined');
-
-// 檢查 OneAD 事件歷史
-if (typeof onead !== 'undefined') {
-  console.log('OneAD events:', onead.getEvents());
-}
-```
-
-#### Google Analytics 4 測試
-1. 開啟 GA4 Real-time 報告
-2. 執行購物操作
-3. 確認事件出現在即時報告中
+1. 安裝 [OneAD Pixel Helper](https://chromewebstore.google.com/detail/onead-tag-assistant/giclcphmgfdppppohhbfccocanhbdijd?utm_source=ext_app_menu) 瀏覽器擴充功能
+2. 執行購物操作並觀察 Pixel Helper 狀態
 
 ### 4. 開發者工具 Network 檢查
 
 #### 檢查追蹤請求
-1. 開啟瀏覽器開發者工具 (F12)
-2. 切換到 Network 標籤
-3. 過濾以下網域的請求：
-   - `www.facebook.com` (Facebook Pixel)
-   - `googletagmanager.com` (GTM)
-   - `google-analytics.com` (GA4)
-   - OneAD 相關網域
+  OneAD 相關網域
+- https://onead.onevision.com.tw/
+- https://pixel.onead.com.tw/
 
-#### 驗證請求參數
-確認追蹤請求包含正確的參數：
-```
-Facebook Pixel 範例:
-- ev=AddToCart
-- cd[content_ids]=['1']
-- cd[value]=30.00
-- cd[currency]=USD
-
-GA4 範例:
-- en=add_to_cart (事件名稱)
-- ep.currency=USD (事件參數)
-- ep.value=30.00 (事件值)
-```
 
 ### 5. 常見問題故障排除
 
