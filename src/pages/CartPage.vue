@@ -23,7 +23,7 @@
       
       <div class="cart-summary">
         <h3>總計: ${{ totalPrice }}</h3>
-        <router-link to="/checkout" class="checkout-btn">結帳</router-link>
+        <button @click="goToCheckout" class="checkout-btn">結帳</button>
       </div>
     </div>
   </div>
@@ -31,10 +31,76 @@
 
 <script setup>
 import { computed } from 'vue'
+import { useRouter } from 'vue-router'
 import { useCartStore } from '../store/cart.js'
 
+const router = useRouter()
 const cartStore = useCartStore()
-const { items, removeFromCart } = cartStore
+const { items } = cartStore
+
+// 自定義移除函數以添加 GTM 追蹤
+const removeFromCart = (itemId) => {
+  // 找到要移除的商品
+  const itemToRemove = items.find(item => item.id === itemId)
+  
+  if (itemToRemove) {
+    // 發送 GTM 事件 - 從購物車移除
+    if (typeof window !== 'undefined' && window.dataLayer) {
+      window.dataLayer.push({
+        event: 'remove_from_cart',
+        ecommerce: {
+          currency: 'USD',
+          value: itemToRemove.price * itemToRemove.qty,
+          items: [{
+            item_id: itemToRemove.id.toString(),
+            item_name: itemToRemove.name,
+            category: itemToRemove.type,
+            price: itemToRemove.price,
+            quantity: itemToRemove.qty
+          }]
+        }
+      })
+      
+      console.log('GTM remove_from_cart event sent:', {
+        item_name: itemToRemove.name,
+        item_id: itemToRemove.id,
+        quantity: itemToRemove.qty
+      })
+    }
+    
+    // 執行實際的移除操作
+    cartStore.removeFromCart(itemId)
+  }
+}
+
+// 前往結帳頁面
+const goToCheckout = () => {
+  // 發送 GTM 事件 - 開始結帳
+  if (typeof window !== 'undefined' && window.dataLayer) {
+    window.dataLayer.push({
+      event: 'begin_checkout',
+      ecommerce: {
+        currency: 'USD',
+        value: totalPrice.value,
+        items: items.map(item => ({
+          item_id: item.id.toString(),
+          item_name: item.name,
+          category: item.type,
+          price: item.price,
+          quantity: item.qty
+        }))
+      }
+    })
+    
+    console.log('GTM begin_checkout event sent:', {
+      total_value: totalPrice.value,
+      item_count: items.length
+    })
+  }
+  
+  // 導向結帳頁面
+  router.push('/checkout')
+}
 
 const totalPrice = computed(() => {
   return items.reduce((total, item) => total + (item.price * item.qty), 0)
@@ -154,9 +220,11 @@ const totalPrice = computed(() => {
   background-color: #28a745;
   color: white;
   text-decoration: none;
+  border: none;
   border-radius: 5px;
   font-size: 18px;
   font-weight: 600;
+  cursor: pointer;
   transition: background-color 0.3s;
 }
 

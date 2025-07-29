@@ -58,6 +58,30 @@ export default {
     const addToCart = (product) => {
       cartStore.addToCart(product)
       
+      // 發送 GTM 事件 - 加入購物車
+      if (typeof window !== 'undefined' && window.dataLayer) {
+        window.dataLayer.push({
+          event: 'add_to_cart',
+          ecommerce: {
+            currency: 'USD',
+            value: product.price,
+            items: [{
+              item_id: product.id.toString(),
+              item_name: product.name,
+              category: product.type,
+              price: product.price,
+              quantity: 1
+            }]
+          }
+        })
+        
+        console.log('GTM add_to_cart event sent:', {
+          item_name: product.name,
+          item_id: product.id,
+          price: product.price
+        })
+      }
+      
       // 顯示提示訊息
       alert(`${product.name} 已加入購物車！`)
     }

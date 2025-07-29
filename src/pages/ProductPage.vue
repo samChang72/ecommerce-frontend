@@ -45,7 +45,7 @@
 </template>
 
 <script>
-import { computed } from 'vue'
+import { computed, onMounted } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
 import { useCartStore } from '../store/cart'
 import productsData from '../assets/products.json'
@@ -63,10 +63,61 @@ export default {
       return productsData.find(p => p.id === productId)
     })
     
+    // 當組件載入時發送產品查看事件
+    onMounted(() => {
+      if (product.value && typeof window !== 'undefined' && window.dataLayer) {
+        window.dataLayer.push({
+          event: 'view_item',
+          ecommerce: {
+            currency: 'USD',
+            value: product.value.price,
+            items: [{
+              item_id: product.value.id.toString(),
+              item_name: product.value.name,
+              category: product.value.type,
+              price: product.value.price,
+              quantity: 1
+            }]
+          }
+        })
+        
+        console.log('GTM view_item event sent:', {
+          item_name: product.value.name,
+          item_id: product.value.id,
+          price: product.value.price
+        })
+      }
+    })
+    
     // 加入購物車
     const handleAddToCart = () => {
       if (product.value) {
         cartStore.addToCart(product.value)
+        
+        // 發送 GTM 事件 - 加入購物車
+        if (typeof window !== 'undefined' && window.dataLayer) {
+          window.dataLayer.push({
+            event: 'add_to_cart',
+            ecommerce: {
+              currency: 'USD',
+              value: product.value.price,
+              items: [{
+                item_id: product.value.id.toString(),
+                item_name: product.value.name,
+                category: product.value.type,
+                price: product.value.price,
+                quantity: 1
+              }]
+            }
+          })
+          
+          console.log('GTM add_to_cart event sent from ProductPage:', {
+            item_name: product.value.name,
+            item_id: product.value.id,
+            price: product.value.price
+          })
+        }
+        
         alert(`${product.value.name} 已加入購物車！`)
       }
     }
