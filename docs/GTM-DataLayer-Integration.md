@@ -399,12 +399,118 @@ export default {
 </script>
 ```
 
+### 6. 登入/註冊頁面 - 用戶註冊追蹤 (LoginPage.vue)
+
+```vue
+<script>
+import { ref, computed } from 'vue'
+import { useRouter, useRoute } from 'vue-router'
+import { useUserStore } from '../store/user'
+
+export default {
+  name: 'LoginPage',
+  setup() {
+    const router = useRouter()
+    const route = useRoute()
+    const userStore = useUserStore()
+    
+    const usernameInput = ref('')
+    const isLoading = ref(false)
+    const isNewUser = ref(false) // 追蹤是否為新用戶
+    
+    // 處理登入/註冊
+    const handleLogin = async () => {
+      if (!canSubmit.value) return
+      
+      isLoading.value = true
+      
+      // 檢查是否為新用戶（模擬檢查邏輯）
+      const isFirstTimeLogin = !localStorage.getItem(`user_${usernameInput.value}_visited`)
+      
+      setTimeout(() => {
+        const result = userStore.login(usernameInput.value)
+        
+        if (result.success) {
+          // 如果是新用戶，發送註冊完成事件
+          if (isFirstTimeLogin) {
+            // 標記用戶已訪問
+            localStorage.setItem(`user_${usernameInput.value}_visited`, 'true')
+            
+            // 發送 GTM 註冊事件
+            if (typeof window !== 'undefined' && window.dataLayer) {
+              window.dataLayer.push({
+                event: 'sign_up',
+                user_data: {
+                  username: usernameInput.value,
+                  registration_method: 'website',
+                  registration_type: 'manual',
+                  is_first_time: true
+                },
+                // 可選：如果有註冊獎勵
+                ecommerce: {
+                  currency: 'USD',
+                  value: 0, // 註冊獎勵金額
+                  items: [] // 如果有贈送商品
+                }
+              })
+              
+              console.log('GTM sign_up event sent:', {
+                username: usernameInput.value,
+                registration_method: 'website',
+                timestamp: new Date().toISOString()
+              })
+            }
+            
+            isNewUser.value = true
+          } else {
+            // 現有用戶登入，發送登入事件
+            if (typeof window !== 'undefined' && window.dataLayer) {
+              window.dataLayer.push({
+                event: 'login',
+                user_data: {
+                  username: usernameInput.value,
+                  login_method: 'website',
+                  is_returning_user: true
+                }
+              })
+              
+              console.log('GTM login event sent:', {
+                username: usernameInput.value,
+                login_method: 'website'
+              })
+            }
+          }
+          
+          // 登入成功後的導向
+          const redirectTo = route.query.redirect || '/'
+          router.push(redirectTo)
+        } else {
+          errorMessage.value = result.message
+        }
+        
+        isLoading.value = false
+      }, 500)
+    }
+    
+    return {
+      usernameInput,
+      isLoading,
+      isNewUser,
+      handleLogin
+      // ... 其他返回值
+    }
+  }
+}
+</script>
+```
+
 ## 🔧 GTM 設定指南
 
 ### GTM 變數設定
 
 在 GTM 後台建立以下資料層變數 (Data Layer Variable)：
 
+#### 電商事件變數
 | 變數名稱 | 變數類型 | 資料層變數名稱 | 說明 |
 |----------|----------|----------------|------|
 | `DLV - Item ID` | 資料層變數 | `ecommerce.items.0.item_id` | 商品 ID |
@@ -418,10 +524,22 @@ export default {
 | `DLV - Cart Items Count` | 自訂 JavaScript | `function(){return {{ecommerce.items}}.length;}` | 購物車商品數量 |
 | `DLV - Cart Item IDs` | 自訂 JavaScript | `function(){return {{ecommerce.items}}.map(item => item.item_id);}` | 購物車所有商品 ID 陣列 |
 
+#### 用戶事件變數
+| 變數名稱 | 變數類型 | 資料層變數名稱 | 說明 |
+|----------|----------|----------------|------|
+| `DLV - Username` | 資料層變數 | `user_data.username` | 用戶名 |
+| `DLV - Registration Method` | 資料層變數 | `user_data.registration_method` | 註冊方式 (website, social, email) |
+| `DLV - Registration Type` | 資料層變數 | `user_data.registration_type` | 註冊類型 (manual, auto, invited) |
+| `DLV - User Registration Type` | 資料層變數 | `user_data.registration_method` | 用於 OneAD Pixel 的註冊類型 |
+| `DLV - Registration Value` | 資料層變數 | `ecommerce.value` | 註冊獎勵價值 |
+| `DLV - Is First Time` | 資料層變數 | `user_data.is_first_time` | 是否為首次註冊 |
+| `DLV - Login Method` | 資料層變數 | `user_data.login_method` | 登入方式 |
+
 ### GTM 觸發條件設定
 
 建立以下自訂事件觸發條件：
 
+#### 電商事件觸發條件
 | 觸發條件名稱 | 觸發條件類型 | 條件設定 |
 |-------------|-------------|----------|
 | `Trigger - Add to Cart` | 自訂事件 | 事件名稱等於 `add_to_cart` |
@@ -430,6 +548,13 @@ export default {
 | `Trigger - Begin Checkout` | 自訂事件 | 事件名稱等於 `begin_checkout` |
 | `Trigger - Purchase` | 自訂事件 | 事件名稱等於 `purchase` |
 | `Trigger - Page View` | 自訂事件 | 事件名稱等於 `page_view` |
+
+#### 用戶事件觸發條件
+| 觸發條件名稱 | 觸發條件類型 | 條件設定 |
+|-------------|-------------|----------|
+| `Trigger - Sign Up` | 自訂事件 | 事件名稱等於 `sign_up` |
+| `Trigger - Login` | 自訂事件 | 事件名稱等於 `login` |
+| `Trigger - First Time Registration` | 自訂事件 | 事件名稱等於 `sign_up` AND `{{DLV - Is First Time}}` 等於 `true` |
 
 ### OneAD Pixel 整合
 
@@ -441,6 +566,7 @@ OneAD Pixel 也支援電商事件追蹤，以下是對照表：
 | `view_item` | `ViewContent` | `{ content_ids, content_name, content_category, content_type }` |
 | `begin_checkout` | `InitiateCheckout` | `{ value, currency, num_items, content_ids }` |
 | `purchase` | `Purchase` | `{ content_ids, value, currency, transaction_id, num_items }` |
+| `sign_up` | `CompleteRegistration` | `{ status, content_name }` |
 
 #### OneAD Pixel 代碼範例：
 
@@ -501,6 +627,25 @@ if (typeof onep !== 'undefined') {
   });
 }
 </script>
+
+<!-- CompleteRegistration 事件 (註冊完成) -->
+<script>
+if (typeof onep !== 'undefined') {
+  onep('track', 'CompleteRegistration', {
+    status: 'success',                        // 註冊狀態
+    content_name: '{{DLV - User Registration Type}}', // 註冊類型 (如：'website', 'email', 'social')
+    // 可選參數
+    currency: 'USD',                          // 如果有註冊獎勵金額
+    value: {{DLV - Registration Value}}       // 註冊獎勵價值
+  });
+  
+  console.log('OneAD Pixel CompleteRegistration fired:', {
+    username: '{{DLV - Username}}',
+    registration_type: '{{DLV - User Registration Type}}',
+    timestamp: new Date().toISOString()
+  });
+}
+</script>
 ```
 
 ### Facebook Pixel 事件對照表
@@ -514,10 +659,13 @@ if (typeof onep !== 'undefined') {
 | `view_item` | `ViewContent` | 查看內容 | 使用者進入產品詳細頁面 |
 | `begin_checkout` | `InitiateCheckout` | 開始結帳 | 使用者點擊「結帳」按鈕 |
 | `purchase` | `Purchase` | 完成購買 | 使用者完成訂單提交 |
+| `sign_up` | `CompleteRegistration` | 完成註冊 | 使用者完成帳號註冊 |
+| `login` | *(自訂事件)* | 用戶登入 | 使用者登入帳號 |
 | `page_view` | `PageView` | 頁面瀏覽 | 自動追蹤頁面載入 |
 
 ### Facebook Pixel 參數對照表
 
+#### 電商事件參數
 | 參數用途 | GTM 變數 | Facebook Pixel 參數 | 資料類型 | 範例值 |
 |----------|----------|-------------------|----------|--------|
 | 商品 ID | `{{DLV - Item ID}}` | `content_ids` | Array | `['1']` |
@@ -527,6 +675,14 @@ if (typeof onep !== 'undefined') {
 | 幣別 | `'USD'` | `currency` | String | `'USD'` |
 | 內容類型 | `'product'` | `content_type` | String | `'product'` |
 | 數量 | `{{DLV - Item Quantity}}` | `num_items` | Number | `1` |
+
+#### 用戶事件參數
+| 參數用途 | GTM 變數 | Facebook Pixel 參數 | 資料類型 | 範例值 |
+|----------|----------|-------------------|----------|--------|
+| 註冊方式 | `{{DLV - Registration Method}}` | `content_name` | String | `'website'` |
+| 註冊狀態 | `'success'` | `status` | String | `'success'` |
+| 註冊獎勵值 | `{{DLV - Registration Value}}` | `value` | Number | `0` |
+| 幣別 | `'USD'` | `currency` | String | `'USD'` |
 
 ### 第三方追蹤代碼範例
 
@@ -600,7 +756,44 @@ if (typeof fbq !== 'undefined') {
 </script>
 ```
 
-#### 5. 自訂移除購物車事件
+#### 5. CompleteRegistration 事件 (完成註冊)
+```html
+<script>
+if (typeof fbq !== 'undefined') {
+  fbq('track', 'CompleteRegistration', {
+    content_name: '{{DLV - Registration Method}}', // 註冊方式
+    status: 'success',                             // 註冊狀態
+    value: {{DLV - Registration Value}},           // 註冊獎勵價值 (如果有)
+    currency: 'USD'                                // 幣別
+  });
+  
+  console.log('Facebook Pixel CompleteRegistration fired:', {
+    username: '{{DLV - Username}}',
+    registration_method: '{{DLV - Registration Method}}',
+    timestamp: new Date().toISOString()
+  });
+}
+</script>
+```
+
+#### 6. 自訂登入事件
+```html
+<script>
+if (typeof fbq !== 'undefined') {
+  fbq('trackCustom', 'UserLogin', {
+    content_name: '{{DLV - Login Method}}',        // 登入方式
+    status: 'success'                              // 登入狀態
+  });
+  
+  console.log('Facebook Pixel UserLogin fired:', {
+    username: '{{DLV - Username}}',
+    login_method: '{{DLV - Login Method}}'
+  });
+}
+</script>
+```
+
+#### 7. 自訂移除購物車事件
 ```html
 <script>
 if (typeof fbq !== 'undefined') {
@@ -652,6 +845,32 @@ window.dataLayer.push({
   }
 });
 
+// 測試用戶註冊事件
+window.dataLayer.push({
+  event: 'sign_up',
+  user_data: {
+    username: 'testuser123',
+    registration_method: 'website',
+    registration_type: 'manual',
+    is_first_time: true
+  },
+  ecommerce: {
+    currency: 'USD',
+    value: 0, // 註冊獎勵金額
+    items: []
+  }
+});
+
+// 測試用戶登入事件
+window.dataLayer.push({
+  event: 'login',
+  user_data: {
+    username: 'existinguser456',
+    login_method: 'website',
+    is_returning_user: true
+  }
+});
+
 // 驗證事件是否推送成功
 console.log('Last event:', window.dataLayer[window.dataLayer.length - 1]);
 ```
@@ -672,6 +891,8 @@ console.log('Last event:', window.dataLayer[window.dataLayer.length - 1]);
 | 移除商品 | 在購物車頁面移除商品 | 觸發 `remove_from_cart` 事件 |
 | 開始結帳 | 點擊「結帳」按鈕 | 觸發 `begin_checkout` 事件 |
 | 完成購買 | 在結帳頁面提交訂單 | 觸發 `purchase` 事件 |
+| 用戶註冊 | 首次登入新帳號 | 觸發 `sign_up` 事件 |
+| 用戶登入 | 現有用戶登入 | 觸發 `login` 事件 |
 
 #### 步驟 3: 驗證變數值
 在 GTM Preview 中檢查以下變數是否正確取值：
