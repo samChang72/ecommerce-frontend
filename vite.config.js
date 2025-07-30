@@ -9,6 +9,7 @@ export default defineConfig(({ command }) => {
     base: '/ecommerce-frontend/', // 開發和生產都使用相同的基礎路徑
     build: {
       outDir: 'docs', // 將輸出目錄改為 docs
+      emptyOutDir: false, // 保留現有檔案，不清空輸出目錄
     },
     publicDir: 'public', // 確保 public 資料夾被啟用
     server: {

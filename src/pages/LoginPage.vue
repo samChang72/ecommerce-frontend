@@ -97,6 +97,28 @@ export default {
         const result = userStore.login(usernameInput.value)
         
         if (result.success) {
+          // 檢查是否為首次登入
+          const userKey = `user_${usernameInput.value}_visited`
+          const isFirstTimeLogin = !localStorage.getItem(userKey)
+          
+          if (isFirstTimeLogin) {
+            // 標記用戶已訪問
+            localStorage.setItem(userKey, 'true')
+            
+            // 發送 GTM 註冊事件
+            if (typeof window !== 'undefined' && window.dataLayer) {
+              window.dataLayer.push({
+                event: 'sign_up',
+                user_data: {
+                  username: usernameInput.value,
+                  registration_method: 'website',
+                  registration_type: 'manual',
+                  is_first_time: true
+                }
+              })
+            }
+          }
+          
           // 登入成功，導向回原來的頁面或首頁
           const redirectTo = route.query.redirect || '/'
           router.push(redirectTo)

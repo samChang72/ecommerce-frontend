@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "scripts": {
     "dev": "vite",
-    "build": "vite build",
+    "build": "npm run update-facebook-feed && vite build",
     "preview": "vite preview",
     "deploy": "vite build && gh-pages -d dist",
     "update-facebook-feed": "node scripts/update-facebook-feed.js",
