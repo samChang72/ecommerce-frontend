@@ -521,8 +521,13 @@ export default {
 | `DLV - Ecommerce Value` | 資料層變數 | `ecommerce.value` | 交易總值 |
 | `DLV - Currency` | 資料層變數 | `ecommerce.currency` | 幣別 |
 | `DLV - Transaction ID` | 資料層變數 | `ecommerce.transaction_id` | 交易訂單編號 |
-| `DLV - Cart Items Count` | 自訂 JavaScript | `function(){return {{ecommerce.items}}.length;}` | 購物車商品數量 |
-| `DLV - Cart Item IDs` | 自訂 JavaScript | `function(){return {{ecommerce.items}}.map(item => item.item_id);}` | 購物車所有商品 ID 陣列 |
+| `DLV - Ecommerce Items` | 資料層變數 | `ecommerce.items` | 購物車商品陣列 |
+
+#### 自訂 JavaScript 變數 (需要先建立 DLV - Ecommerce Items)
+| 變數名稱 | 變數類型 | JavaScript 代碼 | 說明 |
+|----------|----------|----------------|------|
+| `DLV - Cart Items Count` | 自訂 JavaScript | `function(){var items={{DLV - Ecommerce Items}};return items?items.length:0;}` | 購物車商品數量 |
+| `DLV - Cart Item IDs` | 自訂 JavaScript | `function(){var items={{DLV - Ecommerce Items}};return items?items.map(function(item){return item.item_id;}):[]; }` | 購物車所有商品 ID 陣列 |
 
 #### 用戶事件變數
 | 變數名稱 | 變數類型 | 資料層變數名稱 | 說明 |
@@ -601,7 +606,7 @@ if (typeof onep !== 'undefined') {
 <script>
 if (typeof onep !== 'undefined') {
   onep('track', 'InitiateCheckout', {
-    content_ids: [{{DLV - Cart Item IDs}}], // 陣列格式: ['1', '2', '3']
+    content_ids: {{DLV - Cart Item IDs}}, // 陣列格式: ['1', '2', '3']
     value: {{DLV - Ecommerce Value}},
     currency: 'USD',
     num_items: {{DLV - Cart Items Count}}
@@ -613,16 +618,16 @@ if (typeof onep !== 'undefined') {
 <script>
 if (typeof onep !== 'undefined') {
   onep('track', 'Purchase', {
-    content_ids: [{{DLV - Cart Item IDs}}], // 所有購買商品的 ID 陣列
-    value: {{DLV - Transaction Value}},     // 交易總金額
-    currency: 'USD',                        // 幣別
+    content_ids: {{DLV - Cart Item IDs}}, // 所有購買商品的 ID 陣列
+    value: {{DLV - Ecommerce Value}},     // 交易總金額
+    currency: 'USD',                      // 幣別
     transaction_id: '{{DLV - Transaction ID}}', // 訂單編號
-    num_items: {{DLV - Cart Items Count}}   // 購買商品總數
+    num_items: {{DLV - Cart Items Count}} // 購買商品總數
   });
   
   console.log('OneAD Pixel Purchase fired:', {
     transaction_id: '{{DLV - Transaction ID}}',
-    value: {{DLV - Transaction Value}},
+    value: {{DLV - Ecommerce Value}},
     num_items: {{DLV - Cart Items Count}}
   });
 }
@@ -724,7 +729,7 @@ if (typeof fbq !== 'undefined') {
 <script>
 if (typeof fbq !== 'undefined') {
   fbq('track', 'InitiateCheckout', {
-    content_ids: [{{DLV - Cart Item IDs}}], // 陣列格式: ['1', '2', '3']
+    content_ids: {{DLV - Cart Item IDs}}, // 陣列格式: ['1', '2', '3']
     value: {{DLV - Ecommerce Value}},
     currency: 'USD',
     num_items: {{DLV - Cart Items Count}}
@@ -738,13 +743,13 @@ if (typeof fbq !== 'undefined') {
 <script>
 if (typeof fbq !== 'undefined') {
   fbq('track', 'Purchase', {
-    content_ids: [{{DLV - Cart Item IDs}}], // 所有購買商品的 ID 陣列
-    value: {{DLV - Ecommerce Value}},       // 交易總金額
-    currency: 'USD',                        // 幣別
-    content_type: 'product',                // 內容類型
-    num_items: {{DLV - Cart Items Count}},  // 購買商品總數
+    content_ids: {{DLV - Cart Item IDs}}, // 所有購買商品的 ID 陣列
+    value: {{DLV - Ecommerce Value}},     // 交易總金額
+    currency: 'USD',                      // 幣別
+    content_type: 'product',              // 內容類型
+    num_items: {{DLV - Cart Items Count}}, // 購買商品總數
     // 可選參數
-    order_id: '{{DLV - Transaction ID}}'    // 訂單編號
+    order_id: '{{DLV - Transaction ID}}'  // 訂單編號
   });
   
   console.log('Facebook Pixel Purchase fired:', {
@@ -916,6 +921,61 @@ console.log('Last event:', window.dataLayer[window.dataLayer.length - 1]);
 
 
 ### 5. 常見問題故障排除
+
+### 5. 常見問題故障排除
+
+#### 📋 **GTM 變數設定步驟指南**
+
+**步驟 1: 建立基礎資料層變數**
+```
+變數 → 新增 → 選擇「資料層變數」
+- 變數名稱: DLV - Ecommerce Items
+- 資料層變數名稱: ecommerce.items
+- 儲存
+```
+
+**步驟 2: 建立自訂 JavaScript 變數**
+```
+變數 → 新增 → 選擇「自訂 JavaScript」
+- 變數名稱: DLV - Cart Items Count
+- 自訂 JavaScript:
+function(){
+  var items = {{DLV - Ecommerce Items}};
+  return items ? items.length : 0;
+}
+- 儲存
+```
+
+```
+變數 → 新增 → 選擇「自訂 JavaScript」
+- 變數名稱: DLV - Cart Item IDs
+- 自訂 JavaScript:
+function(){
+  var items = {{DLV - Ecommerce Items}};
+  return items ? items.map(function(item){
+    return item.item_id;
+  }) : [];
+}
+- 儲存
+```
+
+#### Q: 變數設定錯誤檢查清單
+
+**必須按順序建立的變數：**
+
+1. **基礎資料層變數** (先建立這些)
+   - ✅ `DLV - Ecommerce Items` → `ecommerce.items`
+   - ✅ `DLV - Ecommerce Value` → `ecommerce.value` 
+   - ✅ `DLV - Transaction ID` → `ecommerce.transaction_id`
+
+2. **依賴變數** (需要先有基礎變數)
+   - ✅ `DLV - Cart Items Count` → 自訂 JS (依賴 DLV - Ecommerce Items)
+   - ✅ `DLV - Cart Item IDs` → 自訂 JS (依賴 DLV - Ecommerce Items)
+
+**常見錯誤修正：**
+- ❌ `{{ecommerce.items}}` → ✅ `{{DLV - Ecommerce Items}}`
+- ❌ `DLV - Transaction Value` → ✅ `DLV - Ecommerce Value`
+- ❌ `[{{DLV - Cart Item IDs}}]` → ✅ `{{DLV - Cart Item IDs}}`
 
 #### Q: DataLayer 事件沒有觸發
 **可能原因與解決方案：**
