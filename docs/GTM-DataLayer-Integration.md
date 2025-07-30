@@ -312,6 +312,93 @@ router.afterEach((to) => {
 export default router
 ```
 
+### 5. 結帳頁面 - 完成購買 (CheckoutPage.vue)
+
+```vue
+<script>
+import { ref, computed } from 'vue'
+import { useRouter } from 'vue-router'
+import { useCartStore } from '../store/cart'
+
+export default {
+  name: 'CheckoutPage',
+  setup() {
+    const router = useRouter()
+    const cartStore = useCartStore()
+    const { items, clearCart } = cartStore
+    
+    const formData = ref({
+      name: '',
+      address: '',
+      phone: ''
+    })
+    
+    const totalPrice = computed(() => {
+      return items.reduce((total, item) => total + (item.price * item.qty), 0)
+    })
+    
+    // 提交訂單並發送 Purchase 事件
+    const submitOrder = async () => {
+      try {
+        // 生成唯一訂單編號
+        const transactionId = 'ORDER_' + Date.now() + '_' + Math.random().toString(36).substr(2, 9)
+        
+        // 發送 GTM Purchase 事件
+        if (typeof window !== 'undefined' && window.dataLayer) {
+          window.dataLayer.push({
+            event: 'purchase',
+            ecommerce: {
+              transaction_id: transactionId,
+              currency: 'USD',
+              value: parseFloat(totalPrice.value),
+              items: items.map(item => ({
+                item_id: item.id.toString(),
+                item_name: item.name,
+                category: item.type,
+                price: parseFloat(item.price),
+                quantity: item.qty
+              }))
+            },
+            // 額外的訂單資訊
+            customer_info: {
+              name: formData.value.name,
+              phone: formData.value.phone
+            }
+          })
+          
+          console.log('GTM purchase event sent:', {
+            transaction_id: transactionId,
+            total_value: totalPrice.value,
+            item_count: items.length,
+            customer_name: formData.value.name
+          })
+        }
+        
+        // 模擬 API 調用
+        await new Promise(resolve => setTimeout(resolve, 1500))
+        
+        // 清空購物車
+        clearCart()
+        
+        // 導向成功頁面
+        router.push('/order-success')
+        
+      } catch (error) {
+        console.error('訂單提交失敗:', error)
+      }
+    }
+    
+    return {
+      formData,
+      totalPrice,
+      submitOrder,
+      items
+    }
+  }
+}
+</script>
+```
+
 ## 🔧 GTM 設定指南
 
 ### GTM 變數設定
@@ -327,7 +414,9 @@ export default router
 | `DLV - Item Quantity` | 資料層變數 | `ecommerce.items.0.quantity` | 商品數量 |
 | `DLV - Ecommerce Value` | 資料層變數 | `ecommerce.value` | 交易總值 |
 | `DLV - Currency` | 資料層變數 | `ecommerce.currency` | 幣別 |
-| `DLV - Cart Items Count` | 資料層變數 | `ecommerce.items.length` | 購物車商品數量 |
+| `DLV - Transaction ID` | 資料層變數 | `ecommerce.transaction_id` | 交易訂單編號 |
+| `DLV - Cart Items Count` | 自訂 JavaScript | `function(){return {{ecommerce.items}}.length;}` | 購物車商品數量 |
+| `DLV - Cart Item IDs` | 自訂 JavaScript | `function(){return {{ecommerce.items}}.map(item => item.item_id);}` | 購物車所有商品 ID 陣列 |
 
 ### GTM 觸發條件設定
 
@@ -339,6 +428,7 @@ export default router
 | `Trigger - Remove from Cart` | 自訂事件 | 事件名稱等於 `remove_from_cart` |
 | `Trigger - View Item` | 自訂事件 | 事件名稱等於 `view_item` |
 | `Trigger - Begin Checkout` | 自訂事件 | 事件名稱等於 `begin_checkout` |
+| `Trigger - Purchase` | 自訂事件 | 事件名稱等於 `purchase` |
 | `Trigger - Page View` | 自訂事件 | 事件名稱等於 `page_view` |
 
 ### OneAD Pixel 整合
@@ -347,18 +437,17 @@ OneAD Pixel 也支援電商事件追蹤，以下是對照表：
 
 | GTM Event | OneAD Pixel Event | 參數格式 |
 |-----------|------------------|----------|
-| `add_to_cart` | `addToCart` | `{ product_id, value, currency }` |
-| `view_item` | `viewContent` | `{ product_id, content_type }` |
-| `begin_checkout` | `initiateCheckout` | `{ value, currency, num_items }` |
+| `add_to_cart` | `AddToCart` | `{ content_ids, content_name, content_category, value, currency }` |
+| `view_item` | `ViewContent` | `{ content_ids, content_name, content_category, content_type }` |
+| `begin_checkout` | `InitiateCheckout` | `{ value, currency, num_items, content_ids }` |
+| `purchase` | `Purchase` | `{ content_ids, value, currency, transaction_id, num_items }` |
 
 #### OneAD Pixel 代碼範例：
 
 ```html
 <!-- AddToCart 事件 -->
 <script>
-// 確保 OneAD Pixel 已載入
 if (typeof onep !== 'undefined') {
-  // 發送 AddToCart 事件到 OneAD Pixel
   onep('track', 'AddToCart', {
     content_ids: ['{{DLV - Item ID}}'],
     content_name: '{{DLV - Item Name}}',
@@ -367,17 +456,49 @@ if (typeof onep !== 'undefined') {
     value: {{DLV - Item Price}},
     currency: 'USD'
   });
-  
-  // Debug 資訊
-  console.log('OneAD Pixel AddToCart fired with data:', {
+}
+</script>
+
+<!-- ViewContent 事件 -->
+<script>
+if (typeof onep !== 'undefined') {
+  onep('track', 'ViewContent', {
     content_ids: ['{{DLV - Item ID}}'],
     content_name: '{{DLV - Item Name}}',
     content_category: '{{DLV - Item Category}}',
-    value: {{DLV - Item Price}},
-    currency: 'USD'
+    content_type: 'product'
   });
-} else {
-  console.warn('OneAD Pixel (onep) not found');
+}
+</script>
+
+<!-- InitiateCheckout 事件 -->
+<script>
+if (typeof onep !== 'undefined') {
+  onep('track', 'InitiateCheckout', {
+    content_ids: [{{DLV - Cart Item IDs}}], // 陣列格式: ['1', '2', '3']
+    value: {{DLV - Ecommerce Value}},
+    currency: 'USD',
+    num_items: {{DLV - Cart Items Count}}
+  });
+}
+</script>
+
+<!-- Purchase 事件 (完成購買) -->
+<script>
+if (typeof onep !== 'undefined') {
+  onep('track', 'Purchase', {
+    content_ids: [{{DLV - Cart Item IDs}}], // 所有購買商品的 ID 陣列
+    value: {{DLV - Transaction Value}},     // 交易總金額
+    currency: 'USD',                        // 幣別
+    transaction_id: '{{DLV - Transaction ID}}', // 訂單編號
+    num_items: {{DLV - Cart Items Count}}   // 購買商品總數
+  });
+  
+  console.log('OneAD Pixel Purchase fired:', {
+    transaction_id: '{{DLV - Transaction ID}}',
+    value: {{DLV - Transaction Value}},
+    num_items: {{DLV - Cart Items Count}}
+  });
 }
 </script>
 ```
@@ -392,6 +513,7 @@ if (typeof onep !== 'undefined') {
 | `remove_from_cart` | *(自訂事件)* | 移除購物車 | 使用者在購物車頁面移除商品 |
 | `view_item` | `ViewContent` | 查看內容 | 使用者進入產品詳細頁面 |
 | `begin_checkout` | `InitiateCheckout` | 開始結帳 | 使用者點擊「結帳」按鈕 |
+| `purchase` | `Purchase` | 完成購買 | 使用者完成訂單提交 |
 | `page_view` | `PageView` | 頁面瀏覽 | 自動追蹤頁面載入 |
 
 ### Facebook Pixel 參數對照表
@@ -411,8 +533,8 @@ if (typeof onep !== 'undefined') {
 #### 1. AddToCart 事件 (加入購物車)
 ```html
 <script>
-if (typeof onep !== 'undefined') {
-  onep('track', 'AddToCart', {
+if (typeof fbq !== 'undefined') {
+  fbq('track', 'AddToCart', {
     content_ids: ['{{DLV - Item ID}}'],
     content_name: '{{DLV - Item Name}}',
     content_category: '{{DLV - Item Category}}',
@@ -420,6 +542,75 @@ if (typeof onep !== 'undefined') {
     value: {{DLV - Item Price}},
     currency: 'USD',
     num_items: 1
+  });
+}
+</script>
+```
+
+#### 2. ViewContent 事件 (查看商品)
+```html
+<script>
+if (typeof fbq !== 'undefined') {
+  fbq('track', 'ViewContent', {
+    content_ids: ['{{DLV - Item ID}}'],
+    content_name: '{{DLV - Item Name}}',
+    content_category: '{{DLV - Item Category}}',
+    content_type: 'product',
+    value: {{DLV - Item Price}},
+    currency: 'USD'
+  });
+}
+</script>
+```
+
+#### 3. InitiateCheckout 事件 (開始結帳)
+```html
+<script>
+if (typeof fbq !== 'undefined') {
+  fbq('track', 'InitiateCheckout', {
+    content_ids: [{{DLV - Cart Item IDs}}], // 陣列格式: ['1', '2', '3']
+    value: {{DLV - Ecommerce Value}},
+    currency: 'USD',
+    num_items: {{DLV - Cart Items Count}}
+  });
+}
+</script>
+```
+
+#### 4. Purchase 事件 (完成購買)
+```html
+<script>
+if (typeof fbq !== 'undefined') {
+  fbq('track', 'Purchase', {
+    content_ids: [{{DLV - Cart Item IDs}}], // 所有購買商品的 ID 陣列
+    value: {{DLV - Ecommerce Value}},       // 交易總金額
+    currency: 'USD',                        // 幣別
+    content_type: 'product',                // 內容類型
+    num_items: {{DLV - Cart Items Count}},  // 購買商品總數
+    // 可選參數
+    order_id: '{{DLV - Transaction ID}}'    // 訂單編號
+  });
+  
+  console.log('Facebook Pixel Purchase fired:', {
+    transaction_id: '{{DLV - Transaction ID}}',
+    value: {{DLV - Ecommerce Value}},
+    num_items: {{DLV - Cart Items Count}}
+  });
+}
+</script>
+```
+
+#### 5. 自訂移除購物車事件
+```html
+<script>
+if (typeof fbq !== 'undefined') {
+  fbq('trackCustom', 'RemoveFromCart', {
+    content_ids: ['{{DLV - Item ID}}'],
+    content_name: '{{DLV - Item Name}}',
+    content_category: '{{DLV - Item Category}}',
+    content_type: 'product',
+    value: {{DLV - Item Price}},
+    currency: 'USD'
   });
 }
 </script>
@@ -480,6 +671,7 @@ console.log('Last event:', window.dataLayer[window.dataLayer.length - 1]);
 | 加入購物車 | 點擊「加入購物車」按鈕 | 觸發 `add_to_cart` 事件 |
 | 移除商品 | 在購物車頁面移除商品 | 觸發 `remove_from_cart` 事件 |
 | 開始結帳 | 點擊「結帳」按鈕 | 觸發 `begin_checkout` 事件 |
+| 完成購買 | 在結帳頁面提交訂單 | 觸發 `purchase` 事件 |
 
 #### 步驟 3: 驗證變數值
 在 GTM Preview 中檢查以下變數是否正確取值：
