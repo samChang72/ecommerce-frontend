@@ -4,7 +4,8 @@ const getProductCategory = (type) => {
   const categoryMap = {
     '飲料': 'Food, Beverages & Tobacco > Beverages',
     '3C': 'Electronics',
-    '零食': 'Food, Beverages & Tobacco > Food Items'
+    '零食': 'Food, Beverages & Tobacco > Food Items',
+    '衣著': 'Apparel & Accessories > Clothing'
   }
   return categoryMap[type] || 'General'
 }
@@ -15,6 +16,12 @@ const getSpecificCategory = (type, name) => {
     if (name.includes('筆電') || name.includes('電腦')) return 'Electronics > Computers'
     return 'Electronics'
   }
+  if (type === '衣著') {
+    if (name.includes('短褲') || name.includes('長褲')) return 'Apparel & Accessories > Clothing > Pants'
+    if (name.includes('鞋') || name.includes('涼鞋') || name.includes('高跟')) return 'Apparel & Accessories > Shoes'
+    if (name.includes('外套') || name.includes('西裝')) return 'Apparel & Accessories > Clothing > Outerwear'
+    return 'Apparel & Accessories > Clothing'
+  }
   return getProductCategory(type)
 }
 
@@ -22,16 +29,36 @@ export const generateFacebookFeed = (products) => {
   const baseUrl = 'https://samchang72.github.io/ecommerce-frontend'
   
   return products.map(product => ({
-    id: product.id.toString(),
+    id: `DB_${product.id}`,
     title: product.name,
     description: product.name,
     availability: 'in stock',
     condition: 'new',
-    price: `${product.price}.00 USD`,
+    price: `${product.price}.00 TWD`,
     link: `${baseUrl}/#/product/${product.id}`,
     image_link: `${baseUrl}/${product.image}`,
-    brand: 'YourBrand',
-    google_product_category: getSpecificCategory(product.type, product.name)
+    brand: 'Example',
+    google_product_category: 'Animals > Pet Supplies',
+    shipping: {
+      country: 'UK',
+      service: 'Standard',
+      price: '4.95 GBP'
+    },
+    ios_url: 'example-ios://electronic',
+    ios_app_store_id: '42',
+    ios_app_name: 'Electronic Example iOS',
+    iphone_url: 'example-iphone://electronic',
+    iphone_app_store_id: '43',
+    iphone_app_name: 'Electronic Example iPhone',
+    ipad_url: 'example-ipad://electronic',
+    ipad_app_store_id: '44',
+    ipad_app_name: 'Electronic Example iPad',
+    android_url: 'example-android://electronic',
+    android_package: 'com.electronic',
+    android_app_name: 'Electronic Example Android',
+    windows_phone_url: 'example-windows://electronic',
+    windows_phone_app_id: '64ec0d1b-5b3b-4c77-a86b-5e12d465edc0',
+    windows_phone_app_name: 'Electronic Example Windows'
   }))
 }
 
