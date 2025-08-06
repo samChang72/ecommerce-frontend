@@ -4,5 +4,9 @@
   { "id": 3, "name": "手機", "price": 15000, "type": "3C", "image": "/ecommerce-frontend/image/phone.png" },
   { "id": 4, "name": "筆電", "price": 45000, "type": "3C", "image": "/ecommerce-frontend/image/notebook.png" },
   { "id": 5, "name": "洋芋片", "price": 50, "type": "零食", "image": "/ecommerce-frontend/image/chips.png" },
-  { "id": 6, "name": "巧克力", "price": 60, "type": "零食", "image": "/ecommerce-frontend/image/chocolate.png" }
+  { "id": 6, "name": "巧克力", "price": 60, "type": "零食", "image": "/ecommerce-frontend/image/chocolate.png" },
+  { "id": 7, "name": "素面短T", "price": 390, "type": "衣著", "image": "/ecommerce-frontend/image/白色素面短T.png" },
+  { "id": 8, "name": "五分袖西裝外套", "price": 1290, "type": "衣著", "image": "/ecommerce-frontend/image/黑色五分袖西裝.png" },
+  { "id": 9, "name": "牛仔短褲", "price": 790, "type": "衣著", "image": "/ecommerce-frontend/image/黑色牛仔短褲.png" },
+  { "id": 10, "name": "高跟涼鞋", "price": 890, "type": "衣著", "image": "/ecommerce-frontend/image/膚色高跟涼鞋.png" }
 ]

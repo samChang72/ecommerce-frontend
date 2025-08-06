@@ -45,7 +45,7 @@ export default {
   setup() {
     const cartStore = useCartStore()
     
-    const tabs = ref(['飲料', '3C', '零食'])
+    const tabs = ref(['飲料', '3C', '零食', '衣著'])
     const activeTab = ref('飲料')
     const products = ref(productsData)
     

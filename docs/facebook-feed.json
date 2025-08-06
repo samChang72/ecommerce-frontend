@@ -70,5 +70,53 @@
     "image_link": "https://samchang72.github.io/ecommerce-frontend/image/chocolate.png",
     "brand": "YourBrand",
     "google_product_category": "Food, Beverages & Tobacco > Food Items"
+  },
+  {
+    "id": "7",
+    "title": "素面短T",
+    "description": "素面短T",
+    "availability": "in stock",
+    "condition": "new",
+    "price": "390.00 USD",
+    "link": "https://samchang72.github.io/ecommerce-frontend/#/product/7",
+    "image_link": "https://samchang72.github.io/ecommerce-frontend/image/白色素面短T.png",
+    "brand": "YourBrand",
+    "google_product_category": "General"
+  },
+  {
+    "id": "8",
+    "title": "五分袖西裝外套",
+    "description": "五分袖西裝外套",
+    "availability": "in stock",
+    "condition": "new",
+    "price": "1290.00 USD",
+    "link": "https://samchang72.github.io/ecommerce-frontend/#/product/8",
+    "image_link": "https://samchang72.github.io/ecommerce-frontend/image/黑色五分袖西裝.png",
+    "brand": "YourBrand",
+    "google_product_category": "General"
+  },
+  {
+    "id": "9",
+    "title": "牛仔短褲",
+    "description": "牛仔短褲",
+    "availability": "in stock",
+    "condition": "new",
+    "price": "790.00 USD",
+    "link": "https://samchang72.github.io/ecommerce-frontend/#/product/9",
+    "image_link": "https://samchang72.github.io/ecommerce-frontend/image/黑色牛仔短褲.png",
+    "brand": "YourBrand",
+    "google_product_category": "General"
+  },
+  {
+    "id": "10",
+    "title": "高跟涼鞋",
+    "description": "高跟涼鞋",
+    "availability": "in stock",
+    "condition": "new",
+    "price": "890.00 USD",
+    "link": "https://samchang72.github.io/ecommerce-frontend/#/product/10",
+    "image_link": "https://samchang72.github.io/ecommerce-frontend/image/膚色高跟涼鞋.png",
+    "brand": "YourBrand",
+    "google_product_category": "General"
   }
 ]
