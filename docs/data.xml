@@ -8,7 +8,7 @@
 		<g:title>可樂</g:title>
 		<g:description>可樂</g:description>
 		<g:link>https://samchang72.github.io/ecommerce-frontend/#/product/1</g:link>
-		<g:image_link>https://samchang72.github.io/ecommerce-frontend/image/coke.png</g:image_link>
+		<g:image_link>https://samchang72.github.io/ecommerce-frontend/image/cokev2.png</g:image_link>
 		<g:brand>Example</g:brand>
 		<g:condition>new</g:condition>
 		<g:availability>in stock</g:availability>
@@ -41,7 +41,7 @@
 		<g:title>綠茶</g:title>
 		<g:description>綠茶</g:description>
 		<g:link>https://samchang72.github.io/ecommerce-frontend/#/product/2</g:link>
-		<g:image_link>https://samchang72.github.io/ecommerce-frontend/image/green.png</g:image_link>
+		<g:image_link>https://samchang72.github.io/ecommerce-frontend/image/greenv2.png</g:image_link>
 		<g:brand>Example</g:brand>
 		<g:condition>new</g:condition>
 		<g:availability>in stock</g:availability>
@@ -74,7 +74,7 @@
 		<g:title>手機</g:title>
 		<g:description>手機</g:description>
 		<g:link>https://samchang72.github.io/ecommerce-frontend/#/product/3</g:link>
-		<g:image_link>https://samchang72.github.io/ecommerce-frontend/image/phone.png</g:image_link>
+		<g:image_link>https://samchang72.github.io/ecommerce-frontend/image/phonev2.png</g:image_link>
 		<g:brand>Example</g:brand>
 		<g:condition>new</g:condition>
 		<g:availability>in stock</g:availability>
@@ -107,7 +107,7 @@
 		<g:title>筆電</g:title>
 		<g:description>筆電</g:description>
 		<g:link>https://samchang72.github.io/ecommerce-frontend/#/product/4</g:link>
-		<g:image_link>https://samchang72.github.io/ecommerce-frontend/image/notebook.png</g:image_link>
+		<g:image_link>https://samchang72.github.io/ecommerce-frontend/image/notebookv2.png</g:image_link>
 		<g:brand>Example</g:brand>
 		<g:condition>new</g:condition>
 		<g:availability>in stock</g:availability>
@@ -140,7 +140,7 @@
 		<g:title>洋芋片</g:title>
 		<g:description>洋芋片</g:description>
 		<g:link>https://samchang72.github.io/ecommerce-frontend/#/product/5</g:link>
-		<g:image_link>https://samchang72.github.io/ecommerce-frontend/image/chips.png</g:image_link>
+		<g:image_link>https://samchang72.github.io/ecommerce-frontend/image/chipsv2.png</g:image_link>
 		<g:brand>Example</g:brand>
 		<g:condition>new</g:condition>
 		<g:availability>in stock</g:availability>
@@ -173,7 +173,7 @@
 		<g:title>巧克力</g:title>
 		<g:description>巧克力</g:description>
 		<g:link>https://samchang72.github.io/ecommerce-frontend/#/product/6</g:link>
-		<g:image_link>https://samchang72.github.io/ecommerce-frontend/image/chocolate.png</g:image_link>
+		<g:image_link>https://samchang72.github.io/ecommerce-frontend/image/chocolatev2.png</g:image_link>
 		<g:brand>Example</g:brand>
 		<g:condition>new</g:condition>
 		<g:availability>in stock</g:availability>
@@ -206,7 +206,7 @@
 		<g:title>素面短T</g:title>
 		<g:description>素面短T</g:description>
 		<g:link>https://samchang72.github.io/ecommerce-frontend/#/product/7</g:link>
-		<g:image_link>https://samchang72.github.io/ecommerce-frontend/image/白色素面短T.png</g:image_link>
+		<g:image_link>https://samchang72.github.io/ecommerce-frontend/image/白色素面短Tv2.png</g:image_link>
 		<g:brand>Example</g:brand>
 		<g:condition>new</g:condition>
 		<g:availability>in stock</g:availability>
@@ -239,7 +239,7 @@
 		<g:title>五分袖西裝外套</g:title>
 		<g:description>五分袖西裝外套</g:description>
 		<g:link>https://samchang72.github.io/ecommerce-frontend/#/product/8</g:link>
-		<g:image_link>https://samchang72.github.io/ecommerce-frontend/image/黑色五分袖西裝.png</g:image_link>
+		<g:image_link>https://samchang72.github.io/ecommerce-frontend/image/黑色五分袖西裝v2.png</g:image_link>
 		<g:brand>Example</g:brand>
 		<g:condition>new</g:condition>
 		<g:availability>in stock</g:availability>
@@ -272,7 +272,7 @@
 		<g:title>牛仔短褲</g:title>
 		<g:description>牛仔短褲</g:description>
 		<g:link>https://samchang72.github.io/ecommerce-frontend/#/product/9</g:link>
-		<g:image_link>https://samchang72.github.io/ecommerce-frontend/image/黑色牛仔短褲.png</g:image_link>
+		<g:image_link>https://samchang72.github.io/ecommerce-frontend/image/黑色牛仔短褲v2.png</g:image_link>
 		<g:brand>Example</g:brand>
 		<g:condition>new</g:condition>
 		<g:availability>in stock</g:availability>
@@ -305,7 +305,7 @@
 		<g:title>高跟涼鞋</g:title>
 		<g:description>高跟涼鞋</g:description>
 		<g:link>https://samchang72.github.io/ecommerce-frontend/#/product/10</g:link>
-		<g:image_link>https://samchang72.github.io/ecommerce-frontend/image/膚色高跟涼鞋.png</g:image_link>
+		<g:image_link>https://samchang72.github.io/ecommerce-frontend/image/膚色高跟涼鞋v2.png</g:image_link>
 		<g:brand>Example</g:brand>
 		<g:condition>new</g:condition>
 		<g:availability>in stock</g:availability>

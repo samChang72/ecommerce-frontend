@@ -7,7 +7,7 @@
     "condition": "new",
     "price": "30.00 TWD",
     "link": "https://samchang72.github.io/ecommerce-frontend/#/product/1",
-    "image_link": "https://samchang72.github.io/ecommerce-frontend/image/coke.png",
+    "image_link": "https://samchang72.github.io/ecommerce-frontend/image/cokev2.png",
     "brand": "Example",
     "google_product_category": "Animals > Pet Supplies",
     "shipping": {
@@ -39,7 +39,7 @@
     "condition": "new",
     "price": "25.00 TWD",
     "link": "https://samchang72.github.io/ecommerce-frontend/#/product/2",
-    "image_link": "https://samchang72.github.io/ecommerce-frontend/image/green.png",
+    "image_link": "https://samchang72.github.io/ecommerce-frontend/image/greenv2.png",
     "brand": "Example",
     "google_product_category": "Animals > Pet Supplies",
     "shipping": {
@@ -71,7 +71,7 @@
     "condition": "new",
     "price": "15000.00 TWD",
     "link": "https://samchang72.github.io/ecommerce-frontend/#/product/3",
-    "image_link": "https://samchang72.github.io/ecommerce-frontend/image/phone.png",
+    "image_link": "https://samchang72.github.io/ecommerce-frontend/image/phonev2.png",
     "brand": "Example",
     "google_product_category": "Animals > Pet Supplies",
     "shipping": {
@@ -103,7 +103,7 @@
     "condition": "new",
     "price": "45000.00 TWD",
     "link": "https://samchang72.github.io/ecommerce-frontend/#/product/4",
-    "image_link": "https://samchang72.github.io/ecommerce-frontend/image/notebook.png",
+    "image_link": "https://samchang72.github.io/ecommerce-frontend/image/notebookv2.png",
     "brand": "Example",
     "google_product_category": "Animals > Pet Supplies",
     "shipping": {
@@ -135,7 +135,7 @@
     "condition": "new",
     "price": "50.00 TWD",
     "link": "https://samchang72.github.io/ecommerce-frontend/#/product/5",
-    "image_link": "https://samchang72.github.io/ecommerce-frontend/image/chips.png",
+    "image_link": "https://samchang72.github.io/ecommerce-frontend/image/chipsv2.png",
     "brand": "Example",
     "google_product_category": "Animals > Pet Supplies",
     "shipping": {
@@ -167,7 +167,7 @@
     "condition": "new",
     "price": "60.00 TWD",
     "link": "https://samchang72.github.io/ecommerce-frontend/#/product/6",
-    "image_link": "https://samchang72.github.io/ecommerce-frontend/image/chocolate.png",
+    "image_link": "https://samchang72.github.io/ecommerce-frontend/image/chocolatev2.png",
     "brand": "Example",
     "google_product_category": "Animals > Pet Supplies",
     "shipping": {
@@ -199,7 +199,7 @@
     "condition": "new",
     "price": "390.00 TWD",
     "link": "https://samchang72.github.io/ecommerce-frontend/#/product/7",
-    "image_link": "https://samchang72.github.io/ecommerce-frontend/image/白色素面短T.png",
+    "image_link": "https://samchang72.github.io/ecommerce-frontend/image/白色素面短Tv2.png",
     "brand": "Example",
     "google_product_category": "Animals > Pet Supplies",
     "shipping": {
@@ -231,7 +231,7 @@
     "condition": "new",
     "price": "1290.00 TWD",
     "link": "https://samchang72.github.io/ecommerce-frontend/#/product/8",
-    "image_link": "https://samchang72.github.io/ecommerce-frontend/image/黑色五分袖西裝.png",
+    "image_link": "https://samchang72.github.io/ecommerce-frontend/image/黑色五分袖西裝v2.png",
     "brand": "Example",
     "google_product_category": "Animals > Pet Supplies",
     "shipping": {
@@ -263,7 +263,7 @@
     "condition": "new",
     "price": "790.00 TWD",
     "link": "https://samchang72.github.io/ecommerce-frontend/#/product/9",
-    "image_link": "https://samchang72.github.io/ecommerce-frontend/image/黑色牛仔短褲.png",
+    "image_link": "https://samchang72.github.io/ecommerce-frontend/image/黑色牛仔短褲v2.png",
     "brand": "Example",
     "google_product_category": "Animals > Pet Supplies",
     "shipping": {
@@ -295,7 +295,7 @@
     "condition": "new",
     "price": "890.00 TWD",
     "link": "https://samchang72.github.io/ecommerce-frontend/#/product/10",
-    "image_link": "https://samchang72.github.io/ecommerce-frontend/image/膚色高跟涼鞋.png",
+    "image_link": "https://samchang72.github.io/ecommerce-frontend/image/膚色高跟涼鞋v2.png",
     "brand": "Example",
     "google_product_category": "Animals > Pet Supplies",
     "shipping": {
