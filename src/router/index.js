@@ -1,4 +1,4 @@
-import { createRouter, createWebHashHistory } from 'vue-router'
+import { createRouter, createWebHistory } from 'vue-router'
 import HomePage from '../pages/HomePage.vue'
 import ProductPage from '../pages/ProductPage.vue'
 import CartPage from '../pages/CartPage.vue'
@@ -11,7 +11,7 @@ import { useUserStore } from '../store/user'
 console.log('Router configuration loading...')
 
 const router = createRouter({
-  history: createWebHashHistory(),
+  history: createWebHistory('/ecommerce-frontend/'),
   routes: [
     { 
       path: '/', 
