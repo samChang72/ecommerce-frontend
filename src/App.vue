@@ -38,6 +38,8 @@
     <div class="uuid-display">
       <span id="uuidDisplay">等待 UUID...</span>
     </div>
+    <!-- Cookie Consent Banner -->
+    <CookieBanner />
   </div>
 </template>
 
@@ -46,6 +48,8 @@ import { computed, onMounted } from 'vue'
 import { useRouter } from 'vue-router'
 import { useUserStore } from './store/user'
 import { useCartStore } from './store/cart'
+import { useConsentStore } from './store/consent'
+import CookieBanner from './components/CookieBanner.vue'
 import { updateFacebookFeedFile } from './utils/facebookFeed.js'
 import productsData from './assets/products.json'
 
@@ -54,7 +58,9 @@ export default {
   setup() {
     const router = useRouter()
     const userStore = useUserStore()
+
     const cartStore = useCartStore()
+    const consentStore = useConsentStore()
     
     // 購物車商品數量
     const cartItems = computed(() => cartStore.items)
@@ -68,6 +74,9 @@ export default {
     onMounted(() => {
       // 調試日誌
       console.log('App.vue mounted')
+      
+      // 初始化隱私權同意狀態
+      consentStore.initConsent()
       
       // 初始化 GTM dataLayer (如果尚未存在)
       if (typeof window !== 'undefined' && !window.dataLayer) {
@@ -98,6 +107,9 @@ export default {
       cartItems,
       handleLogout
     }
+  },
+  components: {
+    CookieBanner
   }
 }
 </script>
