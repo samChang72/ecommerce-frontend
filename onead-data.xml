@@ -1,0 +1,203 @@
+<?xml version="1.0"?>
+<feed xmlns="http://www.w3.org/2005/Atom" xmlns:g="http://base.google.com/ns/1.0">
+	<title>OneAD Store</title>
+	<link rel="self" href="https://www.onead.com.tw"/>
+
+	<entry>
+		<g:id>2001-db8-a0b-12f0--1</g:id>
+		<g:title>解鎖聯網電視新境界</g:title>
+		<g:description>解鎖聯網電視新境界</g:description>
+		<g:link>https://www.onead.com.tw/product/swipestory/</g:link>
+		<g:image_link>https://cdn-oneadweb.onead.com.tw/wp-content/uploads/2025/06/Swipestory%E9%A6%96%E5%9C%96.jpg</g:image_link>
+		<g:brand>OneAD</g:brand>
+		<g:condition>new</g:condition>
+		<g:availability>in stock</g:availability>
+		<g:price>45.00 TWD</g:price>
+		<g:shipping>
+			<g:country>TW</g:country>
+			<g:service>Standard</g:service>
+			<g:price>100.00 TWD</g:price>
+		</g:shipping>
+		<g:google_product_category>Electronics &gt; Media Streaming Devices</g:google_product_category>
+		<applink property="ios_url" content="onead-ios://product/swipestory" />
+		<applink property="ios_app_store_id" content="1001" />
+		<applink property="ios_app_name" content="OneAD iOS" />
+		<applink property="iphone_url" content="onead-iphone://product/swipestory" />
+		<applink property="iphone_app_store_id" content="1001" />
+		<applink property="iphone_app_name" content="OneAD iPhone" />
+		<applink property="ipad_url" content="onead-ipad://product/swipestory" />
+		<applink property="ipad_app_store_id" content="1001" />
+		<applink property="ipad_app_name" content="OneAD iPad" />
+		<applink property="android_url" content="onead-android://product/swipestory" />
+		<applink property="android_package" content="com.onead.app" />
+		<applink property="android_app_name" content="OneAD Android" />
+		<applink property="windows_phone_url" content="onead-windows://product/swipestory" />
+		<applink property="windows_phone_app_id" content="a1b2c3d4-e5f6-7890-abcd-ef1234567890" />
+		<applink property="windows_phone_app_name" content="OneAD Windows" />
+	</entry>
+
+	<entry>
+		<g:id>2001-db8-85a3-8d3-1319-8a2e-370-7344</g:id>
+		<g:title>Webb 商圈數據</g:title>
+		<g:description>Webb 商圈數據</g:description>
+		<g:link>https://www.onead.com.tw/product/webb_shoppingarea_data1/</g:link>
+		<g:image_link>https://cdn-oneadweb.onead.com.tw/wp-content/uploads/2025/06/webb%E5%BB%A3%E5%91%8A_%E5%95%86%E5%9C%88%E6%95%B8%E6%93%9A_744.jpg</g:image_link>
+		<g:brand>OneAD</g:brand>
+		<g:condition>new</g:condition>
+		<g:availability>in stock</g:availability>
+		<g:price>78.00 TWD</g:price>
+		<g:shipping>
+			<g:country>TW</g:country>
+			<g:service>Standard</g:service>
+			<g:price>100.00 TWD</g:price>
+		</g:shipping>
+		<g:google_product_category>Business &amp; Industrial &gt; Business Services</g:google_product_category>
+		<applink property="ios_url" content="onead-ios://product/webb_shoppingarea_data1" />
+		<applink property="ios_app_store_id" content="1001" />
+		<applink property="ios_app_name" content="OneAD iOS" />
+		<applink property="iphone_url" content="onead-iphone://product/webb_shoppingarea_data1" />
+		<applink property="iphone_app_store_id" content="1001" />
+		<applink property="iphone_app_name" content="OneAD iPhone" />
+		<applink property="ipad_url" content="onead-ipad://product/webb_shoppingarea_data1" />
+		<applink property="ipad_app_store_id" content="1001" />
+		<applink property="ipad_app_name" content="OneAD iPad" />
+		<applink property="android_url" content="onead-android://product/webb_shoppingarea_data1" />
+		<applink property="android_package" content="com.onead.app" />
+		<applink property="android_app_name" content="OneAD Android" />
+		<applink property="windows_phone_url" content="onead-windows://product/webb_shoppingarea_data1" />
+		<applink property="windows_phone_app_id" content="a1b2c3d4-e5f6-7890-abcd-ef1234567890" />
+		<applink property="windows_phone_app_name" content="OneAD Windows" />
+	</entry>
+
+	<entry>
+		<g:id>2001-db8-1234-5678-9abc-def0-1234-5678</g:id>
+		<g:title>視覺 x 聽覺創造注意力連環衝擊</g:title>
+		<g:description>視覺 x 聽覺創造注意力連環衝擊</g:description>
+		<g:link>https://www.onead.com.tw/product/mib-audio-launch/</g:link>
+		<g:image_link>https://cdn-oneadweb.onead.com.tw/wp-content/uploads/2025/05/MIB-Audio-%E4%B8%8A%E7%B7%9A.jpg</g:image_link>
+		<g:brand>OneAD</g:brand>
+		<g:condition>new</g:condition>
+		<g:availability>in stock</g:availability>
+		<g:price>92.00 TWD</g:price>
+		<g:shipping>
+			<g:country>TW</g:country>
+			<g:service>Standard</g:service>
+			<g:price>100.00 TWD</g:price>
+		</g:shipping>
+		<g:google_product_category>Electronics &gt; Audio &gt; Audio Players &amp; Recorders</g:google_product_category>
+		<applink property="ios_url" content="onead-ios://product/mib-audio-launch" />
+		<applink property="ios_app_store_id" content="1001" />
+		<applink property="ios_app_name" content="OneAD iOS" />
+		<applink property="iphone_url" content="onead-iphone://product/mib-audio-launch" />
+		<applink property="iphone_app_store_id" content="1001" />
+		<applink property="iphone_app_name" content="OneAD iPhone" />
+		<applink property="ipad_url" content="onead-ipad://product/mib-audio-launch" />
+		<applink property="ipad_app_store_id" content="1001" />
+		<applink property="ipad_app_name" content="OneAD iPad" />
+		<applink property="android_url" content="onead-android://product/mib-audio-launch" />
+		<applink property="android_package" content="com.onead.app" />
+		<applink property="android_app_name" content="OneAD Android" />
+		<applink property="windows_phone_url" content="onead-windows://product/mib-audio-launch" />
+		<applink property="windows_phone_app_id" content="a1b2c3d4-e5f6-7890-abcd-ef1234567890" />
+		<applink property="windows_phone_app_name" content="OneAD Windows" />
+	</entry>
+
+	<entry>
+		<g:id>2001-db8-cafe-babe-dead-beef-1337-c0de</g:id>
+		<g:title>品牌流量競爭白熱化</g:title>
+		<g:description>品牌流量競爭白熱化</g:description>
+		<g:link>https://www.onead.com.tw/product/newsuperdrive/</g:link>
+		<g:image_link>https://cdn-oneadweb.onead.com.tw/wp-content/uploads/2025/02/0224_QT_SuperDrive_%E7%A4%BE%E7%BE%A4%E5%9C%96%E7%89%87%E8%A3%BD%E4%BD%9C.jpg</g:image_link>
+		<g:brand>OneAD</g:brand>
+		<g:condition>new</g:condition>
+		<g:availability>in stock</g:availability>
+		<g:price>33.00 TWD</g:price>
+		<g:shipping>
+			<g:country>TW</g:country>
+			<g:service>Standard</g:service>
+			<g:price>100.00 TWD</g:price>
+		</g:shipping>
+		<g:google_product_category>Business &amp; Industrial &gt; Advertising &amp; Marketing</g:google_product_category>
+		<applink property="ios_url" content="onead-ios://product/newsuperdrive" />
+		<applink property="ios_app_store_id" content="1001" />
+		<applink property="ios_app_name" content="OneAD iOS" />
+		<applink property="iphone_url" content="onead-iphone://product/newsuperdrive" />
+		<applink property="iphone_app_store_id" content="1001" />
+		<applink property="iphone_app_name" content="OneAD iPhone" />
+		<applink property="ipad_url" content="onead-ipad://product/newsuperdrive" />
+		<applink property="ipad_app_store_id" content="1001" />
+		<applink property="ipad_app_name" content="OneAD iPad" />
+		<applink property="android_url" content="onead-android://product/newsuperdrive" />
+		<applink property="android_package" content="com.onead.app" />
+		<applink property="android_app_name" content="OneAD Android" />
+		<applink property="windows_phone_url" content="onead-windows://product/newsuperdrive" />
+		<applink property="windows_phone_app_id" content="a1b2c3d4-e5f6-7890-abcd-ef1234567890" />
+		<applink property="windows_phone_app_name" content="OneAD Windows" />
+	</entry>
+
+	<entry>
+		<g:id>2001-db8-f00d-cafe-1234-5678-9abc-def0</g:id>
+		<g:title>抓住春節注意力</g:title>
+		<g:description>抓住春節注意力</g:description>
+		<g:link>https://www.onead.com.tw/product/cny_richmedia/</g:link>
+		<g:image_link>https://cdn-oneadweb.onead.com.tw/wp-content/uploads/2025/01/19201080_Crop-Image.jpg</g:image_link>
+		<g:brand>OneAD</g:brand>
+		<g:condition>new</g:condition>
+		<g:availability>in stock</g:availability>
+		<g:price>67.00 TWD</g:price>
+		<g:shipping>
+			<g:country>TW</g:country>
+			<g:service>Standard</g:service>
+			<g:price>100.00 TWD</g:price>
+		</g:shipping>
+		<g:google_product_category>Business &amp; Industrial &gt; Advertising &amp; Marketing</g:google_product_category>
+		<applink property="ios_url" content="onead-ios://product/cny_richmedia" />
+		<applink property="ios_app_store_id" content="1001" />
+		<applink property="ios_app_name" content="OneAD iOS" />
+		<applink property="iphone_url" content="onead-iphone://product/cny_richmedia" />
+		<applink property="iphone_app_store_id" content="1001" />
+		<applink property="iphone_app_name" content="OneAD iPhone" />
+		<applink property="ipad_url" content="onead-ipad://product/cny_richmedia" />
+		<applink property="ipad_app_store_id" content="1001" />
+		<applink property="ipad_app_name" content="OneAD iPad" />
+		<applink property="android_url" content="onead-android://product/cny_richmedia" />
+		<applink property="android_package" content="com.onead.app" />
+		<applink property="android_app_name" content="OneAD Android" />
+		<applink property="windows_phone_url" content="onead-windows://product/cny_richmedia" />
+		<applink property="windows_phone_app_id" content="a1b2c3d4-e5f6-7890-abcd-ef1234567890" />
+		<applink property="windows_phone_app_name" content="OneAD Windows" />
+	</entry>
+
+	<entry>
+		<g:id>2001-db8-4200-6900-1000-2000-3000-4000</g:id>
+		<g:title>OneAD 推出全網域廣告</g:title>
+		<g:description>OneAD ��h���J</g:description>
+		<g:link>https://www.onead.com.tw/product/pmpx_launch/</g:link>
+		<g:image_link>https://cdn-oneadweb.onead.com.tw/wp-content/uploads/2025/01/%E5%85%A8%E7%B6%B2%E5%9F%9F.jpg</g:image_link>
+		<g:brand>OneAD</g:brand>
+		<g:condition>new</g:condition>
+		<g:availability>in stock</g:availability>
+		<g:price>56.00 TWD</g:price>
+		<g:shipping>
+			<g:country>TW</g:country>
+			<g:service>Standard</g:service>
+			<g:price>100.00 TWD</g:price>
+		</g:shipping>
+		<g:google_product_category>Business &amp; Industrial &gt; Advertising &amp; Marketing</g:google_product_category>
+		<applink property="ios_url" content="onead-ios://product/pmpx_launch" />
+		<applink property="ios_app_store_id" content="1001" />
+		<applink property="ios_app_name" content="OneAD iOS" />
+		<applink property="iphone_url" content="onead-iphone://product/pmpx_launch" />
+		<applink property="iphone_app_store_id" content="1001" />
+		<applink property="iphone_app_name" content="OneAD iPhone" />
+		<applink property="ipad_url" content="onead-ipad://product/pmpx_launch" />
+		<applink property="ipad_app_store_id" content="1001" />
+		<applink property="ipad_app_name" content="OneAD iPad" />
+		<applink property="android_url" content="onead-android://product/pmpx_launch" />
+		<applink property="android_package" content="com.onead.app" />
+		<applink property="android_app_name" content="OneAD Android" />
+		<applink property="windows_phone_url" content="onead-windows://product/pmpx_launch" />
+		<applink property="windows_phone_app_id" content="a1b2c3d4-e5f6-7890-abcd-ef1234567890" />
+		<applink property="windows_phone_app_name" content="OneAD Windows" />
+	</entry>
+</feed>
