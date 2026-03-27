@@ -78,6 +78,10 @@ function mdTableToDocxTable(mdText) {
   const headerCells = parseRow(dataRows[0])
   const colCount = headerCells.length
 
+  // Distribute column widths evenly in DXA (1/20 of a point, A4 ~= 9026 DXA usable)
+  const totalWidth = 9026
+  const colWidth = Math.floor(totalWidth / colCount)
+
   const cellBorder = {
     top: { style: BorderStyle.SINGLE, size: 1, color: COLORS.border },
     bottom: { style: BorderStyle.SINGLE, size: 1, color: COLORS.border },
@@ -92,6 +96,7 @@ function mdTableToDocxTable(mdText) {
           children: [textRun(cell.replace(/\*\*/g, ''), { bold: true, size: 20 })],
           alignment: AlignmentType.CENTER
         })],
+        width: { size: colWidth, type: WidthType.DXA },
         shading: { type: ShadingType.CLEAR, fill: COLORS.codeBg },
         borders: cellBorder
       })
@@ -104,8 +109,10 @@ function mdTableToDocxTable(mdText) {
       children: Array.from({ length: colCount }, (_, i) =>
         new TableCell({
           children: [new Paragraph({
-            children: [textRun((cells[i] || '').replace(/\*\*/g, ''), { size: 20 })]
+            children: [textRun((cells[i] || '').replace(/\*\*/g, ''), { size: 20 })],
+            alignment: AlignmentType.CENTER
           })],
+          width: { size: colWidth, type: WidthType.DXA },
           borders: cellBorder
         })
       )
@@ -114,7 +121,8 @@ function mdTableToDocxTable(mdText) {
 
   return [new Table({
     rows: [headerRow, ...bodyRows],
-    width: { size: 100, type: WidthType.PERCENTAGE }
+    width: { size: totalWidth, type: WidthType.DXA },
+    columnWidths: Array(colCount).fill(colWidth)
   })]
 }
 
