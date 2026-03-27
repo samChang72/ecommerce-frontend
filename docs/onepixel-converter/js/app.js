@@ -3,6 +3,8 @@ import { generateMarkdown } from './generator.js'
 import { generateHtml } from './html-generator.js'
 import { generateDocx } from './docx-generator.js'
 
+const APP_VERSION = '1.1.0'
+
 let state = { parsedData: null, clientName: '' }
 
 const dropZone = document.getElementById('drop-zone')
@@ -224,3 +226,5 @@ downloadBtn.addEventListener('click', handleDownload)
 downloadHtmlBtn.addEventListener('click', handleDownloadHtml)
 downloadDocxBtn.addEventListener('click', handleDownloadDocx)
 copyBtn.addEventListener('click', handleCopy)
+
+document.getElementById('version-footer').textContent = `v${APP_VERSION}`
