@@ -51,13 +51,31 @@ function bulletPoint(text) {
 
 function codeBlock(code) {
   const lines = code.split('\n')
-  return lines.map(line =>
+  const codeParagraphs = lines.map(line =>
     new Paragraph({
       children: [textRun(line || ' ', { code: true, size: 18, color: COLORS.text })],
-      spacing: { after: 0, line: 276 },
-      shading: { type: ShadingType.CLEAR, fill: COLORS.codeBg }
+      spacing: { after: 0, line: 276 }
     })
   )
+
+  const cellBorder = {
+    top: { style: BorderStyle.SINGLE, size: 1, color: COLORS.border },
+    bottom: { style: BorderStyle.SINGLE, size: 1, color: COLORS.border },
+    left: { style: BorderStyle.SINGLE, size: 1, color: COLORS.border },
+    right: { style: BorderStyle.SINGLE, size: 1, color: COLORS.border }
+  }
+
+  return [new Table({
+    rows: [new TableRow({
+      children: [new TableCell({
+        children: codeParagraphs,
+        borders: cellBorder,
+        shading: { type: ShadingType.CLEAR, fill: COLORS.codeBg },
+        width: { size: 9026, type: WidthType.DXA }
+      })]
+    })],
+    width: { size: 9026, type: WidthType.DXA }
+  })]
 }
 
 function emptyLine() {

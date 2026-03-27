@@ -3,7 +3,7 @@ import { generateMarkdown } from './generator.js'
 import { generateHtml } from './html-generator.js'
 import { generateDocx } from './docx-generator.js'
 
-const APP_VERSION = '1.1.0'
+const APP_VERSION = '1.2.0'
 
 let state = { parsedData: null, clientName: '' }
 
