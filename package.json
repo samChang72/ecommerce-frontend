@@ -3,11 +3,13 @@
   "version": "1.0.0",
   "scripts": {
     "dev": "vite",
-    "build": "npm run update-facebook-feed && vite build",
+    "build": "npm run update-facebook-feed && vite build && npm run deploy:onepixel",
     "preview": "vite preview",
     "deploy": "vite build && gh-pages -d dist",
     "update-facebook-feed": "node scripts/update-facebook-feed.js",
-    "build:sync": "npm run update-facebook-feed && vite build",
+    "build:sync": "npm run update-facebook-feed && vite build && npm run deploy:onepixel",
+    "deploy:onepixel": "node tools/onepixel-converter/deploy.js",
+    "test:onepixel": "cd tools/onepixel-converter && npm test",
     "dev:info": "echo '🚀 開發服務器將在 http://localhost:3000/ecommerce-frontend/ 啟動' && npm run dev",
     "test:local": "echo '🧪 本地測試：http://localhost:3000/ecommerce-frontend/' && echo '🌐 線上版本：https://samchang72.github.io/ecommerce-frontend/' && npm run dev"
   },

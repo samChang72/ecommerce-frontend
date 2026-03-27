@@ -1,0 +1,13 @@
+{
+  "name": "onepixel-converter",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "test": "node --import ./tests/setup.js --test tests/*.test.js",
+    "deploy": "node deploy.js"
+  },
+  "devDependencies": {
+    "linkedom": "^0.16.11"
+  }
+}

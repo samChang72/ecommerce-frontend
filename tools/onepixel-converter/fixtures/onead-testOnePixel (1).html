@@ -1,0 +1,115 @@
+
+    <!DOCTYPE html>
+    <html lang="zh-Hant-TW">
+    <head>
+      <title>SuperDSP</title>
+      <meta charset="UTF-8" />
+      <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+      <style>
+        body {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+wrapper {
+  width: 100%;
+  max-width: 1440px;
+  padding: 16px;
+}
+.title {
+  padding: 24px 0 8px 0;
+  font-size: 20px;
+  text-align: center;
+  font-style: normal;
+  font-weight: 500;
+}
+ul {
+  padding-left: 1rem;
+}
+p {
+  font-size: 16px;
+  font-weight: normal;
+  line-height: 28px;
+  margin: 0 0 8px;
+}
+p.bold {
+  font-weight: 700;
+}
+.code {
+  border: 1px solid rgba(0, 0, 0, 0.06);
+  background: #fff;
+}
+.code .code_title {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 16px;
+  background-color: #fafafa;
+}
+.code .code_title p {
+  margin: 0;
+}
+.code .code_title .code_title_button .code_title_button_inner {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.code .code_container {
+  padding: 16px;
+  background-color: #fff;
+  overflow: auto;
+  word-wrap: break-word;
+}
+.code .code_container pre {
+  margin: 0;
+}
+.code .code_container pre code {
+  font-family: Roboto;
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 22px;
+}
+hr {
+  border-color: #fcfcfc;
+  margin: 16px 0;
+}
+      </style>
+    </head>
+    <body>
+      <wrapper>
+        <div class="title">OnePixel</div>
+        <div data-v-ce8860a7="" class="mb-6 font-bold"><p data-v-ce8860a7="">OnePixel ID：586731500</p><p data-v-ce8860a7="">名稱：onead-test</p></div><p data-v-ce8860a7="" class="font-bold">複製並安裝初始化程式碼</p><ul data-v-ce8860a7="" class="mb-4 list-disc pl-6 text-gray-700"><li data-v-ce8860a7="">程式放在 &lt; body &gt; &lt; /body &gt; 之間，如透過 Tag Manager 工具，請依工具設定說明。</li><li data-v-ce8860a7="">優先設定執行初始化程式碼</li></ul><div data-v-e8de0097="" data-v-ce8860a7="" class="code"><div data-v-e8de0097="" class="code-title"><p data-v-e8de0097="" class="bold">初始化程式碼</p><button data-v-e8de0097="" aria-disabled="false" type="button" class="el-button code-title-button copyToHide h-fit !min-w-fit py-2" style="display: none;"><!--v-if--><span class=""><div data-v-e8de0097="" class="code-title-button-inner gap-1"><i data-v-e8de0097="" class="el-icon"><svg data-v-e8de0097="" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024"><path fill="currentColor" d="M128 320v576h576V320zm-32-64h640a32 32 0 0 1 32 32v640a32 32 0 0 1-32 32H96a32 32 0 0 1-32-32V288a32 32 0 0 1 32-32M960 96v704a32 32 0 0 1-32 32h-96v-64h64V128H384v64h-64V96a32 32 0 0 1 32-32h576a32 32 0 0 1 32 32M256 672h320v64H256zm0-192h320v64H256z"></path></svg></i> 複製</div></span></button></div><div data-v-e8de0097="" class="code-container"><pre data-v-e8de0097=""><code data-v-e8de0097="">&lt;script type="text/javascript"&gt;
+    // 重要!!執行轉換程式前需先執行
+    !function (w, d, e, v) {
+        if (w.onep) return;
+
+        w.onep = function () {
+            (w.onep_queue = w.onep_queue || []).push(arguments);
+        };
+
+        var n = d.createElement(e);
+        n.async = !0;
+        n.src = v;
+        var t = d.getElementsByTagName(e)[0];
+        t.parentNode.insertBefore(n, t);
+    }(window, document, 'script', 'https://pixel.onead.com.tw/static/js/onead-pixel-v2.min.js');
+
+    onep('init', '586731500');
+    onep('track', 'PageView');
+&lt;/script&gt;</code></pre></div></div><hr data-v-ce8860a7="" class="my-4 border-gray-300"><div data-v-ce8860a7="" class="mb-4 font-bold"><p data-v-ce8860a7="">類型：全站進站 (Page View)</p><p data-v-ce8860a7="">名稱：PageView</p><div data-v-e8de0097="" data-v-ce8860a7="" class="code"><div data-v-e8de0097="" class="code-title"><p data-v-e8de0097="" class="bold">事件程式碼</p><button data-v-e8de0097="" aria-disabled="false" type="button" class="el-button code-title-button copyToHide h-fit !min-w-fit py-2" style="display: none;"><!--v-if--><span class=""><div data-v-e8de0097="" class="code-title-button-inner gap-1"><i data-v-e8de0097="" class="el-icon"><svg data-v-e8de0097="" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024"><path fill="currentColor" d="M128 320v576h576V320zm-32-64h640a32 32 0 0 1 32 32v640a32 32 0 0 1-32 32H96a32 32 0 0 1-32-32V288a32 32 0 0 1 32-32M960 96v704a32 32 0 0 1-32 32h-96v-64h64V128H384v64h-64V96a32 32 0 0 1 32-32h576a32 32 0 0 1 32 32M256 672h320v64H256zm0-192h320v64H256z"></path></svg></i> 複製</div></span></button></div><div data-v-e8de0097="" class="code-container"><pre data-v-e8de0097=""><code data-v-e8de0097="">&lt;script&gt;
+    // 轉換事件，依照需求加在適當的位置（必須在初始化程式碼後）
+    onep('track', 'PageView', { content_name: 'PageView', id: '799212711' });
+&lt;/script&gt;</code></pre></div></div></div><div data-v-ce8860a7="" class="mb-4 font-bold"><p data-v-ce8860a7="">類型：按鈕點擊 (Lead)</p><p data-v-ce8860a7="">名稱：lead</p><div data-v-e8de0097="" data-v-ce8860a7="" class="code"><div data-v-e8de0097="" class="code-title"><p data-v-e8de0097="" class="bold">事件程式碼</p><button data-v-e8de0097="" aria-disabled="false" type="button" class="el-button code-title-button copyToHide h-fit !min-w-fit py-2" style="display: none;"><!--v-if--><span class=""><div data-v-e8de0097="" class="code-title-button-inner gap-1"><i data-v-e8de0097="" class="el-icon"><svg data-v-e8de0097="" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024"><path fill="currentColor" d="M128 320v576h576V320zm-32-64h640a32 32 0 0 1 32 32v640a32 32 0 0 1-32 32H96a32 32 0 0 1-32-32V288a32 32 0 0 1 32-32M960 96v704a32 32 0 0 1-32 32h-96v-64h64V128H384v64h-64V96a32 32 0 0 1 32-32h576a32 32 0 0 1 32 32M256 672h320v64H256zm0-192h320v64H256z"></path></svg></i> 複製</div></span></button></div><div data-v-e8de0097="" class="code-container"><pre data-v-e8de0097=""><code data-v-e8de0097="">&lt;script&gt;
+    // 轉換事件，依照需求加在適當的位置（必須在初始化程式碼後）
+    onep('track', 'Lead', { content_name: 'lead', id: '715841193' });
+&lt;/script&gt;</code></pre></div></div></div><div data-v-ce8860a7="" class="mb-4 font-bold"><p data-v-ce8860a7="">類型：按鈕點擊 (Lead)</p><p data-v-ce8860a7="">名稱：lead</p><div data-v-e8de0097="" data-v-ce8860a7="" class="code"><div data-v-e8de0097="" class="code-title"><p data-v-e8de0097="" class="bold">事件程式碼</p><button data-v-e8de0097="" aria-disabled="false" type="button" class="el-button code-title-button copyToHide h-fit !min-w-fit py-2" style="display: none;"><!--v-if--><span class=""><div data-v-e8de0097="" class="code-title-button-inner gap-1"><i data-v-e8de0097="" class="el-icon"><svg data-v-e8de0097="" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024"><path fill="currentColor" d="M128 320v576h576V320zm-32-64h640a32 32 0 0 1 32 32v640a32 32 0 0 1-32 32H96a32 32 0 0 1-32-32V288a32 32 0 0 1 32-32M960 96v704a32 32 0 0 1-32 32h-96v-64h64V128H384v64h-64V96a32 32 0 0 1 32-32h576a32 32 0 0 1 32 32M256 672h320v64H256zm0-192h320v64H256z"></path></svg></i> 複製</div></span></button></div><div data-v-e8de0097="" class="code-container"><pre data-v-e8de0097=""><code data-v-e8de0097="">&lt;script&gt;
+    // 轉換事件，依照需求加在適當的位置（必須在初始化程式碼後）
+    onep('track', 'Lead', { content_name: 'lead', id: '564467372' });
+&lt;/script&gt;</code></pre></div></div></div><div data-v-ce8860a7="" class="mb-4 font-bold"><p data-v-ce8860a7="">類型：完成購買 (Purchase)</p><p data-v-ce8860a7="">名稱：pp</p><div data-v-e8de0097="" data-v-ce8860a7="" class="code"><div data-v-e8de0097="" class="code-title"><p data-v-e8de0097="" class="bold">事件程式碼</p><button data-v-e8de0097="" aria-disabled="false" type="button" class="el-button code-title-button copyToHide h-fit !min-w-fit py-2" style="display: none;"><!--v-if--><span class=""><div data-v-e8de0097="" class="code-title-button-inner gap-1"><i data-v-e8de0097="" class="el-icon"><svg data-v-e8de0097="" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024"><path fill="currentColor" d="M128 320v576h576V320zm-32-64h640a32 32 0 0 1 32 32v640a32 32 0 0 1-32 32H96a32 32 0 0 1-32-32V288a32 32 0 0 1 32-32M960 96v704a32 32 0 0 1-32 32h-96v-64h64V128H384v64h-64V96a32 32 0 0 1 32-32h576a32 32 0 0 1 32 32M256 672h320v64H256zm0-192h320v64H256z"></path></svg></i> 複製</div></span></button></div><div data-v-e8de0097="" class="code-container"><pre data-v-e8de0097=""><code data-v-e8de0097="">&lt;script&gt;
+    // 轉換事件，依照需求加在適當的位置（必須在初始化程式碼後）
+    onep('track', 'Purchase', { content_name: 'pp', id: '428882660' });
+&lt;/script&gt;</code></pre></div></div></div>
+      </wrapper>
+    </body>
+    </html>
+  
