@@ -41,6 +41,14 @@
       <p>抱歉，找不到您要查看的商品。</p>
       <router-link to="/" class="back-home-btn">返回首頁</router-link>
     </div>
+
+    <!-- Schema.org Product JSON-LD for UCP discoverability -->
+    <component
+      :is="'script'"
+      v-if="product"
+      type="application/ld+json"
+      v-html="productJsonLd"
+    />
   </div>
 </template>
 
@@ -61,6 +69,26 @@ export default {
     const product = computed(() => {
       const productId = parseInt(route.params.id)
       return productsData.find(p => p.id === productId)
+    })
+
+    // Schema.org Product JSON-LD — lets UCP-aware agents discover the product
+    // offering from the merchant page without calling /catalog.
+    const productJsonLd = computed(() => {
+      if (!product.value) return ''
+      return JSON.stringify({
+        '@context': 'https://schema.org',
+        '@type': 'Product',
+        '@id': String(product.value.id),
+        name: product.value.name,
+        image: product.value.image,
+        category: product.value.type,
+        offers: {
+          '@type': 'Offer',
+          priceCurrency: 'USD',
+          price: product.value.price,
+          availability: 'https://schema.org/InStock',
+        },
+      })
     })
     
     // 當組件載入時發送產品查看事件
@@ -129,6 +157,7 @@ export default {
     
     return {
       product,
+      productJsonLd,
       handleAddToCart,
       goBack
     }
