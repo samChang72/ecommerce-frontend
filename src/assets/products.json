@@ -8,5 +8,14 @@
   { "id": 7, "name": "素面短T", "price": 390, "type": "衣著", "image": "/ecommerce-frontend/image/白色素面短Tv2.png" },
   { "id": 8, "name": "五分袖西裝外套", "price": 1290, "type": "衣著", "image": "/ecommerce-frontend/image/黑色五分袖西裝v2.png" },
   { "id": 9, "name": "牛仔短褲", "price": 790, "type": "衣著", "image": "/ecommerce-frontend/image/黑色牛仔短褲v2.png" },
-  { "id": 10, "name": "高跟涼鞋", "price": 890, "type": "衣著", "image": "/ecommerce-frontend/image/膚色高跟涼鞋v2.png" }
+  { "id": 10, "name": "高跟涼鞋", "price": 890, "type": "衣著", "image": "/ecommerce-frontend/image/膚色高跟涼鞋v2.png" },
+  { "id": 11, "name": "咖啡", "price": 45, "type": "飲料", "image": "/ecommerce-frontend/image/coffee.png" },
+  { "id": 12, "name": "礦泉水", "price": 20, "type": "飲料", "image": "/ecommerce-frontend/image/water.png" },
+  { "id": 13, "name": "運動飲料", "price": 35, "type": "飲料", "image": "/ecommerce-frontend/image/sportsdrink.png" },
+  { "id": 14, "name": "平板電腦", "price": 12000, "type": "3C", "image": "/ecommerce-frontend/image/tablet.png" },
+  { "id": 15, "name": "藍牙耳機", "price": 2990, "type": "3C", "image": "/ecommerce-frontend/image/earbuds.png" },
+  { "id": 16, "name": "無線滑鼠", "price": 590, "type": "3C", "image": "/ecommerce-frontend/image/mouse.png" },
+  { "id": 17, "name": "餅乾", "price": 40, "type": "零食", "image": "/ecommerce-frontend/image/cookies.png" },
+  { "id": 18, "name": "堅果", "price": 120, "type": "零食", "image": "/ecommerce-frontend/image/nuts.png" },
+  { "id": 19, "name": "軟糖", "price": 35, "type": "零食", "image": "/ecommerce-frontend/image/gummy.png" }
 ]
