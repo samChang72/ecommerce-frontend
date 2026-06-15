@@ -69,10 +69,10 @@ export default {
         window.dataLayer.push({
           event: 'view_item',
           ecommerce: {
-            currency: 'USD',
+            currency: 'TWD',
             value: product.value.price,
             items: [{
-              item_id: product.value.id.toString(),
+              item_id: 'DB_' + product.value.id,
               item_name: product.value.name,
               category: product.value.type,
               price: product.value.price,
@@ -99,10 +99,10 @@ export default {
           window.dataLayer.push({
             event: 'add_to_cart',
             ecommerce: {
-              currency: 'USD',
+              currency: 'TWD',
               value: product.value.price,
               items: [{
-                item_id: product.value.id.toString(),
+                item_id: 'DB_' + product.value.id,
                 item_name: product.value.name,
                 category: product.value.type,
                 price: product.value.price,

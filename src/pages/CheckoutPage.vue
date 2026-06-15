@@ -220,10 +220,10 @@ const submitOrder = async () => {
         event: 'purchase',
         ecommerce: {
           transaction_id: orderId,
-          currency: 'USD',
+          currency: 'TWD',
           value: totalPrice.value,
           items: items.map(item => ({
-            item_id: item.id.toString(),
+            item_id: 'DB_' + item.id,
             item_name: item.name,
             category: item.type,
             price: item.price,

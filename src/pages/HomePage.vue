@@ -63,10 +63,10 @@ export default {
         window.dataLayer.push({
           event: 'add_to_cart',
           ecommerce: {
-            currency: 'USD',
+            currency: 'TWD',
             value: product.price,
             items: [{
-              item_id: product.id.toString(),
+              item_id: 'DB_' + product.id,
               item_name: product.name,
               category: product.type,
               price: product.price,

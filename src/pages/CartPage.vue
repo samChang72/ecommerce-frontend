@@ -49,10 +49,10 @@ const removeFromCart = (itemId) => {
       window.dataLayer.push({
         event: 'remove_from_cart',
         ecommerce: {
-          currency: 'USD',
+          currency: 'TWD',
           value: itemToRemove.price * itemToRemove.qty,
           items: [{
-            item_id: itemToRemove.id.toString(),
+            item_id: 'DB_' + itemToRemove.id,
             item_name: itemToRemove.name,
             category: itemToRemove.type,
             price: itemToRemove.price,
@@ -80,10 +80,10 @@ const goToCheckout = () => {
     window.dataLayer.push({
       event: 'begin_checkout',
       ecommerce: {
-        currency: 'USD',
+        currency: 'TWD',
         value: totalPrice.value,
         items: items.map(item => ({
-          item_id: item.id.toString(),
+          item_id: 'DB_' + item.id,
           item_name: item.name,
           category: item.type,
           price: item.price,
