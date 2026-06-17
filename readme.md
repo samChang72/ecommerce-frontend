@@ -2,6 +2,13 @@
 
 Vue.js 3 電商前端應用程式，使用 Vite 建置並部署到 GitHub Pages。
 
+本站同時作為 UCP Agentic Commerce Demo 的 **Merchant** 角色：
+- `/product/:id` 頁面嵌入 Schema.org Product JSON-LD，供 UCP 代理發現商品
+- `/order/:id` 讀取 ucp-server `/orders/:id` 顯示完整訂單（publisher-site 結帳完成後的 permalink 會導向此頁）
+- UCP 整合檔案：`src/utils/ucpClient.js`、`src/pages/OrderLookupPage.vue`
+
+完整 UCP 架構見 `../ucp-agentic-commerce-demo/` umbrella repo 的 README。
+
 ## 🚀 開發指令
 
 ### 本地開發

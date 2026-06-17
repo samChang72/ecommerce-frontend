@@ -1,0 +1,15 @@
+node_modules
+docs
+coverage
+playwright-report
+test-results
+.git
+.gitignore
+.github
+*.log
+.DS_Store
+Dockerfile
+.dockerignore
+README.md
+readme.md
+tools/onepixel-converter/node_modules

@@ -6,6 +6,7 @@ import CheckoutPage from '../pages/CheckoutPage.vue'
 import LoginPage from '../pages/LoginPage.vue'
 import ProfilePage from '../pages/ProfilePage.vue'
 import OrderSuccessPage from '../pages/OrderSuccessPage.vue'
+import OrderLookupPage from '../pages/OrderLookupPage.vue'
 import { useUserStore } from '../store/user'
 
 console.log('Router configuration loading...')
@@ -31,7 +32,8 @@ const router = createRouter({
       component: ProfilePage,
       meta: { requiresAuth: true }
     },
-    { path: '/order-success', component: OrderSuccessPage }
+    { path: '/order-success', component: OrderSuccessPage },
+    { path: '/order/:id', component: OrderLookupPage, name: 'OrderLookup' }
   ]
 })
 

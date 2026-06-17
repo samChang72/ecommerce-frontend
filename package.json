@@ -4,6 +4,7 @@
   "scripts": {
     "dev": "vite",
     "build": "npm run update-facebook-feed && vite build && npm run deploy:onepixel",
+    "build:app": "npm run update-facebook-feed && vite build",
     "preview": "vite preview",
     "deploy": "vite build && gh-pages -d dist",
     "update-facebook-feed": "node scripts/update-facebook-feed.js",
