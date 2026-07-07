@@ -1,0 +1,236 @@
+<?xml version="1.0"?>
+<rss xmlns:g="http://base.google.com/ns/1.0" version="2.0">
+<channel>
+<title>Test Store</title>
+<link>https://samchang72.github.io/ecommerce-frontend/</link>
+<description>An example item from the feed</description>
+<item>
+<g:id>DB_1</g:id>
+<g:title>可樂</g:title>
+<g:description>可樂</g:description>
+<g:link>https://samchang72.github.io/ecommerce-frontend/#/product/1</g:link>
+<g:image_link>https://samchang72.github.io/ecommerce-frontend/image/cokev2.png</g:image_link>
+<g:brand>Example</g:brand>
+<g:condition>new</g:condition>
+<g:availability>in stock</g:availability>
+<g:price>30.00 TWD</g:price>
+<g:google_product_category>Animals &gt; Pet Supplies</g:google_product_category>
+</item>
+<item>
+<g:id>DB_2</g:id>
+<g:title>綠茶</g:title>
+<g:description>綠茶</g:description>
+<g:link>https://samchang72.github.io/ecommerce-frontend/#/product/2</g:link>
+<g:image_link>https://samchang72.github.io/ecommerce-frontend/image/greenv2.png</g:image_link>
+<g:brand>Example</g:brand>
+<g:condition>new</g:condition>
+<g:availability>in stock</g:availability>
+<g:price>25.00 TWD</g:price>
+<g:google_product_category>Animals &gt; Pet Supplies</g:google_product_category>
+</item>
+<item>
+<g:id>DB_3</g:id>
+<g:title>手機</g:title>
+<g:description>手機</g:description>
+<g:link>https://samchang72.github.io/ecommerce-frontend/#/product/3</g:link>
+<g:image_link>https://samchang72.github.io/ecommerce-frontend/image/phonev2.png</g:image_link>
+<g:brand>Example</g:brand>
+<g:condition>new</g:condition>
+<g:availability>in stock</g:availability>
+<g:price>15000.00 TWD</g:price>
+<g:google_product_category>Animals &gt; Pet Supplies</g:google_product_category>
+</item>
+<item>
+<g:id>DB_4</g:id>
+<g:title>筆電</g:title>
+<g:description>筆電</g:description>
+<g:link>https://samchang72.github.io/ecommerce-frontend/#/product/4</g:link>
+<g:image_link>https://samchang72.github.io/ecommerce-frontend/image/notebookv2.png</g:image_link>
+<g:brand>Example</g:brand>
+<g:condition>new</g:condition>
+<g:availability>in stock</g:availability>
+<g:price>45000.00 TWD</g:price>
+<g:google_product_category>Animals &gt; Pet Supplies</g:google_product_category>
+</item>
+<item>
+<g:id>DB_5</g:id>
+<g:title>洋芋片</g:title>
+<g:description>洋芋片</g:description>
+<g:link>https://samchang72.github.io/ecommerce-frontend/#/product/5</g:link>
+<g:image_link>https://samchang72.github.io/ecommerce-frontend/image/chipsv2.png</g:image_link>
+<g:brand>Example</g:brand>
+<g:condition>new</g:condition>
+<g:availability>in stock</g:availability>
+<g:price>50.00 TWD</g:price>
+<g:google_product_category>Animals &gt; Pet Supplies</g:google_product_category>
+</item>
+<item>
+<g:id>DB_6</g:id>
+<g:title>巧克力</g:title>
+<g:description>巧克力</g:description>
+<g:link>https://samchang72.github.io/ecommerce-frontend/#/product/6</g:link>
+<g:image_link>https://samchang72.github.io/ecommerce-frontend/image/chocolatev2.png</g:image_link>
+<g:brand>Example</g:brand>
+<g:condition>new</g:condition>
+<g:availability>in stock</g:availability>
+<g:price>60.00 TWD</g:price>
+<g:google_product_category>Animals &gt; Pet Supplies</g:google_product_category>
+</item>
+<item>
+<g:id>DB_7</g:id>
+<g:title>素面短T</g:title>
+<g:description>素面短T</g:description>
+<g:link>https://samchang72.github.io/ecommerce-frontend/#/product/7</g:link>
+<g:image_link>https://samchang72.github.io/ecommerce-frontend/image/白色素面短Tv2.png</g:image_link>
+<g:brand>Example</g:brand>
+<g:condition>new</g:condition>
+<g:availability>in stock</g:availability>
+<g:price>390.00 TWD</g:price>
+<g:google_product_category>Animals &gt; Pet Supplies</g:google_product_category>
+</item>
+<item>
+<g:id>DB_8</g:id>
+<g:title>五分袖西裝外套</g:title>
+<g:description>五分袖西裝外套</g:description>
+<g:link>https://samchang72.github.io/ecommerce-frontend/#/product/8</g:link>
+<g:image_link>https://samchang72.github.io/ecommerce-frontend/image/黑色五分袖西裝v2.png</g:image_link>
+<g:brand>Example</g:brand>
+<g:condition>new</g:condition>
+<g:availability>in stock</g:availability>
+<g:price>1290.00 TWD</g:price>
+<g:google_product_category>Animals &gt; Pet Supplies</g:google_product_category>
+</item>
+<item>
+<g:id>DB_9</g:id>
+<g:title>牛仔短褲</g:title>
+<g:description>牛仔短褲</g:description>
+<g:link>https://samchang72.github.io/ecommerce-frontend/#/product/9</g:link>
+<g:image_link>https://samchang72.github.io/ecommerce-frontend/image/黑色牛仔短褲v2.png</g:image_link>
+<g:brand>Example</g:brand>
+<g:condition>new</g:condition>
+<g:availability>in stock</g:availability>
+<g:price>790.00 TWD</g:price>
+<g:google_product_category>Animals &gt; Pet Supplies</g:google_product_category>
+</item>
+<item>
+<g:id>DB_10</g:id>
+<g:title>高跟涼鞋</g:title>
+<g:description>高跟涼鞋</g:description>
+<g:link>https://samchang72.github.io/ecommerce-frontend/#/product/10</g:link>
+<g:image_link>https://samchang72.github.io/ecommerce-frontend/image/膚色高跟涼鞋v2.png</g:image_link>
+<g:brand>Example</g:brand>
+<g:condition>new</g:condition>
+<g:availability>in stock</g:availability>
+<g:price>890.00 TWD</g:price>
+<g:google_product_category>Animals &gt; Pet Supplies</g:google_product_category>
+</item>
+<item>
+<g:id>DB_11</g:id>
+<g:title>咖啡</g:title>
+<g:description>咖啡</g:description>
+<g:link>https://samchang72.github.io/ecommerce-frontend/#/product/11</g:link>
+<g:image_link>https://samchang72.github.io/ecommerce-frontend/image/coffee.png</g:image_link>
+<g:brand>Example</g:brand>
+<g:condition>new</g:condition>
+<g:availability>in stock</g:availability>
+<g:price>45.00 TWD</g:price>
+<g:google_product_category>Animals &gt; Pet Supplies</g:google_product_category>
+</item>
+<item>
+<g:id>DB_12</g:id>
+<g:title>礦泉水</g:title>
+<g:description>礦泉水</g:description>
+<g:link>https://samchang72.github.io/ecommerce-frontend/#/product/12</g:link>
+<g:image_link>https://samchang72.github.io/ecommerce-frontend/image/water.png</g:image_link>
+<g:brand>Example</g:brand>
+<g:condition>new</g:condition>
+<g:availability>in stock</g:availability>
+<g:price>20.00 TWD</g:price>
+<g:google_product_category>Animals &gt; Pet Supplies</g:google_product_category>
+</item>
+<item>
+<g:id>DB_13</g:id>
+<g:title>運動飲料</g:title>
+<g:description>運動飲料</g:description>
+<g:link>https://samchang72.github.io/ecommerce-frontend/#/product/13</g:link>
+<g:image_link>https://samchang72.github.io/ecommerce-frontend/image/sportsdrink.png</g:image_link>
+<g:brand>Example</g:brand>
+<g:condition>new</g:condition>
+<g:availability>in stock</g:availability>
+<g:price>35.00 TWD</g:price>
+<g:google_product_category>Animals &gt; Pet Supplies</g:google_product_category>
+</item>
+<item>
+<g:id>DB_14</g:id>
+<g:title>平板電腦</g:title>
+<g:description>平板電腦</g:description>
+<g:link>https://samchang72.github.io/ecommerce-frontend/#/product/14</g:link>
+<g:image_link>https://samchang72.github.io/ecommerce-frontend/image/tablet.png</g:image_link>
+<g:brand>Example</g:brand>
+<g:condition>new</g:condition>
+<g:availability>in stock</g:availability>
+<g:price>12000.00 TWD</g:price>
+<g:google_product_category>Animals &gt; Pet Supplies</g:google_product_category>
+</item>
+<item>
+<g:id>DB_15</g:id>
+<g:title>藍牙耳機</g:title>
+<g:description>藍牙耳機</g:description>
+<g:link>https://samchang72.github.io/ecommerce-frontend/#/product/15</g:link>
+<g:image_link>https://samchang72.github.io/ecommerce-frontend/image/earbuds.png</g:image_link>
+<g:brand>Example</g:brand>
+<g:condition>new</g:condition>
+<g:availability>in stock</g:availability>
+<g:price>2990.00 TWD</g:price>
+<g:google_product_category>Animals &gt; Pet Supplies</g:google_product_category>
+</item>
+<item>
+<g:id>DB_16</g:id>
+<g:title>無線滑鼠</g:title>
+<g:description>無線滑鼠</g:description>
+<g:link>https://samchang72.github.io/ecommerce-frontend/#/product/16</g:link>
+<g:image_link>https://samchang72.github.io/ecommerce-frontend/image/mouse.png</g:image_link>
+<g:brand>Example</g:brand>
+<g:condition>new</g:condition>
+<g:availability>in stock</g:availability>
+<g:price>590.00 TWD</g:price>
+<g:google_product_category>Animals &gt; Pet Supplies</g:google_product_category>
+</item>
+<item>
+<g:id>DB_17</g:id>
+<g:title>餅乾</g:title>
+<g:description>餅乾</g:description>
+<g:link>https://samchang72.github.io/ecommerce-frontend/#/product/17</g:link>
+<g:image_link>https://samchang72.github.io/ecommerce-frontend/image/cookies.png</g:image_link>
+<g:brand>Example</g:brand>
+<g:condition>new</g:condition>
+<g:availability>in stock</g:availability>
+<g:price>40.00 TWD</g:price>
+<g:google_product_category>Animals &gt; Pet Supplies</g:google_product_category>
+</item>
+<item>
+<g:id>DB_18</g:id>
+<g:title>堅果</g:title>
+<g:description>堅果</g:description>
+<g:link>https://samchang72.github.io/ecommerce-frontend/#/product/18</g:link>
+<g:image_link>https://samchang72.github.io/ecommerce-frontend/image/nuts.png</g:image_link>
+<g:brand>Example</g:brand>
+<g:condition>new</g:condition>
+<g:availability>in stock</g:availability>
+<g:price>120.00 TWD</g:price>
+<g:google_product_category>Animals &gt; Pet Supplies</g:google_product_category>
+</item>
+<item>
+<g:id>DB_19</g:id>
+<g:title>軟糖</g:title>
+<g:description>軟糖</g:description>
+<g:link>https://samchang72.github.io/ecommerce-frontend/#/product/19</g:link>
+<g:image_link>https://samchang72.github.io/ecommerce-frontend/image/gummy.png</g:image_link>
+<g:brand>Example</g:brand>
+<g:condition>new</g:condition>
+<g:availability>in stock</g:availability>
+<g:price>35.00 TWD</g:price>
+<g:google_product_category>Animals &gt; Pet Supplies</g:google_product_category>
+</item>
+</channel>
+</rss>

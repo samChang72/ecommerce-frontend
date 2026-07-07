@@ -121,6 +121,39 @@ const generateDataXml = (products) => {
   return xmlHeader + xmlEntries + xmlFooter
 }
 
+// 生成 Meta 官方 RSS 2.0 XML 的函數
+const generateRssXml = (products) => {
+  const baseUrl = 'https://samchang72.github.io/ecommerce-frontend'
+
+  const xmlHeader = `<?xml version="1.0"?>
+<rss xmlns:g="http://base.google.com/ns/1.0" version="2.0">
+<channel>
+<title>Test Store</title>
+<link>${baseUrl}/</link>
+<description>An example item from the feed</description>
+`
+
+  const xmlItems = products.map(product => `<item>
+<g:id>DB_${product.id}</g:id>
+<g:title>${product.name}</g:title>
+<g:description>${product.name}</g:description>
+<g:link>${baseUrl}/#/product/${product.id}</g:link>
+<g:image_link>https://samchang72.github.io${product.image}</g:image_link>
+<g:brand>Example</g:brand>
+<g:condition>new</g:condition>
+<g:availability>in stock</g:availability>
+<g:price>${product.price}.00 TWD</g:price>
+<g:google_product_category>Animals &gt; Pet Supplies</g:google_product_category>
+</item>`).join('\n')
+
+  const xmlFooter = `
+</channel>
+</rss>
+`
+
+  return xmlHeader + xmlItems + xmlFooter
+}
+
 // 更新 Facebook Feed 檔案
 const updateFacebookFeed = () => {
   try {
@@ -134,6 +167,9 @@ const updateFacebookFeed = () => {
     
     // 生成 Data XML
     const xmlData = generateDataXml(products)
+
+    // 生成 RSS 2.0 XML
+    const rssData = generateRssXml(products)
     
     // 確保 docs 目錄存在
     const docsDir = path.join(__dirname, '../docs')
@@ -151,10 +187,16 @@ const updateFacebookFeed = () => {
     const xmlPath = path.join(__dirname, '../docs/data.xml')
     fs.writeFileSync(xmlPath, xmlData, 'utf8')
     console.log('✅ 已更新 docs/data.xml')
-    
+
+    // 寫入 docs/data-rss.xml
+    const rssPath = path.join(__dirname, '../docs/data-rss.xml')
+    fs.writeFileSync(rssPath, rssData, 'utf8')
+    console.log('✅ 已更新 docs/data-rss.xml')
+
     console.log('🎉 Facebook Product Data Feed 和 XML Feed 同步完成！')
     console.log(`📍 JSON Feed URL: https://samchang72.github.io/ecommerce-frontend/facebook-feed.json`)
     console.log(`📍 XML Feed URL: https://samchang72.github.io/ecommerce-frontend/data.xml`)
+    console.log(`📍 RSS Feed URL: https://samchang72.github.io/ecommerce-frontend/data-rss.xml`)
     
   } catch (error) {
     console.error('❌ 更新 Facebook Feed 失敗:', error)
