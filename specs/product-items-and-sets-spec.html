@@ -1,0 +1,406 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>商品項目與商品組合 — 功能規格書</title>
+<style>
+  :root {
+    --blue: #0866ff;
+    --ink: #1c1e21;
+    --muted: #65676b;
+    --border: #e3e6ea;
+    --bg: #f6f7f9;
+    --surface: #fff;
+    --code-bg: #f5f6f8;
+    --amber-bg: #fff8e6;
+    --amber-bd: #f0c14b;
+    --green: #2e7d32;
+    --red: #c62828;
+    --radius: 8px;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang TC",
+      "Microsoft JhengHei", "Helvetica Neue", sans-serif;
+  }
+  * { box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body { margin: 0; background: var(--bg); color: var(--ink); line-height: 1.7; font-size: 15px; }
+
+  .wrap { display: grid; grid-template-columns: 260px minmax(0, 1fr); gap: 40px; max-width: 1200px; margin: 0 auto; padding: 32px 28px 96px; }
+
+  /* ---- TOC ---- */
+  .toc { position: sticky; top: 24px; align-self: start; max-height: calc(100vh - 48px); overflow-y: auto; font-size: 13.5px; }
+  .toc .brand { font-weight: 800; font-size: 15px; margin-bottom: 4px; }
+  .toc .brand .tag { display: inline-block; background: var(--blue); color: #fff; font-size: 11px; font-weight: 700; padding: 1px 7px; border-radius: 20px; margin-left: 6px; vertical-align: middle; }
+  .toc .sub { color: var(--muted); font-size: 12px; margin-bottom: 14px; }
+  .toc a { display: block; color: var(--muted); text-decoration: none; padding: 5px 10px; border-left: 2px solid transparent; border-radius: 0 6px 6px 0; }
+  .toc a:hover { color: var(--blue); background: #eef4ff; }
+  .toc a.h3 { padding-left: 24px; font-size: 12.5px; }
+
+  /* ---- Article ---- */
+  article { background: var(--surface); border: 1px solid var(--border); border-radius: 12px; padding: 44px 52px; box-shadow: 0 1px 3px rgba(0,0,0,.04); }
+  article > header { border-bottom: 2px solid var(--ink); padding-bottom: 18px; margin-bottom: 28px; }
+  h1 { font-size: 28px; font-weight: 800; margin: 0 0 6px; letter-spacing: .3px; }
+  h1 .rd { color: var(--muted); font-weight: 600; font-size: 18px; }
+  h2 { font-size: 21px; font-weight: 800; margin: 44px 0 14px; padding-top: 12px; border-top: 1px solid var(--border); scroll-margin-top: 20px; }
+  h2:first-of-type { border-top: none; }
+  h3 { font-size: 16.5px; font-weight: 700; margin: 26px 0 10px; color: #33373c; scroll-margin-top: 20px; }
+  h4 { font-size: 14.5px; font-weight: 700; margin: 20px 0 8px; color: #4a4e54; }
+  p { margin: 10px 0; }
+  ul, ol { margin: 10px 0; padding-left: 22px; }
+  li { margin: 5px 0; }
+  a { color: var(--blue); }
+  strong { font-weight: 700; }
+  code { background: var(--code-bg); border: 1px solid var(--border); border-radius: 4px; padding: 1px 5px; font-family: ui-monospace, "SF Mono", Menlo, Consolas, monospace; font-size: 12.5px; color: #b5305d; }
+
+  pre { background: #1e2127; color: #d7dae0; border-radius: var(--radius); padding: 16px 18px; overflow-x: auto; margin: 14px 0; }
+  pre code { background: none; border: none; color: inherit; padding: 0; font-size: 12.5px; line-height: 1.6; }
+
+  table { width: 100%; border-collapse: collapse; margin: 14px 0; font-size: 13.5px; }
+  th, td { border: 1px solid var(--border); padding: 9px 12px; text-align: left; vertical-align: top; }
+  thead th { background: #f0f3f7; font-weight: 700; white-space: nowrap; }
+  tbody tr:nth-child(even) { background: #fafbfc; }
+  td code, th code { font-size: 12px; }
+
+  blockquote { margin: 16px 0; padding: 12px 16px; background: var(--amber-bg); border: 1px solid var(--amber-bd); border-left: 4px solid var(--amber-bd); border-radius: 6px; color: #6b4e00; }
+  blockquote p { margin: 0; }
+
+  .meta-table td:first-child { width: 130px; font-weight: 700; background: #f7f9fb; white-space: nowrap; }
+
+  .req { color: var(--green); font-weight: 700; }
+  .opt { color: var(--muted); }
+  .rec { color: var(--blue); font-weight: 600; }
+
+  .check { list-style: none; padding-left: 4px; }
+  .check li { padding-left: 28px; position: relative; }
+  .check li::before { content: "☐"; position: absolute; left: 0; top: 0; color: var(--blue); font-size: 16px; }
+
+  hr { display: none; }
+
+  @media (max-width: 900px) {
+    .wrap { grid-template-columns: 1fr; padding: 20px 14px 60px; gap: 20px; }
+    .toc { position: static; max-height: none; border-bottom: 1px solid var(--border); padding-bottom: 12px; }
+    article { padding: 24px 20px; }
+    h1 { font-size: 23px; }
+  }
+  @media print {
+    body { background: #fff; font-size: 12px; }
+    .toc { display: none; }
+    .wrap { display: block; max-width: none; padding: 0; }
+    article { border: none; box-shadow: none; padding: 0; }
+    h2 { page-break-after: avoid; }
+    table, pre, blockquote { page-break-inside: avoid; }
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <!-- ============ TOC ============ -->
+  <nav class="toc">
+    <div class="brand">功能規格書<span class="tag">v1.0</span></div>
+    <div class="sub">商品項目與商品組合 · 給 RD</div>
+    <a href="#s1">1. 背景與目標</a>
+    <a href="#s2">2. 名詞定義</a>
+    <a href="#s3">3. 範圍</a>
+    <a href="#s4">4. 使用者故事</a>
+    <a href="#s5">5. 商品項目</a>
+    <a href="#s5-1" class="h3">5.1 資料模型</a>
+    <a href="#s5-2" class="h3">5.2 清單頁</a>
+    <a href="#s5-3" class="h3">5.3 資料來源</a>
+    <a href="#s5-4" class="h3">5.4 診斷</a>
+    <a href="#s6">6. 商品組合</a>
+    <a href="#s6-1" class="h3">6.1 建立流程</a>
+    <a href="#s6-2" class="h3">6.2 篩選建構器</a>
+    <a href="#s6-3" class="h3">6.3 比對邏輯</a>
+    <a href="#s6-4" class="h3">6.4 即時預覽</a>
+    <a href="#s6-5" class="h3">6.5 編輯輔助</a>
+    <a href="#s7">7. 資料結構與 API</a>
+    <a href="#s8">8. 邊界情況與驗證</a>
+    <a href="#s9">9. 非功能需求</a>
+    <a href="#s10">10. 驗收條件</a>
+    <a href="#s11">11. 待確認</a>
+  </nav>
+
+  <!-- ============ ARTICLE ============ -->
+  <article>
+    <header>
+      <h1>商品項目與商品組合 <span class="rd">— 功能規格書（給 RD）</span></h1>
+      <table class="meta-table">
+        <tbody>
+          <tr><td>文件版本</td><td>v1.0</td></tr>
+          <tr><td>撰寫角色</td><td>Product Manager</td></tr>
+          <tr><td>對象</td><td>前後端 RD</td></tr>
+          <tr><td>狀態</td><td>Draft / 待評估</td></tr>
+          <tr><td>視覺參考</td><td><code>docs/catalog-manager.html</code>（可互動原型）</td></tr>
+          <tr><td>資料參考</td><td><code>catalog_products.csv</code>（Meta 目錄欄位）、<code>src/assets/products.json</code>、<code>docs/data.xml</code></td></tr>
+        </tbody>
+      </table>
+    </header>
+
+    <!-- 1 -->
+    <h2 id="s1">1. 背景與目標</h2>
+    <p>我們的目錄資料（<code>data.xml</code> / feed）已可上架 Meta，但目前缺少<strong>站內自管的目錄後台</strong>。本規格定義兩個核心模組，讓營運人員不需進 Meta 後台即可檢視商品上架狀態、並將商品分群供廣告投放使用。</p>
+    <ul>
+      <li><strong>商品項目（Product Items）</strong>：目錄內所有商品的清單、狀態與診斷。</li>
+      <li><strong>商品組合（Product Sets）</strong>：以「篩選條件」把商品動態分群，作為廣告投放的商品池。</li>
+    </ul>
+    <h3>成功指標</h3>
+    <ol>
+      <li>營運可在清單頁 3 秒內找到任一商品並看到其上架狀態。</li>
+      <li>可用篩選條件建立商品組合，且組合會隨 feed 更新自動重算成員。</li>
+    </ol>
+
+    <!-- 2 -->
+    <h2 id="s2">2. 名詞定義</h2>
+    <table>
+      <thead><tr><th>名詞</th><th>說明</th></tr></thead>
+      <tbody>
+        <tr><td>目錄 Catalog</td><td>一組商品資料的容器，對應一份 feed。</td></tr>
+        <tr><td>商品項目 Item</td><td>目錄中的單一商品，唯一鍵為 <code>content_id</code>（本專案格式 <code>DB_&lt;id&gt;</code>）。</td></tr>
+        <tr><td>商品組合 Product Set</td><td>依條件動態圈選的商品子集合；<strong>動態</strong>＝feed 更新後成員自動重算。</td></tr>
+        <tr><td>篩選條件 Filter</td><td><code>屬性 + 運算子 + 值</code> 的三元組。</td></tr>
+        <tr><td>資料來源 Data Source</td><td>商品資料的匯入方式（feed 排程 / 手動上傳 / Pixel）。</td></tr>
+      </tbody>
+    </table>
+    <blockquote><p>⚠️ <strong>重要澄清</strong>：商品組合的篩選屬性（含 <code>gender</code>、<code>age_group</code>）是<strong>商品屬性</strong>，非受眾資料。受眾在廣告層另行設定，本規格不涵蓋。</p></blockquote>
+
+    <!-- 3 -->
+    <h2 id="s3">3. 範圍</h2>
+    <p><strong>In scope</strong>：商品項目清單/狀態/診斷、資料來源設定、商品組合建構器（篩選引擎）。</p>
+    <p><strong>Out of scope</strong>：廣告建立與受眾設定、金流/庫存扣減、Pixel/CAPI 事件蒐集實作（僅需串接既有 <code>item_id = DB_&lt;id&gt;</code> 契約）。</p>
+
+    <!-- 4 -->
+    <h2 id="s4">4. 使用者故事</h2>
+    <ul>
+      <li><strong>US-1</strong>｜身為營運，我想看到所有商品與其上架狀態，以便快速發現被拒登的商品。</li>
+      <li><strong>US-2</strong>｜身為營運，我想用名稱或 Content ID 搜尋商品，以便定位單一品項。</li>
+      <li><strong>US-3</strong>｜身為營運，我想設定 feed 自動抓取排程，以便商品資料定期同步。</li>
+      <li><strong>US-4</strong>｜身為行銷，我想用「售價 &lt; 100 的飲料」這類條件建立商品組合，供動態廣告投放。</li>
+      <li><strong>US-5</strong>｜身為行銷，我想在建立組合時即時看到符合的商品數，以判斷組合規模是否足夠。</li>
+    </ul>
+
+    <!-- 5 -->
+    <h2 id="s5">5. 商品項目（Product Items）</h2>
+
+    <h3 id="s5-1">5.1 資料模型（欄位規格，對齊 Meta 目錄）</h3>
+    <table>
+      <thead><tr><th>欄位</th><th>key</th><th>必填</th><th>型別</th><th>規則</th></tr></thead>
+      <tbody>
+        <tr><td>內容編號</td><td><code>id</code></td><td class="req">✅</td><td>string</td><td>全目錄唯一；本專案 <code>DB_&lt;id&gt;</code>，須等於站上 dataLayer 的 <code>item_id</code>。上限 100 字。</td></tr>
+        <tr><td>標題</td><td><code>title</code></td><td class="req">✅</td><td>string</td><td>≤ 200 字。</td></tr>
+        <tr><td>說明</td><td><code>description</code></td><td class="req">✅</td><td>string</td><td>純文字、非全大寫，≤ 9999 字。</td></tr>
+        <tr><td>供應狀況</td><td><code>availability</code></td><td class="req">✅</td><td>enum</td><td><code>in stock</code> / <code>out of stock</code>。</td></tr>
+        <tr><td>商品狀況</td><td><code>condition</code></td><td class="req">✅</td><td>enum</td><td><code>new</code> / <code>used</code> / <code>refurbished</code>。</td></tr>
+        <tr><td>價格</td><td><code>price</code></td><td class="req">✅</td><td>money</td><td><code>數字 + 空格 + ISO4217</code>，小數點用 <code>.</code>，例 <code>30.00 TWD</code>。</td></tr>
+        <tr><td>商品頁網址</td><td><code>link</code></td><td class="req">✅</td><td>url</td><td>可購買的商品頁。</td></tr>
+        <tr><td>主圖</td><td><code>image_link</code></td><td class="req">✅</td><td>url</td><td>JPG/PNG/GIF，≥ 500×500。非 ASCII 檔名須 percent-encode。</td></tr>
+        <tr><td>品牌</td><td><code>brand</code></td><td class="req">✅</td><td>string</td><td>≤ 100 字。</td></tr>
+        <tr><td>Google 產品類別</td><td><code>google_product_category</code></td><td class="rec">建議</td><td>string</td><td>官方分類字串。</td></tr>
+        <tr><td>優惠價</td><td><code>sale_price</code></td><td class="opt">選填</td><td>money</td><td>同 price 格式。</td></tr>
+        <tr><td>商品群組編號</td><td><code>item_group_id</code></td><td class="opt">選填</td><td>string</td><td>同款變體共用。</td></tr>
+        <tr><td>變體屬性</td><td><code>gender</code> <code>color</code> <code>size</code> <code>age_group</code> <code>material</code> <code>pattern</code></td><td class="opt">選填</td><td>string/enum</td><td>服飾類建議填。</td></tr>
+        <tr><td>自訂標籤</td><td><code>custom_label_0..4</code></td><td class="opt">選填</td><td>string</td><td>供分群/報表使用。</td></tr>
+        <tr><td>GTIN</td><td><code>gtin</code></td><td class="opt">選填</td><td>string</td><td>建議補以提升比對率。</td></tr>
+      </tbody>
+    </table>
+
+    <h3 id="s5-2">5.2 清單頁</h3>
+    <ul>
+      <li><strong>統計卡</strong>：商品總數 / 使用中 / 有問題 / 上次同步時間。</li>
+      <li><strong>工具列</strong>：
+        <ul>
+          <li>搜尋框：對 <code>title</code> 與 <code>id</code> 做<strong>不分大小寫的 contains</strong> 比對。</li>
+          <li>篩選 chip：<code>狀態</code>（使用中/有問題）、<code>供應狀況</code>（有庫存/缺貨）。</li>
+        </ul>
+      </li>
+      <li><strong>表格欄位</strong>：勾選框、商品（縮圖＋名稱＋產品類型）、Content ID、產品類型、供應狀況、價格、狀態。</li>
+      <li><strong>縮圖</strong>：載入失敗需 fallback（原型用品類 emoji；正式版建議用預設佔位圖）。</li>
+      <li><strong>批次操作</strong>：表頭全選；選取後可批次匯出/停用（v1 先做全選 UI，動作可 stub）。</li>
+      <li><strong>分頁</strong>：商品數 &gt; 50 時需分頁或無限捲動（RD 擇一，建議 cursor-based）。</li>
+    </ul>
+
+    <h3 id="s5-3">5.3 資料來源</h3>
+    <table>
+      <thead><tr><th>方式</th><th>需求</th></tr></thead>
+      <tbody>
+        <tr><td>Data feed</td><td>輸入 feed URL（如 <code>…/data.xml</code>）＋<strong>排程</strong>（每小時/每日）；記錄上次成功時間與結果。</td></tr>
+        <tr><td>手動上傳</td><td>支援 XML / CSV / TSV / Google 試算表。</td></tr>
+        <tr><td>Pixel</td><td>依瀏覽事件自動建立商品（v1 可僅顯示未連結狀態）。</td></tr>
+      </tbody>
+    </table>
+
+    <h3 id="s5-4">5.4 診斷（Diagnostics）</h3>
+    <p>系統需檢查並列出問題項，每則含：等級（錯誤/警告）、標題、受影響商品數、說明。至少涵蓋：</p>
+    <ol>
+      <li><strong>缺必填欄位</strong>（如缺 <code>image_link</code>）→ 該商品不上架。</li>
+      <li><strong>Content ID 與 Pixel 事件不符</strong> → <code>item_id</code> 未對齊 <code>&lt;g:id&gt;</code>，無法歸因。</li>
+      <li><strong>建議補 <code>gtin</code> / <code>brand</code></strong> → 提升 Advantage+ 比對率。</li>
+    </ol>
+
+    <!-- 6 -->
+    <h2 id="s6">6. 商品組合（Product Sets）</h2>
+
+    <h3 id="s6-1">6.1 建立流程</h3>
+    <ol>
+      <li>輸入<strong>名稱</strong>（必填）。</li>
+      <li>開關「使用篩選條件」：
+        <ul>
+          <li><strong>開</strong>：顯示篩選建構器，組合為<strong>動態</strong>（feed 更新後重算）。</li>
+          <li><strong>關</strong>：改為手動從右側清單挑選商品（v1 可先做 UI）。</li>
+        </ul>
+      </li>
+      <li>設定一或多條篩選條件。</li>
+      <li>右側即時顯示符合的商品與數量。</li>
+      <li>按「建立」儲存。</li>
+    </ol>
+
+    <h3 id="s6-2">6.2 篩選條件建構器</h3>
+    <p>一條條件 = <code>屬性(attr) + 運算子(op) + 值(value)</code>。多條件之間以<strong>比對模式</strong>串接：</p>
+    <ul>
+      <li><strong>所有篩選條件</strong>＝ AND（every）</li>
+      <li><strong>至少一個篩選條件</strong>＝ OR（some）</li>
+    </ul>
+
+    <h4>6.2.1 屬性清單與型別（共 22 項）</h4>
+    <table>
+      <thead><tr><th>型別</th><th>屬性</th></tr></thead>
+      <tbody>
+        <tr><td>number</td><td><code>price</code> 價格、<code>sale_price</code> 優惠價</td></tr>
+        <tr><td>select</td><td><code>gender</code> 性別、<code>age_group</code> 年齡層、<code>availability</code> 供應狀況、<code>condition</code> 商品狀況</td></tr>
+        <tr><td>text</td><td><code>item_group_id</code>、<code>id</code>、<code>title</code>、<code>description</code>、<code>product_type</code>、<code>google_product_category</code>、<code>brand</code>、<code>color</code>、<code>size</code>、<code>material</code>、<code>pattern</code>、<code>custom_label_0..4</code></td></tr>
+      </tbody>
+    </table>
+
+    <h4>6.2.2 運算子（依屬性型別）</h4>
+    <table>
+      <thead><tr><th>型別</th><th>可用運算子</th></tr></thead>
+      <tbody>
+        <tr><td>number</td><td>大於 / 小於 / 等於 / 不等於 / 大於或等於 / 小於或等於</td></tr>
+        <tr><td>text</td><td>包含 / 不包含 / 等於 / 不等於</td></tr>
+        <tr><td>select</td><td>等於 / 不等於</td></tr>
+      </tbody>
+    </table>
+
+    <h4>6.2.3 值輸入元件（依型別）</h4>
+    <table>
+      <thead><tr><th>型別</th><th>元件</th></tr></thead>
+      <tbody>
+        <tr><td>number</td><td>幣別下拉（TWD/USD/EUR/JPY/GBP）＋金額輸入；幣別符號隨選擇變動。</td></tr>
+        <tr><td>text</td><td>文字輸入框。</td></tr>
+        <tr><td>select</td><td>該屬性的選項下拉。</td></tr>
+      </tbody>
+    </table>
+    <blockquote><p>切換屬性時：運算子重設為該型別第一個、值清空、幣別回 TWD。</p></blockquote>
+
+    <h3 id="s6-3">6.3 比對邏輯（RD 實作依據，pseudocode）</h3>
+    <pre><code>matched(products, state):
+  if not state.useFilter: return products
+  active = [f for f in state.filters if isComplete(f)]     # 不完整條件忽略
+  if active is empty: return products                       # 無有效條件 → 全部
+  return [p for p in products if
+            state.matchType == 'all' ? all(eval(p,f) for f in active)
+                                     : any(eval(p,f) for f in active)]
+
+isComplete(f):
+  a = attrDef(f.attr)
+  if not a or not f.op: return false
+  if a.type == number: return f.value != '' and isNumber(f.value)
+  return f.value != ''
+
+eval(p, f):                    # 回傳 boolean
+  pv = p[f.attr]
+  number: 依運算子做數值比較；pv 或 value 非數字 → false
+  select: 等於/不等於 做字串相等比較
+  text  : 包含/不包含/等於/不等於，皆 lower-case 後比較</code></pre>
+    <p>比對規則重點：</p>
+    <ul>
+      <li>不完整條件（缺值）<strong>不影響結果</strong>（略過）。</li>
+      <li>無任何有效條件時，組合＝全部商品。</li>
+      <li><code>sale_price</code> 等空值欄位在數值比較時視為不符（false）。</li>
+    </ul>
+
+    <h3 id="s6-4">6.4 即時預覽（右側面板）</h3>
+    <ul>
+      <li>標頭：<code>N 商品</code> / <code>N 款式</code>＝符合條件的商品數。</li>
+      <li>搜尋框：在<strong>已符合條件</strong>的結果中，再依名稱/編號過濾顯示（不改變 N）。</li>
+      <li>商品列：縮圖、名稱、價格、<code>內容編號：DB_x</code>、⋯選單。</li>
+      <li><strong>商品選擇量表</strong>：填滿比例 = 符合數 / 目錄總數，兩端標示「受限 ↔ 廣泛」。</li>
+      <li>空狀態：無符合條件時顯示提示文案。</li>
+    </ul>
+
+    <h3 id="s6-5">6.5 編輯輔助</h3>
+    <ul>
+      <li><code>＋ 新增其他篩選條件</code>：新增一列（預設 <code>標題 / 包含 / 空值</code>）。</li>
+      <li>每列在總數 &gt; 1 時提供「移除」。</li>
+      <li><code>清除所有篩選條件</code>：重置為單一空條件。</li>
+      <li><strong>取消 / 重做（Undo/Redo）</strong>：需維護條件狀態歷史堆疊；按鈕依可用性 enable/disable。</li>
+      <li>底部：<code>取消</code>（返回）、<code>建立</code>（儲存並回饋結果）。</li>
+      <li>AI 生成篩選框：v1 為展示用途，實作可延後（需標示「測試階段，儲存前請檢查」）。</li>
+    </ul>
+
+    <!-- 7 -->
+    <h2 id="s7">7. 建議資料結構與 API（方向，細節由 RD 決定）</h2>
+    <pre><code>// Product Set 儲存結構
+{
+  "id": "set_xxx",
+  "name": "飲料",
+  "useFilter": true,
+  "matchType": "all",              // all | any
+  "filters": [
+    { "attr": "product_type", "op": "等於", "value": "飲料" },
+    { "attr": "price", "op": "小於", "value": "100", "currency": "TWD" }
+  ]
+}</code></pre>
+    <p>建議端點：</p>
+    <ul>
+      <li><code>GET /catalog/items?search=&amp;status=&amp;availability=&amp;cursor=</code></li>
+      <li><code>GET /catalog/diagnostics</code></li>
+      <li><code>POST /catalog/data-sources</code>（feed URL + 排程）</li>
+      <li><code>GET/POST/PUT/DELETE /product-sets</code></li>
+      <li><code>POST /product-sets/preview</code>（傳 filters，回符合商品數與清單）— 供即時預覽，避免前端持有全量目錄。</li>
+    </ul>
+
+    <!-- 8 -->
+    <h2 id="s8">8. 邊界情況與驗證</h2>
+    <ol>
+      <li>名稱空白 → 阻擋建立並提示。</li>
+      <li>條件值含特殊字元 / 引號 → 需轉義，勿造成 XSS 或查詢錯誤。</li>
+      <li>數值條件輸入非數字 / 負值 → 視為不完整，忽略。</li>
+      <li>目錄商品數大（&gt;1 萬）→ 預覽走後端查詢，勿在前端全量比對。</li>
+      <li>feed 抓取失敗 → 資料來源顯示錯誤與上次成功時間，不覆寫既有資料。</li>
+      <li>i18n：全介面繁體中文；商品屬性值可能為多語系文字，比對需支援 Unicode。</li>
+    </ol>
+
+    <!-- 9 -->
+    <h2 id="s9">9. 非功能需求</h2>
+    <ul>
+      <li>清單頁首屏 &lt; 1.5s；預覽查詢 &lt; 500ms（1 萬商品內）。</li>
+      <li>篩選比對須不分大小寫且支援中日文字元。</li>
+      <li>縮圖延遲載入（lazy load）。</li>
+    </ul>
+
+    <!-- 10 -->
+    <h2 id="s10">10. 驗收條件（Acceptance Criteria）</h2>
+    <ul class="check">
+      <li>商品清單可搜尋、可依狀態/供應狀況篩選、縮圖失敗有 fallback。</li>
+      <li>診斷至少列出缺必填、Content ID 不符兩類問題。</li>
+      <li>資料來源可設定 feed URL 與排程並記錄結果。</li>
+      <li>商品組合支援 22 屬性 × 對應運算子 × 三種值輸入。</li>
+      <li>AND / OR 比對正確；不完整條件被忽略；無條件＝全部。</li>
+      <li>右側即時更新符合數與量表；Undo/Redo 正常。</li>
+      <li>組合可儲存為第 7 節結構並在 feed 更新後重算成員。</li>
+    </ul>
+
+    <!-- 11 -->
+    <h2 id="s11">11. 待確認（Open Questions）</h2>
+    <ol>
+      <li>商品組合是否需要跨目錄？（v1 假設單一目錄）</li>
+      <li>手動挑選模式（關閉篩選）是否納入 v1？</li>
+      <li>AI 生成篩選條件的優先度與資料來源？</li>
+      <li>診斷規則清單是否需與 Meta 官方診斷完全對齊，或先做核心三類？</li>
+    </ol>
+
+  </article>
+</div>
+</body>
+</html>

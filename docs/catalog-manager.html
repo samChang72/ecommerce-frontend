@@ -1,0 +1,843 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>商務管理平台 · 目錄管理（仿 Meta）</title>
+  <style>
+    :root {
+      --meta-blue: #0866ff;
+      --meta-blue-hover: #0056e0;
+      --green: #31a24c;
+      --green-hover: #278a3f;
+      --bg: #f0f2f5;
+      --surface: #ffffff;
+      --border: #dadde1;
+      --text: #1c1e21;
+      --text-secondary: #65676b;
+      --green-bg: #e3f4e7;
+      --red: #e41e3f;
+      --red-bg: #fdeaec;
+      --amber: #b26a00;
+      --amber-bg: #fdf3e3;
+      --radius: 8px;
+      --shadow: 0 1px 2px rgba(0,0,0,.1);
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Helvetica Neue",
+        "PingFang TC", "Microsoft JhengHei", sans-serif;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body { background: var(--bg); color: var(--text); font-size: 14px; }
+
+    /* ---------- Top bar ---------- */
+    .topbar {
+      height: 56px; background: var(--surface); border-bottom: 1px solid var(--border);
+      display: flex; align-items: center; gap: 16px; padding: 0 16px;
+      position: sticky; top: 0; z-index: 20;
+    }
+    .logo {
+      width: 32px; height: 32px; border-radius: 50%; background: var(--meta-blue);
+      color: #fff; display: grid; place-items: center; font-weight: 800; font-size: 18px;
+    }
+    .topbar h1 { font-size: 17px; font-weight: 700; }
+    .topbar .spacer { flex: 1; }
+    .search-global {
+      background: var(--bg); border: none; border-radius: 20px; height: 36px;
+      padding: 0 14px 0 36px; width: 240px; font-size: 14px;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' fill='%2365676b' viewBox='0 0 24 24'%3E%3Cpath d='M15.5 14h-.79l-.28-.27a6.5 6.5 0 1 0-.7.7l.27.28v.79l5 5 1.5-1.5-5-5zm-6 0a4.5 4.5 0 1 1 0-9 4.5 4.5 0 0 1 0 9z'/%3E%3C/svg%3E");
+      background-repeat: no-repeat; background-position: 12px center;
+    }
+    .avatar { width: 36px; height: 36px; border-radius: 50%; background: linear-gradient(135deg,#f09,#0cf); }
+
+    /* ---------- Layout ---------- */
+    .layout { display: flex; min-height: calc(100vh - 56px); }
+    .sidebar {
+      width: 240px; background: var(--surface); border-right: 1px solid var(--border);
+      padding: 12px 8px; flex-shrink: 0;
+    }
+    .sidebar .section-title {
+      font-size: 12px; color: var(--text-secondary); text-transform: uppercase;
+      letter-spacing: .5px; padding: 12px 12px 6px;
+    }
+    .nav-item {
+      display: flex; align-items: center; gap: 12px; padding: 10px 12px;
+      border-radius: var(--radius); color: var(--text); text-decoration: none;
+      font-weight: 500; cursor: pointer;
+    }
+    .nav-item:hover { background: var(--bg); }
+    .nav-item.active { background: #e7f0ff; color: var(--meta-blue); }
+    .nav-item .ic { width: 20px; text-align: center; }
+
+    .content { flex: 1; padding: 24px 28px; min-width: 0; }
+    .page-head { display: flex; align-items: center; justify-content: space-between; margin-bottom: 4px; }
+    .page-head h2 { font-size: 24px; font-weight: 800; }
+    .breadcrumb { color: var(--text-secondary); font-size: 13px; margin-bottom: 18px; }
+    .breadcrumb b { color: var(--text); }
+
+    .btn {
+      border: none; border-radius: 6px; padding: 8px 16px; font-size: 14px;
+      font-weight: 600; cursor: pointer; display: inline-flex; align-items: center; gap: 6px;
+    }
+    .btn-primary { background: var(--meta-blue); color: #fff; }
+    .btn-primary:hover { background: var(--meta-blue-hover); }
+    .btn-green { background: var(--green); color: #fff; }
+    .btn-green:hover { background: var(--green-hover); }
+    .btn-ghost { background: var(--bg); color: var(--text); }
+    .btn-ghost:hover { background: #e4e6eb; }
+    .btn-outline { background: var(--surface); color: var(--text); border: 1px solid var(--border); }
+    .btn-outline:hover { background: var(--bg); }
+
+    /* ---------- Screens ---------- */
+    .screen { display: none; }
+    .screen.active { display: block; }
+
+    /* ---------- Tabs ---------- */
+    .tabs { display: flex; gap: 4px; border-bottom: 1px solid var(--border); margin-bottom: 18px; }
+    .tab {
+      padding: 12px 16px; font-weight: 600; color: var(--text-secondary);
+      cursor: pointer; border-bottom: 3px solid transparent; margin-bottom: -1px;
+    }
+    .tab:hover { color: var(--text); }
+    .tab.active { color: var(--meta-blue); border-bottom-color: var(--meta-blue); }
+    .tab .badge {
+      background: var(--red); color: #fff; border-radius: 10px; font-size: 11px;
+      padding: 1px 7px; margin-left: 6px;
+    }
+
+    /* ---------- Summary cards ---------- */
+    .cards { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; margin-bottom: 20px; }
+    .card {
+      background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius);
+      padding: 16px; box-shadow: var(--shadow);
+    }
+    .card .label { color: var(--text-secondary); font-size: 13px; margin-bottom: 6px; }
+    .card .value { font-size: 26px; font-weight: 800; }
+    .card .value.red { color: var(--red); }
+    .card .value.green { color: var(--green); }
+
+    /* ---------- Toolbar ---------- */
+    .toolbar { display: flex; align-items: center; gap: 10px; margin-bottom: 14px; flex-wrap: wrap; }
+    .search-local {
+      flex: 1; min-width: 200px; height: 38px; border: 1px solid var(--border);
+      border-radius: 6px; padding: 0 12px 0 34px; font-size: 14px;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' fill='%2365676b' viewBox='0 0 24 24'%3E%3Cpath d='M15.5 14h-.79l-.28-.27a6.5 6.5 0 1 0-.7.7l.27.28v.79l5 5 1.5-1.5-5-5zm-6 0a4.5 4.5 0 1 1 0-9 4.5 4.5 0 0 1 0 9z'/%3E%3C/svg%3E");
+      background-repeat: no-repeat; background-position: 10px center;
+    }
+    .chip {
+      height: 38px; border: 1px solid var(--border); background: var(--surface);
+      border-radius: 6px; padding: 0 14px; font-weight: 600; cursor: pointer;
+      display: inline-flex; align-items: center; gap: 6px;
+    }
+    .chip:hover { background: var(--bg); }
+
+    /* ---------- Table ---------- */
+    .table-wrap {
+      background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius);
+      overflow: hidden; box-shadow: var(--shadow);
+    }
+    .table-scroll { overflow-x: auto; }
+    table { width: 100%; border-collapse: collapse; min-width: 860px; }
+    thead th {
+      text-align: left; font-size: 12px; color: var(--text-secondary); font-weight: 700;
+      text-transform: uppercase; letter-spacing: .4px; padding: 12px 14px;
+      border-bottom: 1px solid var(--border); background: #fafbfc; white-space: nowrap;
+    }
+    tbody td { padding: 12px 14px; border-bottom: 1px solid var(--border); vertical-align: middle; }
+    tbody tr:last-child td { border-bottom: none; }
+    tbody tr:hover { background: #f7f9fc; }
+    .thumb {
+      width: 44px; height: 44px; border-radius: 6px; display: grid; place-items: center;
+      font-size: 22px; background: var(--bg); border: 1px solid var(--border); overflow: hidden;
+    }
+    .thumb img { width: 100%; height: 100%; object-fit: cover; }
+    .prod { display: flex; align-items: center; gap: 12px; }
+    .prod .name { font-weight: 600; }
+    .prod .sub { color: var(--text-secondary); font-size: 12px; }
+    .mono { font-family: ui-monospace, "SF Mono", Menlo, monospace; font-size: 13px; color: var(--text-secondary); }
+
+    .pill { display: inline-flex; align-items: center; gap: 5px; padding: 3px 10px; border-radius: 20px; font-size: 12px; font-weight: 600; }
+    .pill::before { content: ""; width: 7px; height: 7px; border-radius: 50%; background: currentColor; }
+    .pill.in { background: var(--green-bg); color: var(--green); }
+    .pill.out { background: var(--red-bg); color: var(--red); }
+    .status-ok { color: var(--green); font-weight: 600; }
+    .status-warn { color: var(--amber); font-weight: 600; }
+    .status-err { color: var(--red); font-weight: 600; }
+
+    /* ---------- Data sources ---------- */
+    .source-card {
+      background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius);
+      padding: 18px; box-shadow: var(--shadow); margin-bottom: 14px;
+      display: flex; align-items: center; gap: 16px;
+    }
+    .source-icon { width: 44px; height: 44px; border-radius: 8px; background: #e7f0ff; color: var(--meta-blue); display: grid; place-items: center; font-size: 22px; }
+    .source-card .meta { flex: 1; }
+    .source-card .meta .t { font-weight: 700; margin-bottom: 2px; }
+    .source-card .meta .d { color: var(--text-secondary); font-size: 13px; }
+
+    /* ---------- Diagnostics ---------- */
+    .diag {
+      background: var(--surface); border: 1px solid var(--border); border-left: 4px solid var(--red);
+      border-radius: var(--radius); padding: 16px 18px; margin-bottom: 12px; box-shadow: var(--shadow);
+    }
+    .diag.warn { border-left-color: var(--amber); }
+    .diag .head { display: flex; align-items: center; gap: 10px; margin-bottom: 4px; }
+    .diag .head .ic { font-size: 18px; }
+    .diag .head .t { font-weight: 700; }
+    .diag .head .count { margin-left: auto; color: var(--text-secondary); font-size: 13px; }
+    .diag .desc { color: var(--text-secondary); font-size: 13px; margin-left: 28px; }
+    .diag .desc code { background: var(--bg); padding: 1px 6px; border-radius: 4px; font-size: 12px; }
+
+    input[type="checkbox"].box { width: 16px; height: 16px; accent-color: var(--meta-blue); cursor: pointer; }
+
+    /* ================= Product Set builder ================= */
+    .ps-grid { display: grid; grid-template-columns: minmax(0,1fr) 380px; gap: 20px; align-items: start; }
+    .ps-card {
+      background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius);
+      box-shadow: var(--shadow); padding: 18px 20px; margin-bottom: 16px;
+    }
+    .ps-label { font-weight: 700; margin-bottom: 8px; }
+    .ps-input {
+      width: 100%; height: 40px; border: 1px solid var(--border); border-radius: 6px;
+      padding: 0 12px; font-size: 14px;
+    }
+    .ps-input:focus, .sel:focus, .ftext:focus { outline: none; border-color: var(--meta-blue); box-shadow: 0 0 0 2px #0866ff33; }
+
+    /* toggle switch */
+    .switch { position: relative; display: inline-block; width: 40px; height: 22px; flex-shrink: 0; }
+    .switch input { display: none; }
+    .switch .track { position: absolute; inset: 0; background: #ccd0d5; border-radius: 20px; transition: .2s; }
+    .switch .track::before { content: ""; position: absolute; width: 16px; height: 16px; left: 3px; top: 3px; background: #fff; border-radius: 50%; transition: .2s; }
+    .switch input:checked + .track { background: var(--meta-blue); }
+    .switch input:checked + .track::before { transform: translateX(18px); }
+    .switch-row { display: flex; align-items: center; gap: 12px; }
+    .switch-row .txt { color: var(--text); }
+    .switch-row .txt a { color: var(--meta-blue); text-decoration: none; }
+
+    /* AI box */
+    .ai-box {
+      border: 1px solid #d9c9ff; background: linear-gradient(180deg,#f6f1ff,#fbf9ff);
+      border-radius: var(--radius); padding: 14px 16px; margin-bottom: 18px;
+    }
+    .ai-box .ai-head { display: flex; align-items: center; gap: 8px; font-weight: 700; margin-bottom: 10px; }
+    .ai-box .ai-head .sp { color: #8b3ffb; }
+    .ai-input {
+      width: 100%; height: 42px; border: 1px solid var(--border); border-radius: 8px;
+      padding: 0 12px 0 38px; font-size: 14px; background: #fff;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' fill='%238b3ffb' viewBox='0 0 24 24'%3E%3Cpath d='M15.5 14h-.79l-.28-.27a6.5 6.5 0 1 0-.7.7l.27.28v.79l5 5 1.5-1.5-5-5zm-6 0a4.5 4.5 0 1 1 0-9 4.5 4.5 0 0 1 0 9z'/%3E%3C/svg%3E");
+      background-repeat: no-repeat; background-position: 12px center;
+    }
+
+    /* match-type radios */
+    .match-row { display: flex; align-items: center; gap: 22px; margin-bottom: 16px; flex-wrap: wrap; }
+    .match-row .lead { color: var(--text); }
+    .radio { display: inline-flex; align-items: center; gap: 8px; cursor: pointer; }
+    .radio input { display: none; }
+    .radio .dot { width: 18px; height: 18px; border-radius: 50%; border: 2px solid #b0b3b8; display: grid; place-items: center; }
+    .radio input:checked + .dot { border-color: var(--meta-blue); }
+    .radio input:checked + .dot::after { content: ""; width: 9px; height: 9px; border-radius: 50%; background: var(--meta-blue); }
+
+    /* filter rows */
+    .frows { display: flex; flex-direction: column; gap: 12px; margin-bottom: 16px; }
+    .frow { display: grid; grid-template-columns: 1fr 1fr 1.6fr auto; gap: 12px; align-items: end; }
+    .fcol { display: flex; flex-direction: column; gap: 6px; min-width: 0; }
+    .fcol .flabel { font-size: 12px; font-weight: 700; color: var(--text); display: flex; align-items: center; gap: 4px; }
+    .fcol .flabel .i { width: 14px; height: 14px; border-radius: 50%; background: #d8dade; color: #606770; font-size: 10px; display: grid; place-items: center; }
+    .sel, .ftext {
+      height: 40px; border: 1px solid var(--border); border-radius: 6px; padding: 0 10px;
+      font-size: 14px; background: var(--surface); width: 100%; cursor: pointer;
+    }
+    .ftext { cursor: text; }
+    .valnum { display: flex; gap: 8px; }
+    .valnum .cur { width: 96px; flex-shrink: 0; }
+    .numwrap { position: relative; flex: 1; min-width: 0; }
+    .numwrap .adorn { position: absolute; left: 10px; top: 50%; transform: translateY(-50%); color: var(--text-secondary); pointer-events: none; }
+    .numwrap input { height: 40px; width: 100%; border: 1px solid var(--border); border-radius: 6px; padding: 0 10px 0 42px; font-size: 14px; }
+    .frow-x { height: 40px; width: 40px; border: 1px solid var(--border); background: var(--surface); border-radius: 6px; cursor: pointer; color: var(--text-secondary); font-size: 18px; }
+    .frow-x:hover { background: var(--red-bg); color: var(--red); border-color: var(--red); }
+
+    .filter-actions { display: flex; align-items: center; gap: 10px; }
+    .filter-actions .grow { flex: 1; }
+    .link-btn { background: none; border: none; color: var(--meta-blue); font-weight: 600; cursor: pointer; font-size: 14px; }
+    .icon-btn { background: var(--surface); border: 1px solid var(--border); border-radius: 6px; height: 38px; padding: 0 14px; cursor: pointer; font-weight: 600; display: inline-flex; align-items: center; gap: 6px; }
+    .icon-btn:hover { background: var(--bg); }
+    .icon-btn:disabled { opacity: .45; cursor: default; }
+
+    .filter-hint { color: var(--text-secondary); font-size: 12.5px; margin-top: 4px; }
+    .filter-area.off { display: none; }
+    .manual-note { display: none; color: var(--text-secondary); font-size: 14px; padding: 8px 0; }
+    .filter-area.off + .manual-note { display: block; }
+
+    /* bottom bar */
+    .ps-bottom { display: flex; justify-content: flex-end; gap: 10px; padding-top: 4px; }
+
+    /* right rail */
+    .rail { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); box-shadow: var(--shadow); overflow: hidden; position: sticky; top: 72px; }
+    .rail-head { padding: 16px 16px 10px; }
+    .rail-head .n { font-size: 18px; font-weight: 800; }
+    .rail-head .sub { color: var(--text-secondary); font-size: 13px; }
+    .rail-search { padding: 0 16px 12px; }
+    .rail-search input {
+      width: 100%; height: 38px; border: 1px solid var(--border); border-radius: 20px;
+      padding: 0 12px 0 36px; font-size: 13px;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='15' height='15' fill='%2365676b' viewBox='0 0 24 24'%3E%3Cpath d='M15.5 14h-.79l-.28-.27a6.5 6.5 0 1 0-.7.7l.27.28v.79l5 5 1.5-1.5-5-5zm-6 0a4.5 4.5 0 1 1 0-9 4.5 4.5 0 0 1 0 9z'/%3E%3C/svg%3E");
+      background-repeat: no-repeat; background-position: 12px center;
+    }
+    .rail-list { max-height: 420px; overflow-y: auto; border-top: 1px solid var(--border); }
+    .rail-item { display: flex; align-items: center; gap: 12px; padding: 10px 16px; border-bottom: 1px solid #eff1f3; }
+    .rail-item:hover { background: #f7f9fc; }
+    .rail-item .thumb { width: 40px; height: 40px; }
+    .rail-item .info { flex: 1; min-width: 0; }
+    .rail-item .info .nm { font-weight: 600; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+    .rail-item .info .pr { color: var(--text-secondary); font-size: 12.5px; }
+    .rail-item .info .cid { color: var(--text-secondary); font-size: 12px; }
+    .rail-item .more { background: none; border: 1px solid var(--border); border-radius: 6px; width: 32px; height: 28px; cursor: pointer; color: var(--text-secondary); }
+    .rail-empty { padding: 28px 16px; text-align: center; color: var(--text-secondary); font-size: 13px; }
+
+    .rail-foot { padding: 16px; border-top: 1px solid var(--border); }
+    .rail-foot .t { font-weight: 700; display: flex; align-items: center; gap: 6px; }
+    .rail-foot .d { color: var(--text-secondary); font-size: 12.5px; margin: 6px 0 10px; }
+    .meter { height: 8px; border-radius: 6px; background: #e4e6eb; overflow: hidden; }
+    .meter .fill { height: 100%; background: linear-gradient(90deg,#8ab4ff,var(--meta-blue)); transition: width .2s; }
+    .meter-labels { display: flex; justify-content: space-between; color: var(--text-secondary); font-size: 12px; margin-top: 6px; }
+    .rec-row { display: flex; align-items: center; gap: 10px; margin-top: 14px; }
+
+    /* toast */
+    .toast {
+      position: fixed; left: 50%; bottom: 28px; transform: translateX(-50%) translateY(20px);
+      background: #1c1e21; color: #fff; padding: 12px 20px; border-radius: 8px; font-weight: 600;
+      box-shadow: 0 6px 20px rgba(0,0,0,.25); opacity: 0; pointer-events: none; transition: .25s; z-index: 50;
+    }
+    .toast.show { opacity: 1; transform: translateX(-50%) translateY(0); }
+
+    @media (max-width: 1100px) { .ps-grid { grid-template-columns: 1fr; } .rail { position: static; } }
+    @media (max-width: 900px) {
+      .sidebar { display: none; }
+      .cards { grid-template-columns: repeat(2, 1fr); }
+      .frow { grid-template-columns: 1fr 1fr; }
+    }
+  </style>
+</head>
+<body>
+  <!-- Top bar -->
+  <header class="topbar">
+    <div class="logo">∞</div>
+    <h1>商務管理平台</h1>
+    <input class="search-global" placeholder="搜尋" />
+    <div class="spacer"></div>
+    <button class="btn btn-ghost">說明</button>
+    <div class="avatar"></div>
+  </header>
+
+  <div class="layout">
+    <!-- Sidebar -->
+    <aside class="sidebar">
+      <div class="section-title">目錄</div>
+      <a class="nav-item active" data-screen="catalog" data-tab="items"><span class="ic">📦</span> 商品項目</a>
+      <a class="nav-item" data-screen="productset"><span class="ic">🗂️</span> 商品組合</a>
+      <a class="nav-item" data-screen="catalog" data-tab="sources"><span class="ic">🔌</span> 資料來源</a>
+      <a class="nav-item" data-screen="catalog" data-tab="items"><span class="ic">📊</span> 事件</a>
+      <div class="section-title">推廣</div>
+      <a class="nav-item" data-screen="catalog" data-tab="items"><span class="ic">🚀</span> 建立廣告</a>
+      <a class="nav-item" data-screen="catalog" data-tab="items"><span class="ic">🛍️</span> 商店</a>
+      <div class="section-title">設定</div>
+      <a class="nav-item" data-screen="catalog" data-tab="items"><span class="ic">⚙️</span> 目錄設定</a>
+      <a class="nav-item" data-screen="catalog" data-tab="items"><span class="ic">👥</span> 使用者權限</a>
+    </aside>
+
+    <!-- Content -->
+    <main class="content">
+
+      <!-- ===================== SCREEN: 目錄管理 ===================== -->
+      <div class="screen active" id="screen-catalog">
+        <div class="breadcrumb">目錄 › <b>電商示範目錄</b> · 目錄 ID 1234567890</div>
+        <div class="page-head">
+          <h2>目錄管理</h2>
+          <div style="display:flex; gap:10px;">
+            <button class="btn btn-ghost">匯出</button>
+            <button class="btn btn-primary">＋ 新增項目</button>
+          </div>
+        </div>
+
+        <div class="tabs">
+          <div class="tab active" data-tab="items">商品項目</div>
+          <div class="tab" data-tab="sources">資料來源</div>
+          <div class="tab" data-tab="diagnostics">診斷<span class="badge">3</span></div>
+        </div>
+
+        <!-- Items -->
+        <section class="panel" id="items">
+          <div class="cards">
+            <div class="card"><div class="label">商品總數</div><div class="value">19</div></div>
+            <div class="card"><div class="label">使用中</div><div class="value green">19</div></div>
+            <div class="card"><div class="label">有問題</div><div class="value red">0</div></div>
+            <div class="card"><div class="label">上次同步</div><div class="value" style="font-size:16px;">今天 09:14</div></div>
+          </div>
+          <div class="toolbar">
+            <input class="search-local" placeholder="以名稱或 Content ID 搜尋商品" />
+            <button class="chip">狀態 ▾</button>
+            <button class="chip">供應狀況 ▾</button>
+          </div>
+          <div class="table-wrap">
+            <div class="table-scroll">
+              <table>
+                <thead>
+                  <tr>
+                    <th style="width:36px;"><input type="checkbox" class="box" id="checkAll" /></th>
+                    <th>商品</th><th>Content ID</th><th>產品類型</th><th>供應狀況</th><th>價格</th><th>狀態</th>
+                  </tr>
+                </thead>
+                <tbody id="rows"></tbody>
+              </table>
+            </div>
+          </div>
+        </section>
+
+        <!-- Data sources -->
+        <section class="panel" id="sources" style="display:none;">
+          <div class="source-card">
+            <div class="source-icon">🔗</div>
+            <div class="meta">
+              <div class="t">資料摘要（Data feed）</div>
+              <div class="d">https://samchang72.github.io/ecommerce-frontend/data.xml · 每日 02:00 自動抓取 · 上次成功：今天 09:14</div>
+            </div>
+            <span class="pill in">已連線</span>
+            <button class="btn btn-ghost">管理</button>
+          </div>
+          <div class="source-card">
+            <div class="source-icon">⬆️</div>
+            <div class="meta">
+              <div class="t">手動上傳</div>
+              <div class="d">支援 XML / CSV / TSV / Google 試算表</div>
+            </div>
+            <button class="btn btn-ghost">上傳檔案</button>
+          </div>
+          <div class="source-card">
+            <div class="source-icon">📶</div>
+            <div class="meta">
+              <div class="t">像素 / Facebook Pixel</div>
+              <div class="d">依瀏覽事件自動建立商品 · 未連結</div>
+            </div>
+            <button class="btn btn-primary">連結像素</button>
+          </div>
+        </section>
+
+        <!-- Diagnostics -->
+        <section class="panel" id="diagnostics" style="display:none;">
+          <div class="diag">
+            <div class="head"><span class="ic">⛔</span><span class="t">2 項商品被拒登：缺少必填欄位</span><span class="count">影響 2 項</span></div>
+            <div class="desc">下列商品缺少 <code>image_link</code>，將不會顯示於廣告：<code>DB_7</code>、<code>DB_10</code>。</div>
+          </div>
+          <div class="diag">
+            <div class="head"><span class="ic">⛔</span><span class="t">Content ID 與像素事件不符</span><span class="count">影響 1 項</span></div>
+            <div class="desc">網站傳送的 <code>content_id</code> 與目錄 <code>&lt;g:id&gt;</code> 不一致。請確認 dataLayer 的 <code>item_id</code> 使用 <code>DB_&lt;id&gt;</code> 格式。</div>
+          </div>
+          <div class="diag warn">
+            <div class="head"><span class="ic">⚠️</span><span class="t">建議加入 GTIN / 品牌以提升成效</span><span class="count">影響 8 項</span></div>
+            <div class="desc">補上 <code>brand</code> 與 <code>gtin</code> 可提升 Advantage+ 目錄廣告的比對率。</div>
+          </div>
+        </section>
+      </div>
+
+      <!-- ===================== SCREEN: 建立商品組合 ===================== -->
+      <div class="screen" id="screen-productset">
+        <div class="breadcrumb">商品組合 › <b>建立商品組合</b></div>
+
+        <div class="ps-grid">
+          <!-- main -->
+          <div>
+            <div class="ps-card">
+              <div class="ps-label">輸入名稱</div>
+              <input class="ps-input" id="psName" value="飲料" />
+            </div>
+
+            <div class="ps-card">
+              <div class="switch-row" style="margin-bottom:2px;">
+                <label class="switch"><input type="checkbox" id="useFilter" checked /><span class="track"></span></label>
+                <span class="txt">使用篩選條件，定期更新組合以及相符的商品。<a href="#">關於組合篩選條件</a></span>
+              </div>
+
+              <div class="filter-area" id="filterArea" style="margin-top:16px;">
+                <div class="ai-box">
+                  <div class="ai-head"><span class="sp">✨</span> 使用 AI 生成篩選條件</div>
+                  <input class="ai-input" id="aiInput" placeholder="說明你想尋找的內容" />
+                  <div class="filter-hint" style="margin-top:8px;">AI 生成成果仍在測試階段，且可能不準確。請在儲存前檢查篩選條件。</div>
+                </div>
+
+                <div class="match-row">
+                  <span class="lead">新增符合以下設定的商品：</span>
+                  <label class="radio"><input type="radio" name="matchType" value="all" checked /><span class="dot"></span> 所有篩選條件</label>
+                  <label class="radio"><input type="radio" name="matchType" value="any" /><span class="dot"></span> 至少一個篩選條件</label>
+                </div>
+
+                <div class="frows" id="frows"></div>
+
+                <div class="filter-actions">
+                  <button class="link-btn" id="addFilter">＋ 新增其他篩選條件</button>
+                  <span class="grow"></span>
+                  <button class="icon-btn" id="undoBtn" title="取消">↩ 取消</button>
+                  <button class="icon-btn" id="redoBtn" title="重做">↻ 重做</button>
+                  <button class="icon-btn" id="clearBtn">清除所有篩選條件</button>
+                </div>
+              </div>
+              <div class="manual-note">已關閉篩選條件，改為手動從右側清單挑選商品加入組合。</div>
+            </div>
+
+            <div class="ps-bottom">
+              <button class="btn btn-outline" id="psCancel">取消</button>
+              <button class="btn btn-green" id="psCreate">建立</button>
+            </div>
+          </div>
+
+          <!-- right rail -->
+          <aside class="rail">
+            <div class="rail-head">
+              <div class="n" id="railCount">19 商品</div>
+              <div class="sub" id="railSub">19 款式</div>
+            </div>
+            <div class="rail-search"><input id="railSearch" placeholder="依名稱或編號搜尋商品" /></div>
+            <div class="rail-list" id="railList"></div>
+            <div class="rail-foot">
+              <div class="t">商品選擇 <span class="i" style="width:14px;height:14px;border-radius:50%;background:#d8dade;color:#606770;font-size:10px;display:inline-grid;place-items:center;">i</span></div>
+              <div class="d">規模更大且商品選擇更豐富的組合有助於提升廣告成效。</div>
+              <div class="meter"><div class="fill" id="meterFill" style="width:100%"></div></div>
+              <div class="meter-labels"><span>受限</span><span>廣泛</span></div>
+              <div class="rec-row">
+                <label class="switch"><input type="checkbox" id="recToggle" /><span class="track"></span></label>
+                <span>新增推薦商品</span>
+              </div>
+            </div>
+          </aside>
+        </div>
+      </div>
+
+    </main>
+  </div>
+
+  <div class="toast" id="toast"></div>
+
+  <script>
+    /* ---------------- 商品資料（來自 products.json + data.xml，補齊 Meta 屬性） ---------------- */
+    const IMG = "https://samchang72.github.io/ecommerce-frontend/image/";
+    const BASE = { brand: "Example", availability: "in stock", condition: "new",
+      sale_price: "", pattern: "", item_group_id: "",
+      custom_label_0: "", custom_label_1: "", custom_label_2: "", custom_label_3: "", custom_label_4: "" };
+    const RAW = [
+      { id:"DB_1",  name:"可樂", product_type:"飲料", price:30,    file:"cokev2.png",         gpc:"Food, Beverages & Tobacco > Beverages > Soda",              color:"", size:"", material:"", gender:"", age_group:"", desc:"經典風味碳酸可樂，冰涼暢快解渴，暢飲無負擔。" },
+      { id:"DB_2",  name:"綠茶", product_type:"飲料", price:25,    file:"greenv2.png",        gpc:"Food, Beverages & Tobacco > Beverages > Tea & Infusions",   color:"", size:"", material:"", gender:"", age_group:"", desc:"清新無糖綠茶，回甘順口，日常補水首選。" },
+      { id:"DB_3",  name:"手機", product_type:"3C",  price:15000,  file:"phonev2.png",        gpc:"Electronics > Communications > Telephony > Mobile Phones",  color:"", size:"", material:"", gender:"", age_group:"", desc:"高效能智慧型手機，大螢幕搭配長效電池。" },
+      { id:"DB_4",  name:"筆電", product_type:"3C",  price:45000,  file:"notebookv2.png",     gpc:"Electronics > Computers > Laptops",                         color:"", size:"", material:"", gender:"", age_group:"", desc:"輕薄高效筆記型電腦，辦公娛樂兩相宜。" },
+      { id:"DB_5",  name:"洋芋片", product_type:"零食", price:50,  file:"chipsv2.png",        gpc:"Food, Beverages & Tobacco > Food Items > Snack Foods",      color:"", size:"", material:"", gender:"", age_group:"", desc:"香脆原味洋芋片，鹹香涮嘴。" },
+      { id:"DB_6",  name:"巧克力", product_type:"零食", price:60,  file:"chocolatev2.png",    gpc:"Food, Beverages & Tobacco > Food Items > Candy",            color:"", size:"", material:"", gender:"", age_group:"", desc:"香濃絲滑巧克力，濃郁可可風味。" },
+      { id:"DB_7",  name:"素面短T", product_type:"衣著", price:390, file:"白色素面短Tv2.png",  gpc:"Apparel & Accessories > Clothing > Shirts & Tops",          color:"白色", size:"M", material:"棉",       gender:"unisex", age_group:"adult", desc:"100% 純棉素面短袖上衣，親膚透氣。" },
+      { id:"DB_8",  name:"五分袖西裝外套", product_type:"衣著", price:1290, file:"黑色五分袖西裝v2.png", gpc:"Apparel & Accessories > Clothing > Outerwear > Coats & Jackets", color:"黑色", size:"M", material:"聚酯纖維", gender:"unisex", age_group:"adult", desc:"俐落剪裁五分袖西裝外套，修身有型。" },
+      { id:"DB_9",  name:"牛仔短褲", product_type:"衣著", price:790, file:"黑色牛仔短褲v2.png", gpc:"Apparel & Accessories > Clothing > Shorts",                 color:"黑色", size:"M", material:"丹寧",     gender:"unisex", age_group:"adult", desc:"經典牛仔短褲，耐穿有型。" },
+      { id:"DB_10", name:"高跟涼鞋", product_type:"衣著", price:890, file:"膚色高跟涼鞋v2.png", gpc:"Apparel & Accessories > Shoes",                             color:"膚色", size:"37", material:"合成皮",  gender:"female", age_group:"adult", desc:"優雅膚色高跟涼鞋，修飾腿型。" },
+      { id:"DB_11", name:"咖啡", product_type:"飲料", price:45,     file:"coffee.png",         gpc:"Food, Beverages & Tobacco > Beverages > Coffee",            color:"", size:"", material:"", gender:"", age_group:"", desc:"香醇即飲咖啡，濃郁醇厚。" },
+      { id:"DB_12", name:"礦泉水", product_type:"飲料", price:20,   file:"water.png",          gpc:"Food, Beverages & Tobacco > Beverages > Water",             color:"", size:"", material:"", gender:"", age_group:"", desc:"天然純淨礦泉水，清爽甘甜。" },
+      { id:"DB_13", name:"運動飲料", product_type:"飲料", price:35, file:"sportsdrink.png",    gpc:"Food, Beverages & Tobacco > Beverages > Sports & Energy Drinks", color:"", size:"", material:"", gender:"", age_group:"", desc:"補給電解質運動飲料，運動後迅速補水。" },
+      { id:"DB_14", name:"平板電腦", product_type:"3C", price:12000, file:"tablet.png",        gpc:"Electronics > Computers > Tablet Computers",                color:"", size:"", material:"", gender:"", age_group:"", desc:"輕巧大螢幕平板電腦，娛樂工作兼具。" },
+      { id:"DB_15", name:"藍牙耳機", product_type:"3C", price:2990, file:"earbuds.png",        gpc:"Electronics > Audio > Audio Components > Headphones",       color:"", size:"", material:"", gender:"", age_group:"", desc:"真無線藍牙耳機，穩定連線與清晰音質。" },
+      { id:"DB_16", name:"無線滑鼠", product_type:"3C", price:590,  file:"mouse.png",          gpc:"Electronics > Electronics Accessories > Computer Components > Input Devices > Mice & Trackballs", color:"", size:"", material:"", gender:"", age_group:"", desc:"人體工學無線滑鼠，靈敏順手。" },
+      { id:"DB_17", name:"餅乾", product_type:"零食", price:40,     file:"cookies.png",        gpc:"Food, Beverages & Tobacco > Food Items > Bakery > Cookies", color:"", size:"", material:"", gender:"", age_group:"", desc:"香酥可口餅乾，下午茶良伴。" },
+      { id:"DB_18", name:"堅果", product_type:"零食", price:120,    file:"nuts.png",           gpc:"Food, Beverages & Tobacco > Food Items > Snack Foods > Nuts & Seeds", color:"", size:"", material:"", gender:"", age_group:"", desc:"綜合堅果低溫烘焙不加鹽，健康點心。" },
+      { id:"DB_19", name:"軟糖", product_type:"零食", price:35,     file:"gummy.png",          gpc:"Food, Beverages & Tobacco > Food Items > Candy",            color:"", size:"", material:"", gender:"", age_group:"", desc:"Q 彈水果軟糖，酸甜多層次。" },
+    ];
+    const PRODUCTS = RAW.map(r => ({ ...BASE, ...r, title: r.name, description: r.desc, image: IMG + encodeURIComponent(r.file) }));
+    const emojiByType = { "飲料":"🥤", "3C":"💻", "零食":"🍪", "衣著":"👕" };
+    const NT = n => "NT$" + Number(n).toLocaleString("en-US");
+
+    /* ---------------- 目錄管理：商品表格 ---------------- */
+    document.getElementById("rows").innerHTML = PRODUCTS.map(p => `
+      <tr>
+        <td><input type="checkbox" class="box rowCheck" /></td>
+        <td><div class="prod">
+          <div class="thumb"><img src="${p.image}" alt="" onerror="this.parentNode.textContent='${emojiByType[p.product_type]||'📦'}'"></div>
+          <div><div class="name">${p.name}</div><div class="sub">${p.product_type}</div></div>
+        </div></td>
+        <td class="mono">${p.id}</td>
+        <td>${p.product_type}</td>
+        <td><span class="pill in">有庫存</span></td>
+        <td>${NT(p.price)}</td>
+        <td><span class="status-ok">● 使用中</span></td>
+      </tr>`).join("");
+
+    /* 目錄分頁切換 */
+    document.querySelectorAll("#screen-catalog .tab").forEach(tab => {
+      tab.addEventListener("click", () => {
+        document.querySelectorAll("#screen-catalog .tab").forEach(t => t.classList.remove("active"));
+        document.querySelectorAll("#screen-catalog .panel").forEach(p => p.style.display = "none");
+        tab.classList.add("active");
+        document.getElementById(tab.dataset.tab).style.display = "block";
+      });
+    });
+    document.getElementById("checkAll").addEventListener("change", e => {
+      document.querySelectorAll(".rowCheck").forEach(c => (c.checked = e.target.checked));
+    });
+
+    /* 側欄切換畫面 */
+    function showScreen(name, tab) {
+      document.querySelectorAll(".screen").forEach(s => s.classList.remove("active"));
+      document.getElementById("screen-" + name).classList.add("active");
+      if (name === "catalog" && tab) {
+        const t = document.querySelector(`#screen-catalog .tab[data-tab="${tab}"]`);
+        if (t) t.click();
+      }
+    }
+    document.querySelectorAll(".nav-item").forEach(n => {
+      n.addEventListener("click", () => {
+        document.querySelectorAll(".nav-item").forEach(x => x.classList.remove("active"));
+        n.classList.add("active");
+        showScreen(n.dataset.screen, n.dataset.tab);
+      });
+    });
+
+    /* ================= 商品組合：篩選引擎 ================= */
+    const ATTRS = [
+      { key:"item_group_id", label:"商品群組編號", type:"text" },
+      { key:"id",            label:"商品",         type:"text" },
+      { key:"title",         label:"標題",         type:"text" },
+      { key:"description",   label:"說明",         type:"text" },
+      { key:"product_type",  label:"產品類型",     type:"text" },
+      { key:"gpc",           label:"Google 產品類別", type:"text" },
+      { key:"brand",         label:"品牌",         type:"text" },
+      { key:"price",         label:"價格",         type:"number" },
+      { key:"sale_price",    label:"優惠價",       type:"number" },
+      { key:"color",         label:"顏色",         type:"text" },
+      { key:"size",          label:"尺寸",         type:"text" },
+      { key:"material",      label:"材質",         type:"text" },
+      { key:"gender",        label:"性別",         type:"select", options:["female","male","unisex"] },
+      { key:"age_group",     label:"年齡層",       type:"select", options:["adult","all ages","teen","kids","toddler","infant","newborn"] },
+      { key:"availability",  label:"供應狀況",     type:"select", options:["in stock","out of stock"] },
+      { key:"condition",     label:"商品狀況",     type:"select", options:["new","used","refurbished"] },
+      { key:"pattern",       label:"圖案",         type:"text" },
+      { key:"custom_label_0",label:"自訂標籤 0",   type:"text" },
+      { key:"custom_label_1",label:"自訂標籤 1",   type:"text" },
+      { key:"custom_label_2",label:"自訂標籤 2",   type:"text" },
+      { key:"custom_label_3",label:"自訂標籤 3",   type:"text" },
+      { key:"custom_label_4",label:"自訂標籤 4",   type:"text" },
+    ];
+    const OPS = {
+      number: ["大於","小於","等於","不等於","大於或等於","小於或等於"],
+      text:   ["包含","不包含","等於","不等於"],
+      select: ["等於","不等於"],
+    };
+    const CURRENCIES = ["TWD","USD","EUR","JPY","GBP"];
+    const CUR_SYMBOL = { TWD:"NT$", USD:"$", EUR:"€", JPY:"¥", GBP:"£" };
+
+    const attrDef = k => ATTRS.find(a => a.key === k);
+    const defaultOp = a => OPS[a.type][0];
+    const emptyFilter = () => ({ attr:"title", op:"包含", value:"", currency:"TWD" });
+
+    /* 初始狀態（對照截圖：價格 大於 5） */
+    let state = { useFilter:true, matchType:"all",
+      filters:[ { attr:"price", op:"大於", value:"5", currency:"TWD" } ] };
+
+    /* undo/redo 歷史 */
+    let history = [], hIndex = -1;
+    const clone = s => JSON.parse(JSON.stringify(s));
+    function pushHistory() { history = history.slice(0, hIndex + 1); history.push(clone(state)); hIndex = history.length - 1; updateUndoRedo(); }
+    function updateUndoRedo() {
+      document.getElementById("undoBtn").disabled = hIndex <= 0;
+      document.getElementById("redoBtn").disabled = hIndex >= history.length - 1;
+    }
+    function undo() { if (hIndex > 0) { hIndex--; state = clone(history[hIndex]); renderFilters(); renderRail(); syncControls(); updateUndoRedo(); } }
+    function redo() { if (hIndex < history.length - 1) { hIndex++; state = clone(history[hIndex]); renderFilters(); renderRail(); syncControls(); updateUndoRedo(); } }
+
+    function syncControls() {
+      document.querySelector(`input[name="matchType"][value="${state.matchType}"]`).checked = true;
+    }
+
+    /* 判斷單一條件是否完整 */
+    function isComplete(f) {
+      const a = attrDef(f.attr); if (!a || !f.op) return false;
+      if (a.type === "number") return f.value !== "" && !isNaN(parseFloat(f.value));
+      return f.value !== "";
+    }
+    /* 計算單一商品是否符合單一條件 */
+    function evalFilter(p, f) {
+      const a = attrDef(f.attr); if (!a) return false;
+      const pv = p[f.attr];
+      if (a.type === "number") {
+        const x = parseFloat(pv), y = parseFloat(f.value);
+        if (isNaN(x) || isNaN(y)) return false;
+        switch (f.op) {
+          case "大於": return x > y; case "小於": return x < y;
+          case "等於": return x === y; case "不等於": return x !== y;
+          case "大於或等於": return x >= y; case "小於或等於": return x <= y;
+        }
+        return false;
+      }
+      if (a.type === "select") {
+        const x = String(pv || "");
+        return f.op === "不等於" ? x !== f.value : x === f.value;
+      }
+      const x = String(pv || "").toLowerCase(), y = String(f.value || "").toLowerCase();
+      switch (f.op) {
+        case "包含": return x.includes(y); case "不包含": return !x.includes(y);
+        case "等於": return x === y; case "不等於": return x !== y;
+      }
+      return false;
+    }
+    /* 套用所有條件，回傳符合的商品 */
+    function matchedProducts() {
+      if (!state.useFilter) return PRODUCTS.slice();
+      const active = state.filters.filter(isComplete);
+      if (!active.length) return PRODUCTS.slice();
+      return PRODUCTS.filter(p => {
+        const r = active.map(f => evalFilter(p, f));
+        return state.matchType === "all" ? r.every(Boolean) : r.some(Boolean);
+      });
+    }
+
+    /* ---- 渲染條件列 ---- */
+    const frows = document.getElementById("frows");
+    function valueCell(f, i) {
+      const a = attrDef(f.attr);
+      if (!a) return `<input class="ftext" data-field="value" placeholder="請先選擇屬性" disabled />`;
+      if (a.type === "number") {
+        const sym = CUR_SYMBOL[f.currency] || "";
+        return `<div class="valnum">
+          <select class="sel cur" data-field="currency">
+            ${CURRENCIES.map(c => `<option ${c===f.currency?"selected":""}>${c}</option>`).join("")}
+          </select>
+          <div class="numwrap"><span class="adorn">${sym}</span>
+            <input type="number" min="0" data-field="value" value="${f.value}" placeholder="0" />
+          </div>
+        </div>`;
+      }
+      if (a.type === "select") {
+        return `<select class="sel" data-field="value">
+          <option value="">請選擇</option>
+          ${a.options.map(o => `<option ${o===f.value?"selected":""}>${o}</option>`).join("")}
+        </select>`;
+      }
+      return `<input class="ftext" data-field="value" placeholder="輸入值" value="${f.value.replace(/"/g,"&quot;")}" />`;
+    }
+    function renderFilters() {
+      frows.innerHTML = state.filters.map((f, i) => {
+        const a = attrDef(f.attr);
+        const ops = a ? OPS[a.type] : [];
+        const valLabel = (a && a.type === "number") ? "金額" : "值";
+        const showX = state.filters.length > 1;
+        return `<div class="frow" data-idx="${i}">
+          <div class="fcol">
+            <span class="flabel">屬性 <span class="i">i</span></span>
+            <select class="sel" data-field="attr">
+              ${ATTRS.map(o => `<option value="${o.key}" ${o.key===f.attr?"selected":""}>${o.label}</option>`).join("")}
+            </select>
+          </div>
+          <div class="fcol">
+            <span class="flabel">狀況 <span class="i">i</span></span>
+            <select class="sel" data-field="op">
+              ${ops.map(o => `<option ${o===f.op?"selected":""}>${o}</option>`).join("")}
+            </select>
+          </div>
+          <div class="fcol">
+            <span class="flabel">${valLabel} <span class="i">i</span></span>
+            ${valueCell(f, i)}
+          </div>
+          ${showX ? `<button class="frow-x" data-field="remove" title="移除">×</button>` : `<span></span>`}
+        </div>`;
+      }).join("");
+    }
+
+    /* ---- 渲染右側商品清單 ---- */
+    function renderRail() {
+      const matched = matchedProducts();
+      const q = document.getElementById("railSearch").value.trim().toLowerCase();
+      const shown = q ? matched.filter(p => p.name.toLowerCase().includes(q) || p.id.toLowerCase().includes(q)) : matched;
+
+      document.getElementById("railCount").textContent = matched.length + " 商品";
+      document.getElementById("railSub").textContent = matched.length + " 款式";
+      document.getElementById("meterFill").style.width = Math.round(matched.length / PRODUCTS.length * 100) + "%";
+
+      const list = document.getElementById("railList");
+      if (!shown.length) {
+        list.innerHTML = `<div class="rail-empty">沒有商品符合${q ? "搜尋" : "篩選條件"}</div>`;
+        return;
+      }
+      list.innerHTML = shown.map(p => `
+        <div class="rail-item">
+          <div class="thumb"><img src="${p.image}" alt="" onerror="this.parentNode.textContent='${emojiByType[p.product_type]||'📦'}'"></div>
+          <div class="info">
+            <div class="nm">${p.name}</div>
+            <div class="pr">${NT(p.price)}</div>
+            <div class="cid">內容編號：${p.id}</div>
+          </div>
+          <button class="more">⋯</button>
+        </div>`).join("");
+    }
+
+    /* ---- 事件綁定 ---- */
+    frows.addEventListener("change", e => {
+      const row = e.target.closest(".frow"); if (!row) return;
+      const i = +row.dataset.idx, field = e.target.dataset.field, f = state.filters[i];
+      if (field === "attr") {
+        f.attr = e.target.value;
+        const a = attrDef(f.attr);
+        f.op = defaultOp(a); f.value = ""; f.currency = "TWD";
+        renderFilters();
+      } else if (field === "op") { f.op = e.target.value; }
+      else if (field === "currency") { f.currency = e.target.value; renderFilters(); }
+      else if (field === "value") { f.value = e.target.value; }
+      pushHistory(); renderRail();
+    });
+    frows.addEventListener("input", e => {
+      if (e.target.dataset.field !== "value") return;
+      const i = +e.target.closest(".frow").dataset.idx;
+      state.filters[i].value = e.target.value;
+      renderRail(); // 即時更新（打字中不重建、不記錄歷史）
+    });
+    frows.addEventListener("click", e => {
+      if (e.target.dataset.field !== "remove") return;
+      const i = +e.target.closest(".frow").dataset.idx;
+      state.filters.splice(i, 1);
+      if (!state.filters.length) state.filters.push(emptyFilter());
+      renderFilters(); pushHistory(); renderRail();
+    });
+
+    document.getElementById("addFilter").addEventListener("click", () => {
+      state.filters.push(emptyFilter());
+      renderFilters(); pushHistory(); renderRail();
+    });
+    document.getElementById("clearBtn").addEventListener("click", () => {
+      state.filters = [ emptyFilter() ];
+      renderFilters(); pushHistory(); renderRail();
+    });
+    document.getElementById("undoBtn").addEventListener("click", undo);
+    document.getElementById("redoBtn").addEventListener("click", redo);
+
+    document.querySelectorAll('input[name="matchType"]').forEach(r => {
+      r.addEventListener("change", () => { state.matchType = r.value; pushHistory(); renderRail(); });
+    });
+    document.getElementById("useFilter").addEventListener("change", e => {
+      state.useFilter = e.target.checked;
+      document.getElementById("filterArea").classList.toggle("off", !state.useFilter);
+      pushHistory(); renderRail();
+    });
+    document.getElementById("railSearch").addEventListener("input", renderRail);
+
+    document.getElementById("aiInput").addEventListener("keydown", e => {
+      if (e.key === "Enter") showToast("AI 篩選為展示用途，請於下方手動設定條件");
+    });
+
+    document.getElementById("psCancel").addEventListener("click", () => {
+      document.querySelector('.nav-item[data-screen="catalog"]').click();
+    });
+    document.getElementById("psCreate").addEventListener("click", () => {
+      const name = document.getElementById("psName").value || "未命名組合";
+      showToast(`已建立商品組合「${name}」，共 ${matchedProducts().length} 項商品`);
+    });
+
+    let toastTimer;
+    function showToast(msg) {
+      const t = document.getElementById("toast");
+      t.textContent = msg; t.classList.add("show");
+      clearTimeout(toastTimer);
+      toastTimer = setTimeout(() => t.classList.remove("show"), 2600);
+    }
+
+    /* 初始化商品組合 */
+    renderFilters(); renderRail(); pushHistory();
+  </script>
+</body>
+</html>
