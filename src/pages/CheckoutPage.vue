@@ -37,9 +37,9 @@
               </a-list-item-meta>
               <div class="item-details">
                 <div class="price-info">
-                  <span class="unit-price">${item.price}</span>
-                  <span class="quantity">x ${item.qty}</span>
-                  <span class="subtotal">${item.price * item.qty}</span>
+                  <span class="unit-price">${{ item.price }}</span>
+                  <span class="quantity">x {{ item.qty }}</span>
+                  <span class="subtotal">${{ item.price * item.qty }}</span>
                 </div>
               </div>
             </a-list-item>
