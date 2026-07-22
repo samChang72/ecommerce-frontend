@@ -79,6 +79,9 @@ const goToCheckout = () => {
   if (typeof window !== 'undefined' && window.dataLayer) {
     window.dataLayer.push({
       event: 'begin_checkout',
+      // 直接算好給 GTM 用「資料層變數」讀取（避免 Custom JS 變數處理陣列失敗）
+      cart_item_ids: items.map(item => 'DB_' + item.id),
+      cart_items_count: items.reduce((sum, item) => sum + item.qty, 0),
       ecommerce: {
         currency: 'TWD',
         value: totalPrice.value,
