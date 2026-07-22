@@ -98,6 +98,23 @@ const goToCheckout = () => {
     })
   }
   
+  // 發送 OneAD / Meta 像素事件 - InitiateCheckout（扁平結構，供 OnePixel/Pixel 的 DLV 讀取）
+  if (typeof window !== 'undefined' && window.dataLayer && items.length) {
+    window.dataLayer.push({
+      event: 'initiate_checkout',
+      content_ids: items.map(item => 'DB_' + item.id),
+      contents: items.map(item => ({
+        id: 'DB_' + item.id,
+        quantity: item.qty,
+        item_price: item.price
+      })),
+      content_type: 'product',
+      num_items: items.reduce((sum, item) => sum + item.qty, 0),
+      value: totalPrice.value,
+      currency: 'TWD'
+    })
+  }
+
   // 導向結帳頁面
   router.push('/checkout')
 }
