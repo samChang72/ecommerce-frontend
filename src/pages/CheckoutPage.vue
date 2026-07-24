@@ -213,7 +213,7 @@ const submitOrder = async () => {
     loading.value = true
     
     // 生成訂單 ID
-    const orderId = 'ORDER_' + Date.now() + '_' + Math.random().toString(36).substr(2, 9)
+    const orderId = 'ORDER_' + Date.now() + '_' + Math.random().toString(36).slice(2, 11)
 
     // 發送 Purchase 事件到 dataLayer
     if (typeof window !== 'undefined' && window.dataLayer) {
@@ -250,6 +250,8 @@ const submitOrder = async () => {
           order_id: orderId,
           items: items.map(item => ({ id: item.id, qty: item.qty }))
         })
+      }).then(response => {
+        if (!response.ok) console.warn('庫存同步通知被拒:', response.status)
       }).catch(error => console.warn('庫存同步通知失敗:', error))
     }
 
