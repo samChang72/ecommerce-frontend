@@ -16,7 +16,7 @@ export default defineConfig(({ command }) => {
       host: '0.0.0.0', // 允許外部訪問
       port: 3000,
       open: '/ecommerce-frontend/', // 自動開啟瀏覽器並導向正確路徑
-      strictPort: false // 允許自動選擇其他端口
+      strictPort: true // 固定使用 3000，被占用時直接失敗（與 .claude/launch.json 一致）
     },
     preview: {
       host: '0.0.0.0',
