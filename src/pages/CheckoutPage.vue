@@ -1,6 +1,16 @@
 <template>
   <div class="checkout-page">
     <a-card title="結帳" class="checkout-card">
+      <!-- 無結帳權限提示 -->
+      <a-alert
+        v-if="!isAuthorized"
+        message="此帳號無結帳權限"
+        description="僅限授權帳號（sam / danson / neko）可完成結帳。"
+        type="error"
+        show-icon
+        style="margin-bottom: 20px;"
+      />
+
       <!-- 空購物車提示 -->
       <a-alert
         v-if="isCartEmpty"
@@ -136,13 +146,18 @@
 import { ref, computed, reactive } from 'vue'
 import { useRouter } from 'vue-router'
 import { useCartStore } from '../store/cart.js'
+import { useUserStore } from '../store/user.js'
 import { message } from 'ant-design-vue'
 import { UserOutlined, ShoppingCartOutlined } from '@ant-design/icons-vue'
 import { ORDER_API_URL } from '../config/order-api.js'
 
 const router = useRouter()
 const cartStore = useCartStore()
+const userStore = useUserStore()
 const { items, clearCart } = cartStore
+
+// 僅白名單帳號可完成結帳
+const isAuthorized = computed(() => userStore.isAuthorized)
 
 // 表單參考和載入狀態
 const formRef = ref()
@@ -204,11 +219,16 @@ const isCartEmpty = computed(() => {
 
 // 表單是否有效
 const isFormValid = computed(() => {
-  return formData.name.length >= 2 && formData.address.length >= 10 && !isCartEmpty.value
+  return formData.name.length >= 2 && formData.address.length >= 10 && !isCartEmpty.value && isAuthorized.value
 })
 
 // 提交訂單
 const submitOrder = async () => {
+  // 權限防線：非白名單帳號不得完成結帳
+  if (!isAuthorized.value) {
+    message.error('此帳號無結帳權限')
+    return
+  }
   try {
     loading.value = true
     

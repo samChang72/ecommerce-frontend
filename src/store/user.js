@@ -1,9 +1,17 @@
 import { defineStore } from 'pinia'
-import { ref } from 'vue'
+import { ref, computed } from 'vue'
+
+// 允許改庫存與完成結帳的帳號白名單
+const AUTHORIZED_USERS = ['sam', 'danson', 'neko']
 
 export const useUserStore = defineStore('user', () => {
   const username = ref('')
   const isLoggedIn = ref(false)
+
+  // 是否為白名單帳號（可改庫存、可完成結帳）
+  const isAuthorized = computed(() =>
+    isLoggedIn.value && AUTHORIZED_USERS.includes(username.value.toLowerCase())
+  )
 
   // 帳號格式驗證 - 只允許英文和數字
   const validateUsername = (input) => {
@@ -79,6 +87,7 @@ export const useUserStore = defineStore('user', () => {
   return {
     username,
     isLoggedIn,
+    isAuthorized,
     validateUsername,
     filterUsername,
     login,

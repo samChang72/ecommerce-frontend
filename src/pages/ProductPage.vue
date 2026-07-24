@@ -17,8 +17,12 @@
           <div class="product-category">{{ product.type }}</div>
           <h1 class="product-name">{{ product.name }}</h1>
           <div class="product-price">${{ product.price }}</div>
-          <div v-if="getStock(product.id) !== null" class="product-stock">
-            庫存: {{ getStock(product.id) }} 件
+          <div
+            v-if="getStock(product.id) !== null"
+            class="product-stock"
+            :class="{ 'no-stock': getStock(product.id) < 1 }"
+          >
+            {{ getStock(product.id) < 1 ? '沒有庫存' : `庫存: ${getStock(product.id)} 件` }}
           </div>
           
           <div class="product-description">
@@ -228,6 +232,11 @@ export default {
 .product-stock {
   font-size: 15px;
   color: #6c757d;
+}
+
+.product-stock.no-stock {
+  color: #dc3545;
+  font-weight: 600;
 }
 
 .product-description h3 {

@@ -24,8 +24,12 @@
             <div class="product-info">
               <strong>{{ product.name }}</strong>
               <p class="price">價格: ${{ product.price }}</p>
-              <p v-if="getStock(product.id) !== null" class="stock">
-                庫存: {{ getStock(product.id) }} 件
+              <p
+                v-if="getStock(product.id) !== null"
+                class="stock"
+                :class="{ 'no-stock': getStock(product.id) < 1 }"
+              >
+                {{ getStock(product.id) < 1 ? '沒有庫存' : `庫存: ${getStock(product.id)} 件` }}
               </p>
             </div>
           </router-link>
@@ -36,6 +40,23 @@
           >
             {{ isSoldOut(product.id) ? '已售完' : '加入購物車' }}
           </button>
+          <!-- 白名單帳號限定：手動更新庫存 -->
+          <div v-if="isAuthorized" class="stock-editor">
+            <input
+              v-model.number="stockEdits[product.id]"
+              type="number"
+              min="0"
+              placeholder="數量"
+              class="stock-input"
+            />
+            <button
+              @click="updateStock(product)"
+              class="update-stock-btn"
+              :disabled="updating[product.id]"
+            >
+              {{ updating[product.id] ? '更新中…' : '更新庫存' }}
+            </button>
+          </div>
         </li>
       </ul>
     </div>
@@ -43,16 +64,62 @@
 </template>
 
 <script>
-import { ref, computed, onMounted } from 'vue'
+import { ref, computed, reactive, onMounted } from 'vue'
 import { useCartStore } from '../store/cart'
+import { useUserStore } from '../store/user'
 import { useStock } from '../composables/useStock'
+import { ORDER_API_URL } from '../config/order-api.js'
 import productsData from '../assets/products.json'
 
 export default {
   name: 'HomePage',
   setup() {
     const cartStore = useCartStore()
-    const { loadStock, isSoldOut, getStock } = useStock()
+    const userStore = useUserStore()
+    const { stock, loadStock, isSoldOut, getStock } = useStock()
+
+    // 白名單帳號才能改庫存
+    const isAuthorized = computed(() => userStore.isAuthorized)
+
+    // 各商品的庫存編輯狀態
+    const stockEdits = reactive({})
+    const updating = reactive({})
+
+    // 手動更新庫存：送交 Worker → GitHub Action → 重產 feed
+    const updateStock = async (product) => {
+      const newStock = stockEdits[product.id]
+      if (!Number.isInteger(newStock) || newStock < 0) {
+        alert('請輸入 0 或以上的整數')
+        return
+      }
+      if (!ORDER_API_URL) {
+        alert('尚未設定庫存 API')
+        return
+      }
+      updating[product.id] = true
+      try {
+        const response = await fetch(`${ORDER_API_URL}/stock`, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ updates: [{ id: product.id, stock: newStock }] })
+        })
+        if (!response.ok) {
+          const body = await response.json().catch(() => ({}))
+          alert(`更新失敗: ${body.error || response.status}`)
+          return
+        }
+        // 樂觀更新本地顯示（feed 與全站由同步管線於約 1 分鐘內更新）
+        if (stock.value) {
+          stock.value = { ...stock.value, [String(product.id)]: newStock }
+        }
+        alert(`${product.name} 庫存已送出更新為 ${newStock}（約 1 分鐘後全站生效）`)
+      } catch (error) {
+        console.warn('庫存更新失敗:', error)
+        alert('更新失敗，請稍後再試')
+      } finally {
+        updating[product.id] = false
+      }
+    }
 
     // 載入部署版庫存資料（失敗時 fallback 為可購買）
     onMounted(loadStock)
@@ -105,7 +172,11 @@ export default {
       filteredProducts,
       addToCart,
       isSoldOut,
-      getStock
+      getStock,
+      isAuthorized,
+      stockEdits,
+      updating,
+      updateStock
     }
   }
 }
@@ -220,6 +291,47 @@ export default {
 .stock {
   color: #6c757d;
   font-size: 13px;
+}
+
+.stock.no-stock {
+  color: #dc3545;
+  font-weight: 600;
+}
+
+.stock-editor {
+  display: flex;
+  gap: 6px;
+  margin-top: 8px;
+}
+
+.stock-input {
+  flex: 1;
+  min-width: 0;
+  padding: 6px 8px;
+  border: 1px solid #ced4da;
+  border-radius: 4px;
+  font-size: 13px;
+}
+
+.update-stock-btn {
+  padding: 6px 10px;
+  background-color: #6c757d;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  font-size: 13px;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: background-color 0.3s;
+}
+
+.update-stock-btn:hover {
+  background-color: #5a6268;
+}
+
+.update-stock-btn:disabled {
+  background-color: #adb5bd;
+  cursor: not-allowed;
 }
 
 .add-to-cart-btn {
