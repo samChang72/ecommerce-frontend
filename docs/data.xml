@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <feed xmlns="http://www.w3.org/2005/Atom" xmlns:g="http://base.google.com/ns/1.0">
-	<title>Test Store</title>
-	<link rel="self" href="http://www.example.com"/>
+	<title>Sam Store</title>
+	<link rel="self" href="https://samchang72.github.io/ecommerce-frontend/data.xml"/>
 
 	<entry>
 		<g:id>DB_1</g:id>

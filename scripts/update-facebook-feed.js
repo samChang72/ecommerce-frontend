@@ -67,8 +67,8 @@ const generateDataXml = (products, stock) => {
   
   const xmlHeader = `<?xml version="1.0"?>
 <feed xmlns="http://www.w3.org/2005/Atom" xmlns:g="http://base.google.com/ns/1.0">
-	<title>Test Store</title>
-	<link rel="self" href="http://www.example.com"/>
+	<title>${escapeXml(BRAND)}</title>
+	<link rel="self" href="${baseUrl}/data.xml"/>
 
 `
 
@@ -108,9 +108,9 @@ const generateRssXml = (products, stock) => {
   const xmlHeader = `<?xml version="1.0"?>
 <rss xmlns:g="http://base.google.com/ns/1.0" version="2.0">
 <channel>
-<title>Test Store</title>
+<title>${escapeXml(BRAND)}</title>
 <link>${baseUrl}/</link>
-<description>An example item from the feed</description>
+<description>${escapeXml(BRAND)} 商品目錄</description>
 `
 
   const xmlItems = products.map(product => {

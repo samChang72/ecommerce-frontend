@@ -1,9 +1,9 @@
 <?xml version="1.0"?>
 <rss xmlns:g="http://base.google.com/ns/1.0" version="2.0">
 <channel>
-<title>Test Store</title>
+<title>Sam Store</title>
 <link>https://samchang72.github.io/ecommerce-frontend/</link>
-<description>An example item from the feed</description>
+<description>Sam Store 商品目錄</description>
 <item>
 <g:id>DB_1</g:id>
 <g:title>可樂</g:title>
