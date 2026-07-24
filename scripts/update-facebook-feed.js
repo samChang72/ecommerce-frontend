@@ -15,8 +15,20 @@ const getProductsFromJson = () => {
   }
 }
 
+// 從 data/stock.json 讀取庫存資料的函數
+const getStockFromJson = () => {
+  try {
+    const stockPath = path.join(__dirname, '../data/stock.json')
+    const stockContent = fs.readFileSync(stockPath, 'utf8')
+    return JSON.parse(stockContent)
+  } catch (error) {
+    console.error('❌ 讀取庫存資料失敗:', error)
+    process.exit(1)
+  }
+}
+
 // 生成 Facebook Feed 的函數
-const generateFacebookFeed = (products) => {
+const generateFacebookFeed = (products, stock) => {
   const baseUrl = 'https://samchang72.github.io/ecommerce-frontend'
   
   const getSpecificCategory = (type, name) => {
@@ -40,7 +52,7 @@ const generateFacebookFeed = (products) => {
     id: `DB_${product.id}`,
     title: product.name,
     description: product.name,
-    availability: 'in stock',
+    availability: (stock[String(product.id)] ?? 0) > 0 ? 'in stock' : 'out of stock',
     condition: 'new',
     price: `${product.price}.00 TWD`,
     link: `${baseUrl}/#/product/${product.id}`,
@@ -71,7 +83,7 @@ const generateFacebookFeed = (products) => {
 }
 
 // 生成 Data XML 的函數
-const generateDataXml = (products) => {
+const generateDataXml = (products, stock) => {
   const baseUrl = 'https://samchang72.github.io/ecommerce-frontend'
   
   const xmlHeader = `<?xml version="1.0"?>
@@ -81,7 +93,9 @@ const generateDataXml = (products) => {
 
 `
 
-  const xmlEntries = products.map(product => `	<entry>
+  const xmlEntries = products.map(product => {
+    const qty = stock[String(product.id)] ?? 0
+    return `	<entry>
 		<g:id>DB_${product.id}</g:id>
 		<g:title>${product.name}</g:title>
 		<g:description>${product.name}</g:description>
@@ -89,7 +103,8 @@ const generateDataXml = (products) => {
 		<g:image_link>https://samchang72.github.io${product.image}</g:image_link>
 		<g:brand>Example</g:brand>
 		<g:condition>new</g:condition>
-		<g:availability>in stock</g:availability>
+		<g:availability>${qty > 0 ? 'in stock' : 'out of stock'}</g:availability>
+		<g:quantity_to_sell_on_facebook>${qty}</g:quantity_to_sell_on_facebook>
 		<g:price>${product.price}.00 TWD</g:price>
 		<g:shipping>
 			<g:country>UK</g:country>
@@ -113,7 +128,8 @@ const generateDataXml = (products) => {
 		<applink property="windows_phone_app_id" content="64ec0d1b-5b3b-4c77-a86b-5e12d465edc0" />
 		<applink property="windows_phone_app_name" content="Electronic Example Windows" />
 	</entry>
-`).join('\n')
+`
+  }).join('\n')
 
   const xmlFooter = `</feed>
 `
@@ -122,7 +138,7 @@ const generateDataXml = (products) => {
 }
 
 // 生成 Meta 官方 RSS 2.0 XML 的函數
-const generateRssXml = (products) => {
+const generateRssXml = (products, stock) => {
   const baseUrl = 'https://samchang72.github.io/ecommerce-frontend'
 
   const xmlHeader = `<?xml version="1.0"?>
@@ -133,7 +149,9 @@ const generateRssXml = (products) => {
 <description>An example item from the feed</description>
 `
 
-  const xmlItems = products.map(product => `<item>
+  const xmlItems = products.map(product => {
+    const qty = stock[String(product.id)] ?? 0
+    return `<item>
 <g:id>DB_${product.id}</g:id>
 <g:title>${product.name}</g:title>
 <g:description>${product.name}</g:description>
@@ -141,10 +159,12 @@ const generateRssXml = (products) => {
 <g:image_link>https://samchang72.github.io${product.image}</g:image_link>
 <g:brand>Example</g:brand>
 <g:condition>new</g:condition>
-<g:availability>in stock</g:availability>
+<g:availability>${qty > 0 ? 'in stock' : 'out of stock'}</g:availability>
+<g:quantity_to_sell_on_facebook>${qty}</g:quantity_to_sell_on_facebook>
 <g:price>${product.price}.00 TWD</g:price>
 <g:google_product_category>Animals &gt; Pet Supplies</g:google_product_category>
-</item>`).join('\n')
+</item>`
+  }).join('\n')
 
   const xmlFooter = `
 </channel>
@@ -160,16 +180,23 @@ const updateFacebookFeed = () => {
     // 從 products.json 讀取產品資料
     const products = getProductsFromJson()
     console.log(`找到 ${products.length} 個產品`)
-    
+
+    // 從 data/stock.json 讀取庫存資料
+    const stock = getStockFromJson()
+    const missingStock = products.filter(p => stock[String(p.id)] === undefined)
+    if (missingStock.length > 0) {
+      console.warn(`⚠️ 缺少庫存資料（視為售完）: ${missingStock.map(p => `DB_${p.id}`).join(', ')}`)
+    }
+
     // 生成 Facebook Feed
-    const feedData = generateFacebookFeed(products)
+    const feedData = generateFacebookFeed(products, stock)
     const jsonString = JSON.stringify(feedData, null, 2)
-    
+
     // 生成 Data XML
-    const xmlData = generateDataXml(products)
+    const xmlData = generateDataXml(products, stock)
 
     // 生成 RSS 2.0 XML
-    const rssData = generateRssXml(products)
+    const rssData = generateRssXml(products, stock)
     
     // 確保 docs 目錄存在
     const docsDir = path.join(__dirname, '../docs')
@@ -192,6 +219,11 @@ const updateFacebookFeed = () => {
     const rssPath = path.join(__dirname, '../docs/data-rss.xml')
     fs.writeFileSync(rssPath, rssData, 'utf8')
     console.log('✅ 已更新 docs/data-rss.xml')
+
+    // 寫入 docs/stock.json（部署版，供前端 runtime 讀取庫存）
+    const stockDeployPath = path.join(__dirname, '../docs/stock.json')
+    fs.writeFileSync(stockDeployPath, JSON.stringify(stock, null, 2) + '\n', 'utf8')
+    console.log('✅ 已更新 docs/stock.json')
 
     console.log('🎉 Facebook Product Data Feed 和 XML Feed 同步完成！')
     console.log(`📍 JSON Feed URL: https://samchang72.github.io/ecommerce-frontend/facebook-feed.json`)

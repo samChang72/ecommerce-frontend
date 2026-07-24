@@ -12,6 +12,7 @@
 		<g:brand>Example</g:brand>
 		<g:condition>new</g:condition>
 		<g:availability>in stock</g:availability>
+		<g:quantity_to_sell_on_facebook>20</g:quantity_to_sell_on_facebook>
 		<g:price>30.00 TWD</g:price>
 		<g:shipping>
 			<g:country>UK</g:country>
@@ -45,6 +46,7 @@
 		<g:brand>Example</g:brand>
 		<g:condition>new</g:condition>
 		<g:availability>in stock</g:availability>
+		<g:quantity_to_sell_on_facebook>20</g:quantity_to_sell_on_facebook>
 		<g:price>25.00 TWD</g:price>
 		<g:shipping>
 			<g:country>UK</g:country>
@@ -78,6 +80,7 @@
 		<g:brand>Example</g:brand>
 		<g:condition>new</g:condition>
 		<g:availability>in stock</g:availability>
+		<g:quantity_to_sell_on_facebook>20</g:quantity_to_sell_on_facebook>
 		<g:price>15000.00 TWD</g:price>
 		<g:shipping>
 			<g:country>UK</g:country>
@@ -111,6 +114,7 @@
 		<g:brand>Example</g:brand>
 		<g:condition>new</g:condition>
 		<g:availability>in stock</g:availability>
+		<g:quantity_to_sell_on_facebook>20</g:quantity_to_sell_on_facebook>
 		<g:price>45000.00 TWD</g:price>
 		<g:shipping>
 			<g:country>UK</g:country>
@@ -144,6 +148,7 @@
 		<g:brand>Example</g:brand>
 		<g:condition>new</g:condition>
 		<g:availability>in stock</g:availability>
+		<g:quantity_to_sell_on_facebook>20</g:quantity_to_sell_on_facebook>
 		<g:price>50.00 TWD</g:price>
 		<g:shipping>
 			<g:country>UK</g:country>
@@ -177,6 +182,7 @@
 		<g:brand>Example</g:brand>
 		<g:condition>new</g:condition>
 		<g:availability>in stock</g:availability>
+		<g:quantity_to_sell_on_facebook>20</g:quantity_to_sell_on_facebook>
 		<g:price>60.00 TWD</g:price>
 		<g:shipping>
 			<g:country>UK</g:country>
@@ -210,6 +216,7 @@
 		<g:brand>Example</g:brand>
 		<g:condition>new</g:condition>
 		<g:availability>in stock</g:availability>
+		<g:quantity_to_sell_on_facebook>20</g:quantity_to_sell_on_facebook>
 		<g:price>390.00 TWD</g:price>
 		<g:shipping>
 			<g:country>UK</g:country>
@@ -243,6 +250,7 @@
 		<g:brand>Example</g:brand>
 		<g:condition>new</g:condition>
 		<g:availability>in stock</g:availability>
+		<g:quantity_to_sell_on_facebook>20</g:quantity_to_sell_on_facebook>
 		<g:price>1290.00 TWD</g:price>
 		<g:shipping>
 			<g:country>UK</g:country>
@@ -276,6 +284,7 @@
 		<g:brand>Example</g:brand>
 		<g:condition>new</g:condition>
 		<g:availability>in stock</g:availability>
+		<g:quantity_to_sell_on_facebook>20</g:quantity_to_sell_on_facebook>
 		<g:price>790.00 TWD</g:price>
 		<g:shipping>
 			<g:country>UK</g:country>
@@ -309,6 +318,7 @@
 		<g:brand>Example</g:brand>
 		<g:condition>new</g:condition>
 		<g:availability>in stock</g:availability>
+		<g:quantity_to_sell_on_facebook>20</g:quantity_to_sell_on_facebook>
 		<g:price>890.00 TWD</g:price>
 		<g:shipping>
 			<g:country>UK</g:country>
@@ -342,6 +352,7 @@
 		<g:brand>Example</g:brand>
 		<g:condition>new</g:condition>
 		<g:availability>in stock</g:availability>
+		<g:quantity_to_sell_on_facebook>20</g:quantity_to_sell_on_facebook>
 		<g:price>45.00 TWD</g:price>
 		<g:shipping>
 			<g:country>UK</g:country>
@@ -375,6 +386,7 @@
 		<g:brand>Example</g:brand>
 		<g:condition>new</g:condition>
 		<g:availability>in stock</g:availability>
+		<g:quantity_to_sell_on_facebook>20</g:quantity_to_sell_on_facebook>
 		<g:price>20.00 TWD</g:price>
 		<g:shipping>
 			<g:country>UK</g:country>
@@ -408,6 +420,7 @@
 		<g:brand>Example</g:brand>
 		<g:condition>new</g:condition>
 		<g:availability>in stock</g:availability>
+		<g:quantity_to_sell_on_facebook>20</g:quantity_to_sell_on_facebook>
 		<g:price>35.00 TWD</g:price>
 		<g:shipping>
 			<g:country>UK</g:country>
@@ -441,6 +454,7 @@
 		<g:brand>Example</g:brand>
 		<g:condition>new</g:condition>
 		<g:availability>in stock</g:availability>
+		<g:quantity_to_sell_on_facebook>20</g:quantity_to_sell_on_facebook>
 		<g:price>12000.00 TWD</g:price>
 		<g:shipping>
 			<g:country>UK</g:country>
@@ -474,6 +488,7 @@
 		<g:brand>Example</g:brand>
 		<g:condition>new</g:condition>
 		<g:availability>in stock</g:availability>
+		<g:quantity_to_sell_on_facebook>20</g:quantity_to_sell_on_facebook>
 		<g:price>2990.00 TWD</g:price>
 		<g:shipping>
 			<g:country>UK</g:country>
@@ -507,6 +522,7 @@
 		<g:brand>Example</g:brand>
 		<g:condition>new</g:condition>
 		<g:availability>in stock</g:availability>
+		<g:quantity_to_sell_on_facebook>20</g:quantity_to_sell_on_facebook>
 		<g:price>590.00 TWD</g:price>
 		<g:shipping>
 			<g:country>UK</g:country>
@@ -540,6 +556,7 @@
 		<g:brand>Example</g:brand>
 		<g:condition>new</g:condition>
 		<g:availability>in stock</g:availability>
+		<g:quantity_to_sell_on_facebook>20</g:quantity_to_sell_on_facebook>
 		<g:price>40.00 TWD</g:price>
 		<g:shipping>
 			<g:country>UK</g:country>
@@ -573,6 +590,7 @@
 		<g:brand>Example</g:brand>
 		<g:condition>new</g:condition>
 		<g:availability>in stock</g:availability>
+		<g:quantity_to_sell_on_facebook>20</g:quantity_to_sell_on_facebook>
 		<g:price>120.00 TWD</g:price>
 		<g:shipping>
 			<g:country>UK</g:country>
@@ -606,6 +624,7 @@
 		<g:brand>Example</g:brand>
 		<g:condition>new</g:condition>
 		<g:availability>in stock</g:availability>
+		<g:quantity_to_sell_on_facebook>20</g:quantity_to_sell_on_facebook>
 		<g:price>35.00 TWD</g:price>
 		<g:shipping>
 			<g:country>UK</g:country>
