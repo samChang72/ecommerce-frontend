@@ -138,6 +138,7 @@ import { useRouter } from 'vue-router'
 import { useCartStore } from '../store/cart.js'
 import { message } from 'ant-design-vue'
 import { UserOutlined, ShoppingCartOutlined } from '@ant-design/icons-vue'
+import { ORDER_API_URL } from '../config/order-api.js'
 
 const router = useRouter()
 const cartStore = useCartStore()
@@ -211,11 +212,11 @@ const submitOrder = async () => {
   try {
     loading.value = true
     
+    // 生成訂單 ID
+    const orderId = 'ORDER_' + Date.now() + '_' + Math.random().toString(36).substr(2, 9)
+
     // 發送 Purchase 事件到 dataLayer
     if (typeof window !== 'undefined' && window.dataLayer) {
-      // 生成訂單 ID
-      const orderId = 'ORDER_' + Date.now() + '_' + Math.random().toString(36).substr(2, 9)
-      
       window.dataLayer.push({
         event: 'purchase',
         ecommerce: {
@@ -239,7 +240,19 @@ const submitOrder = async () => {
         customer_name: formData.name
       })
     }
-    
+
+    // 通知庫存同步管線（fire-and-forget，失敗不影響結帳流程）
+    if (ORDER_API_URL) {
+      fetch(ORDER_API_URL, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          order_id: orderId,
+          items: items.map(item => ({ id: item.id, qty: item.qty }))
+        })
+      }).catch(error => console.warn('庫存同步通知失敗:', error))
+    }
+
     // 模擬 API 調用
     await new Promise(resolve => setTimeout(resolve, 1500))
     

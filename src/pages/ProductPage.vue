@@ -24,8 +24,12 @@
           </div>
           
           <div class="product-actions">
-            <button @click="handleAddToCart" class="add-to-cart-btn">
-              加入購物車
+            <button
+              @click="handleAddToCart"
+              class="add-to-cart-btn"
+              :disabled="isSoldOut(product.id)"
+            >
+              {{ isSoldOut(product.id) ? '已售完' : '加入購物車' }}
             </button>
             <router-link to="/cart" class="view-cart-btn">
               查看購物車
@@ -48,6 +52,7 @@
 import { computed, onMounted } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
 import { useCartStore } from '../store/cart'
+import { useStock } from '../composables/useStock'
 import productsData from '../assets/products.json'
 
 export default {
@@ -56,6 +61,7 @@ export default {
     const route = useRoute()
     const router = useRouter()
     const cartStore = useCartStore()
+    const { loadStock, isSoldOut } = useStock()
     
     // 根據路由參數找到對應產品
     const product = computed(() => {
@@ -65,6 +71,9 @@ export default {
     
     // 當組件載入時發送產品查看事件
     onMounted(() => {
+      // 載入部署版庫存資料（失敗時 fallback 為可購買）
+      loadStock()
+
       if (product.value && typeof window !== 'undefined' && window.dataLayer) {
         window.dataLayer.push({
           event: 'view_item',
@@ -130,7 +139,8 @@ export default {
     return {
       product,
       handleAddToCart,
-      goBack
+      goBack,
+      isSoldOut
     }
   }
 }
@@ -243,6 +253,11 @@ export default {
 
 .add-to-cart-btn:hover {
   background-color: #218838;
+}
+
+.add-to-cart-btn:disabled {
+  background-color: #adb5bd;
+  cursor: not-allowed;
 }
 
 .view-cart-btn {

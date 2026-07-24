@@ -26,8 +26,12 @@
               <p class="price">價格: ${{ product.price }}</p>
             </div>
           </router-link>
-          <button @click="addToCart(product)" class="add-to-cart-btn">
-            加入購物車
+          <button
+            @click="addToCart(product)"
+            class="add-to-cart-btn"
+            :disabled="isSoldOut(product.id)"
+          >
+            {{ isSoldOut(product.id) ? '已售完' : '加入購物車' }}
           </button>
         </li>
       </ul>
@@ -36,15 +40,20 @@
 </template>
 
 <script>
-import { ref, computed } from 'vue'
+import { ref, computed, onMounted } from 'vue'
 import { useCartStore } from '../store/cart'
+import { useStock } from '../composables/useStock'
 import productsData from '../assets/products.json'
 
 export default {
   name: 'HomePage',
   setup() {
     const cartStore = useCartStore()
-    
+    const { loadStock, isSoldOut } = useStock()
+
+    // 載入部署版庫存資料（失敗時 fallback 為可購買）
+    onMounted(loadStock)
+
     const tabs = ref(['飲料', '3C', '零食', '衣著'])
     const activeTab = ref('飲料')
     const products = ref(productsData)
@@ -91,7 +100,8 @@ export default {
       activeTab,
       products,
       filteredProducts,
-      addToCart
+      addToCart,
+      isSoldOut
     }
   }
 }
@@ -217,6 +227,11 @@ export default {
 
 .add-to-cart-btn:hover {
   background-color: #218838;
+}
+
+.add-to-cart-btn:disabled {
+  background-color: #adb5bd;
+  cursor: not-allowed;
 }
 
 /* RWD 響應式設計 */
