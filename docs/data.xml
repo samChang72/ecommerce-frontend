@@ -201,8 +201,8 @@
 		<g:image_link>https://samchang72.github.io/ecommerce-frontend/image/coffee.png</g:image_link>
 		<g:brand>Sam Store</g:brand>
 		<g:condition>new</g:condition>
-		<g:availability>in stock</g:availability>
-		<g:quantity_to_sell_on_facebook>10000</g:quantity_to_sell_on_facebook>
+		<g:availability>out of stock</g:availability>
+		<g:quantity_to_sell_on_facebook>0</g:quantity_to_sell_on_facebook>
 		<g:price>45.00 TWD</g:price>
 		<g:shipping>
 			<g:country>TW</g:country>
