@@ -149,7 +149,8 @@ const updateFacebookFeed = () => {
     const stock = getStockFromJson()
     const missingStock = products.filter(p => stock[String(p.id)] === undefined)
     if (missingStock.length > 0) {
-      console.warn(`⚠️ 缺少庫存資料（視為售完）: ${missingStock.map(p => `DB_${p.id}`).join(', ')}`)
+      console.error(`❌ 以下商品缺少庫存資料，請補齊 data/stock.json: ${missingStock.map(p => `DB_${p.id}`).join(', ')}`)
+      process.exit(1)
     }
 
     // 生成 Facebook Feed
