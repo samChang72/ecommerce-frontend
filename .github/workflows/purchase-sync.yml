@@ -2,7 +2,7 @@ name: purchase-inventory-sync
 
 on:
   repository_dispatch:
-    types: [purchase]
+    types: [purchase, stock_update]
 
 # 序列化執行：同時多筆訂單依序排隊，避免庫存互相覆蓋
 concurrency:
@@ -24,10 +24,16 @@ jobs:
         with:
           node-version-file: .nvmrc
 
-      - name: 扣減庫存
+      - name: 更新庫存
         env:
           PAYLOAD: ${{ toJSON(github.event.client_payload) }}
-        run: node scripts/decrement-stock.js "$PAYLOAD"
+          EVENT_TYPE: ${{ github.event.action }}
+        run: |
+          if [ "$EVENT_TYPE" = "stock_update" ]; then
+            node scripts/set-stock.js "$PAYLOAD"
+          else
+            node scripts/decrement-stock.js "$PAYLOAD"
+          fi
 
       - name: 重新產生 feed 與部署版庫存
         run: node scripts/update-facebook-feed.js
@@ -35,6 +41,7 @@ jobs:
       - name: Commit 並 push
         env:
           ORDER_ID: ${{ github.event.client_payload.order_id }}
+          EVENT_TYPE: ${{ github.event.action }}
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
@@ -43,5 +50,9 @@ jobs:
             echo "無變更，跳過 commit"
             exit 0
           fi
-          git commit -m "chore: 訂單 ${ORDER_ID} 扣減庫存"
+          if [ "$EVENT_TYPE" = "stock_update" ]; then
+            git commit -m "chore: 手動更新庫存"
+          else
+            git commit -m "chore: 訂單 ${ORDER_ID} 扣減庫存"
+          fi
           git push || (git pull --rebase && git push)

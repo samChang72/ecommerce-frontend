@@ -17,6 +17,23 @@ const jsonResponse = (status, body) =>
     headers: { 'Content-Type': 'application/json', ...corsHeaders }
   })
 
+// 驗證手動庫存更新 payload，回傳錯誤訊息；null 表示通過
+// export 供單元測試使用
+export const validateStockUpdate = (payload) => {
+  if (!payload || typeof payload !== 'object') return 'payload 必須是物件'
+  if (!Array.isArray(payload.updates) || payload.updates.length === 0 || payload.updates.length > 50) {
+    return 'updates 必須是 1-50 筆的陣列'
+  }
+  for (const update of payload.updates) {
+    if (!update || typeof update !== 'object') return 'updates 內容格式錯誤'
+    if (!Number.isInteger(update.id) || update.id < 1) return 'updates[].id 必須是正整數'
+    if (!Number.isInteger(update.stock) || update.stock < 0 || update.stock > 1000000) {
+      return 'updates[].stock 必須是 0-1000000 的整數'
+    }
+  }
+  return null
+}
+
 // 驗證訂單 payload，回傳錯誤訊息；null 表示通過
 // order_id 限制為英數/底線/連字號，避免進入 commit message 時的注入風險
 // export 供單元測試使用
@@ -54,17 +71,35 @@ export default {
       return jsonResponse(429, { error: '請求過於頻繁，請稍後再試' })
     }
 
-    let order
+    let payload
     try {
-      order = await request.json()
+      payload = await request.json()
     } catch {
       return jsonResponse(400, { error: 'JSON 解析失敗' })
     }
 
-    const validationError = validateOrder(order)
+    // 路由：/stock 為手動庫存更新，其餘為訂單扣庫存
+    const isStockUpdate = new URL(request.url).pathname === '/stock'
+
+    const validationError = isStockUpdate ? validateStockUpdate(payload) : validateOrder(payload)
     if (validationError) {
       return jsonResponse(400, { error: validationError })
     }
+
+    const dispatchBody = isStockUpdate
+      ? {
+          event_type: 'stock_update',
+          client_payload: {
+            updates: payload.updates.map(update => ({ id: update.id, stock: update.stock }))
+          }
+        }
+      : {
+          event_type: 'purchase',
+          client_payload: {
+            order_id: payload.order_id,
+            items: payload.items.map(item => ({ id: item.id, qty: item.qty }))
+          }
+        }
 
     const githubResponse = await fetch(GITHUB_DISPATCH_URL, {
       method: 'POST',
@@ -74,13 +109,7 @@ export default {
         'User-Agent': 'ecommerce-frontend-order-relay',
         'Content-Type': 'application/json'
       },
-      body: JSON.stringify({
-        event_type: 'purchase',
-        client_payload: {
-          order_id: order.order_id,
-          items: order.items.map(item => ({ id: item.id, qty: item.qty }))
-        }
-      })
+      body: JSON.stringify(dispatchBody)
     })
 
     // GitHub dispatches API 成功時回 204
