@@ -3,7 +3,7 @@
 // 需設定 Worker Secret：GITHUB_TOKEN（fine-grained PAT，僅本 repo、僅 Contents: Read and write）
 
 const ALLOWED_ORIGIN = 'https://samchang72.github.io'
-const GITHUB_DISPATCH_URL = 'https://api.github.com/repos/samchang72/ecommerce-frontend/dispatches'
+const GITHUB_DISPATCH_URL = 'https://api.github.com/repos/samChang72/ecommerce-frontend/dispatches'
 
 const corsHeaders = {
   'Access-Control-Allow-Origin': ALLOWED_ORIGIN,

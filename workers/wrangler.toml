@@ -1,0 +1,7 @@
+name = "order-relay"
+main = "order-relay.js"
+compatibility_date = "2026-07-24"
+
+# GITHUB_TOKEN 為 Secret，不寫在此檔案
+# 部署：npx wrangler deploy
+# 設定 Secret：npx wrangler secret put GITHUB_TOKEN
