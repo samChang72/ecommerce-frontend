@@ -19,7 +19,8 @@ const jsonResponse = (status, body) =>
 
 // 驗證訂單 payload，回傳錯誤訊息；null 表示通過
 // order_id 限制為英數/底線/連字號，避免進入 commit message 時的注入風險
-const validateOrder = (order) => {
+// export 供單元測試使用
+export const validateOrder = (order) => {
   if (!order || typeof order !== 'object') return 'payload 必須是物件'
   if (typeof order.order_id !== 'string' || !/^[A-Za-z0-9_-]{1,64}$/.test(order.order_id)) {
     return 'order_id 格式錯誤'

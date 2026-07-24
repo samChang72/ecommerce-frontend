@@ -1,7 +1,8 @@
 const fs = require('fs')
 const path = require('path')
 
-const STOCK_PATH = path.join(__dirname, '../data/stock.json')
+// STOCK_PATH 可用環境變數覆寫（供測試以暫存檔執行）
+const STOCK_PATH = process.env.STOCK_PATH || path.join(__dirname, '../data/stock.json')
 
 // 解析 GitHub Action 傳入的 client_payload JSON
 const parsePayload = (raw) => {
