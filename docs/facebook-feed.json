@@ -12,25 +12,10 @@
     "brand": "Sam Store",
     "google_product_category": "Food, Beverages & Tobacco > Beverages > Soda",
     "shipping": {
-      "country": "UK",
+      "country": "TW",
       "service": "Standard",
-      "price": "4.95 GBP"
-    },
-    "ios_url": "example-ios://electronic",
-    "ios_app_store_id": "42",
-    "ios_app_name": "Electronic Example iOS",
-    "iphone_url": "example-iphone://electronic",
-    "iphone_app_store_id": "43",
-    "iphone_app_name": "Electronic Example iPhone",
-    "ipad_url": "example-ipad://electronic",
-    "ipad_app_store_id": "44",
-    "ipad_app_name": "Electronic Example iPad",
-    "android_url": "example-android://electronic",
-    "android_package": "com.electronic",
-    "android_app_name": "Electronic Example Android",
-    "windows_phone_url": "example-windows://electronic",
-    "windows_phone_app_id": "64ec0d1b-5b3b-4c77-a86b-5e12d465edc0",
-    "windows_phone_app_name": "Electronic Example Windows"
+      "price": "60.00 TWD"
+    }
   },
   {
     "id": "DB_2",
@@ -45,25 +30,10 @@
     "brand": "Sam Store",
     "google_product_category": "Food, Beverages & Tobacco > Beverages > Tea & Infusions",
     "shipping": {
-      "country": "UK",
+      "country": "TW",
       "service": "Standard",
-      "price": "4.95 GBP"
-    },
-    "ios_url": "example-ios://electronic",
-    "ios_app_store_id": "42",
-    "ios_app_name": "Electronic Example iOS",
-    "iphone_url": "example-iphone://electronic",
-    "iphone_app_store_id": "43",
-    "iphone_app_name": "Electronic Example iPhone",
-    "ipad_url": "example-ipad://electronic",
-    "ipad_app_store_id": "44",
-    "ipad_app_name": "Electronic Example iPad",
-    "android_url": "example-android://electronic",
-    "android_package": "com.electronic",
-    "android_app_name": "Electronic Example Android",
-    "windows_phone_url": "example-windows://electronic",
-    "windows_phone_app_id": "64ec0d1b-5b3b-4c77-a86b-5e12d465edc0",
-    "windows_phone_app_name": "Electronic Example Windows"
+      "price": "60.00 TWD"
+    }
   },
   {
     "id": "DB_3",
@@ -78,25 +48,10 @@
     "brand": "Sam Store",
     "google_product_category": "Electronics > Communications > Telephony > Mobile Phones",
     "shipping": {
-      "country": "UK",
+      "country": "TW",
       "service": "Standard",
-      "price": "4.95 GBP"
-    },
-    "ios_url": "example-ios://electronic",
-    "ios_app_store_id": "42",
-    "ios_app_name": "Electronic Example iOS",
-    "iphone_url": "example-iphone://electronic",
-    "iphone_app_store_id": "43",
-    "iphone_app_name": "Electronic Example iPhone",
-    "ipad_url": "example-ipad://electronic",
-    "ipad_app_store_id": "44",
-    "ipad_app_name": "Electronic Example iPad",
-    "android_url": "example-android://electronic",
-    "android_package": "com.electronic",
-    "android_app_name": "Electronic Example Android",
-    "windows_phone_url": "example-windows://electronic",
-    "windows_phone_app_id": "64ec0d1b-5b3b-4c77-a86b-5e12d465edc0",
-    "windows_phone_app_name": "Electronic Example Windows"
+      "price": "60.00 TWD"
+    }
   },
   {
     "id": "DB_4",
@@ -111,25 +66,10 @@
     "brand": "Sam Store",
     "google_product_category": "Electronics > Computers > Laptops",
     "shipping": {
-      "country": "UK",
+      "country": "TW",
       "service": "Standard",
-      "price": "4.95 GBP"
-    },
-    "ios_url": "example-ios://electronic",
-    "ios_app_store_id": "42",
-    "ios_app_name": "Electronic Example iOS",
-    "iphone_url": "example-iphone://electronic",
-    "iphone_app_store_id": "43",
-    "iphone_app_name": "Electronic Example iPhone",
-    "ipad_url": "example-ipad://electronic",
-    "ipad_app_store_id": "44",
-    "ipad_app_name": "Electronic Example iPad",
-    "android_url": "example-android://electronic",
-    "android_package": "com.electronic",
-    "android_app_name": "Electronic Example Android",
-    "windows_phone_url": "example-windows://electronic",
-    "windows_phone_app_id": "64ec0d1b-5b3b-4c77-a86b-5e12d465edc0",
-    "windows_phone_app_name": "Electronic Example Windows"
+      "price": "60.00 TWD"
+    }
   },
   {
     "id": "DB_5",
@@ -144,25 +84,10 @@
     "brand": "Sam Store",
     "google_product_category": "Food, Beverages & Tobacco > Food Items > Snack Foods",
     "shipping": {
-      "country": "UK",
+      "country": "TW",
       "service": "Standard",
-      "price": "4.95 GBP"
-    },
-    "ios_url": "example-ios://electronic",
-    "ios_app_store_id": "42",
-    "ios_app_name": "Electronic Example iOS",
-    "iphone_url": "example-iphone://electronic",
-    "iphone_app_store_id": "43",
-    "iphone_app_name": "Electronic Example iPhone",
-    "ipad_url": "example-ipad://electronic",
-    "ipad_app_store_id": "44",
-    "ipad_app_name": "Electronic Example iPad",
-    "android_url": "example-android://electronic",
-    "android_package": "com.electronic",
-    "android_app_name": "Electronic Example Android",
-    "windows_phone_url": "example-windows://electronic",
-    "windows_phone_app_id": "64ec0d1b-5b3b-4c77-a86b-5e12d465edc0",
-    "windows_phone_app_name": "Electronic Example Windows"
+      "price": "60.00 TWD"
+    }
   },
   {
     "id": "DB_6",
@@ -177,25 +102,10 @@
     "brand": "Sam Store",
     "google_product_category": "Food, Beverages & Tobacco > Food Items > Candy",
     "shipping": {
-      "country": "UK",
+      "country": "TW",
       "service": "Standard",
-      "price": "4.95 GBP"
-    },
-    "ios_url": "example-ios://electronic",
-    "ios_app_store_id": "42",
-    "ios_app_name": "Electronic Example iOS",
-    "iphone_url": "example-iphone://electronic",
-    "iphone_app_store_id": "43",
-    "iphone_app_name": "Electronic Example iPhone",
-    "ipad_url": "example-ipad://electronic",
-    "ipad_app_store_id": "44",
-    "ipad_app_name": "Electronic Example iPad",
-    "android_url": "example-android://electronic",
-    "android_package": "com.electronic",
-    "android_app_name": "Electronic Example Android",
-    "windows_phone_url": "example-windows://electronic",
-    "windows_phone_app_id": "64ec0d1b-5b3b-4c77-a86b-5e12d465edc0",
-    "windows_phone_app_name": "Electronic Example Windows"
+      "price": "60.00 TWD"
+    }
   },
   {
     "id": "DB_7",
@@ -210,25 +120,10 @@
     "brand": "Sam Store",
     "google_product_category": "Apparel & Accessories > Clothing > Shirts & Tops",
     "shipping": {
-      "country": "UK",
+      "country": "TW",
       "service": "Standard",
-      "price": "4.95 GBP"
-    },
-    "ios_url": "example-ios://electronic",
-    "ios_app_store_id": "42",
-    "ios_app_name": "Electronic Example iOS",
-    "iphone_url": "example-iphone://electronic",
-    "iphone_app_store_id": "43",
-    "iphone_app_name": "Electronic Example iPhone",
-    "ipad_url": "example-ipad://electronic",
-    "ipad_app_store_id": "44",
-    "ipad_app_name": "Electronic Example iPad",
-    "android_url": "example-android://electronic",
-    "android_package": "com.electronic",
-    "android_app_name": "Electronic Example Android",
-    "windows_phone_url": "example-windows://electronic",
-    "windows_phone_app_id": "64ec0d1b-5b3b-4c77-a86b-5e12d465edc0",
-    "windows_phone_app_name": "Electronic Example Windows"
+      "price": "60.00 TWD"
+    }
   },
   {
     "id": "DB_8",
@@ -243,25 +138,10 @@
     "brand": "Sam Store",
     "google_product_category": "Apparel & Accessories > Clothing > Outerwear > Coats & Jackets",
     "shipping": {
-      "country": "UK",
+      "country": "TW",
       "service": "Standard",
-      "price": "4.95 GBP"
-    },
-    "ios_url": "example-ios://electronic",
-    "ios_app_store_id": "42",
-    "ios_app_name": "Electronic Example iOS",
-    "iphone_url": "example-iphone://electronic",
-    "iphone_app_store_id": "43",
-    "iphone_app_name": "Electronic Example iPhone",
-    "ipad_url": "example-ipad://electronic",
-    "ipad_app_store_id": "44",
-    "ipad_app_name": "Electronic Example iPad",
-    "android_url": "example-android://electronic",
-    "android_package": "com.electronic",
-    "android_app_name": "Electronic Example Android",
-    "windows_phone_url": "example-windows://electronic",
-    "windows_phone_app_id": "64ec0d1b-5b3b-4c77-a86b-5e12d465edc0",
-    "windows_phone_app_name": "Electronic Example Windows"
+      "price": "60.00 TWD"
+    }
   },
   {
     "id": "DB_9",
@@ -276,25 +156,10 @@
     "brand": "Sam Store",
     "google_product_category": "Apparel & Accessories > Clothing > Shorts",
     "shipping": {
-      "country": "UK",
+      "country": "TW",
       "service": "Standard",
-      "price": "4.95 GBP"
-    },
-    "ios_url": "example-ios://electronic",
-    "ios_app_store_id": "42",
-    "ios_app_name": "Electronic Example iOS",
-    "iphone_url": "example-iphone://electronic",
-    "iphone_app_store_id": "43",
-    "iphone_app_name": "Electronic Example iPhone",
-    "ipad_url": "example-ipad://electronic",
-    "ipad_app_store_id": "44",
-    "ipad_app_name": "Electronic Example iPad",
-    "android_url": "example-android://electronic",
-    "android_package": "com.electronic",
-    "android_app_name": "Electronic Example Android",
-    "windows_phone_url": "example-windows://electronic",
-    "windows_phone_app_id": "64ec0d1b-5b3b-4c77-a86b-5e12d465edc0",
-    "windows_phone_app_name": "Electronic Example Windows"
+      "price": "60.00 TWD"
+    }
   },
   {
     "id": "DB_10",
@@ -309,25 +174,10 @@
     "brand": "Sam Store",
     "google_product_category": "Apparel & Accessories > Shoes",
     "shipping": {
-      "country": "UK",
+      "country": "TW",
       "service": "Standard",
-      "price": "4.95 GBP"
-    },
-    "ios_url": "example-ios://electronic",
-    "ios_app_store_id": "42",
-    "ios_app_name": "Electronic Example iOS",
-    "iphone_url": "example-iphone://electronic",
-    "iphone_app_store_id": "43",
-    "iphone_app_name": "Electronic Example iPhone",
-    "ipad_url": "example-ipad://electronic",
-    "ipad_app_store_id": "44",
-    "ipad_app_name": "Electronic Example iPad",
-    "android_url": "example-android://electronic",
-    "android_package": "com.electronic",
-    "android_app_name": "Electronic Example Android",
-    "windows_phone_url": "example-windows://electronic",
-    "windows_phone_app_id": "64ec0d1b-5b3b-4c77-a86b-5e12d465edc0",
-    "windows_phone_app_name": "Electronic Example Windows"
+      "price": "60.00 TWD"
+    }
   },
   {
     "id": "DB_11",
@@ -342,25 +192,10 @@
     "brand": "Sam Store",
     "google_product_category": "Food, Beverages & Tobacco > Beverages > Coffee",
     "shipping": {
-      "country": "UK",
+      "country": "TW",
       "service": "Standard",
-      "price": "4.95 GBP"
-    },
-    "ios_url": "example-ios://electronic",
-    "ios_app_store_id": "42",
-    "ios_app_name": "Electronic Example iOS",
-    "iphone_url": "example-iphone://electronic",
-    "iphone_app_store_id": "43",
-    "iphone_app_name": "Electronic Example iPhone",
-    "ipad_url": "example-ipad://electronic",
-    "ipad_app_store_id": "44",
-    "ipad_app_name": "Electronic Example iPad",
-    "android_url": "example-android://electronic",
-    "android_package": "com.electronic",
-    "android_app_name": "Electronic Example Android",
-    "windows_phone_url": "example-windows://electronic",
-    "windows_phone_app_id": "64ec0d1b-5b3b-4c77-a86b-5e12d465edc0",
-    "windows_phone_app_name": "Electronic Example Windows"
+      "price": "60.00 TWD"
+    }
   },
   {
     "id": "DB_12",
@@ -375,25 +210,10 @@
     "brand": "Sam Store",
     "google_product_category": "Food, Beverages & Tobacco > Beverages > Water",
     "shipping": {
-      "country": "UK",
+      "country": "TW",
       "service": "Standard",
-      "price": "4.95 GBP"
-    },
-    "ios_url": "example-ios://electronic",
-    "ios_app_store_id": "42",
-    "ios_app_name": "Electronic Example iOS",
-    "iphone_url": "example-iphone://electronic",
-    "iphone_app_store_id": "43",
-    "iphone_app_name": "Electronic Example iPhone",
-    "ipad_url": "example-ipad://electronic",
-    "ipad_app_store_id": "44",
-    "ipad_app_name": "Electronic Example iPad",
-    "android_url": "example-android://electronic",
-    "android_package": "com.electronic",
-    "android_app_name": "Electronic Example Android",
-    "windows_phone_url": "example-windows://electronic",
-    "windows_phone_app_id": "64ec0d1b-5b3b-4c77-a86b-5e12d465edc0",
-    "windows_phone_app_name": "Electronic Example Windows"
+      "price": "60.00 TWD"
+    }
   },
   {
     "id": "DB_13",
@@ -408,25 +228,10 @@
     "brand": "Sam Store",
     "google_product_category": "Food, Beverages & Tobacco > Beverages > Sports & Energy Drinks",
     "shipping": {
-      "country": "UK",
+      "country": "TW",
       "service": "Standard",
-      "price": "4.95 GBP"
-    },
-    "ios_url": "example-ios://electronic",
-    "ios_app_store_id": "42",
-    "ios_app_name": "Electronic Example iOS",
-    "iphone_url": "example-iphone://electronic",
-    "iphone_app_store_id": "43",
-    "iphone_app_name": "Electronic Example iPhone",
-    "ipad_url": "example-ipad://electronic",
-    "ipad_app_store_id": "44",
-    "ipad_app_name": "Electronic Example iPad",
-    "android_url": "example-android://electronic",
-    "android_package": "com.electronic",
-    "android_app_name": "Electronic Example Android",
-    "windows_phone_url": "example-windows://electronic",
-    "windows_phone_app_id": "64ec0d1b-5b3b-4c77-a86b-5e12d465edc0",
-    "windows_phone_app_name": "Electronic Example Windows"
+      "price": "60.00 TWD"
+    }
   },
   {
     "id": "DB_14",
@@ -441,25 +246,10 @@
     "brand": "Sam Store",
     "google_product_category": "Electronics > Computers > Tablet Computers",
     "shipping": {
-      "country": "UK",
+      "country": "TW",
       "service": "Standard",
-      "price": "4.95 GBP"
-    },
-    "ios_url": "example-ios://electronic",
-    "ios_app_store_id": "42",
-    "ios_app_name": "Electronic Example iOS",
-    "iphone_url": "example-iphone://electronic",
-    "iphone_app_store_id": "43",
-    "iphone_app_name": "Electronic Example iPhone",
-    "ipad_url": "example-ipad://electronic",
-    "ipad_app_store_id": "44",
-    "ipad_app_name": "Electronic Example iPad",
-    "android_url": "example-android://electronic",
-    "android_package": "com.electronic",
-    "android_app_name": "Electronic Example Android",
-    "windows_phone_url": "example-windows://electronic",
-    "windows_phone_app_id": "64ec0d1b-5b3b-4c77-a86b-5e12d465edc0",
-    "windows_phone_app_name": "Electronic Example Windows"
+      "price": "60.00 TWD"
+    }
   },
   {
     "id": "DB_15",
@@ -474,25 +264,10 @@
     "brand": "Sam Store",
     "google_product_category": "Electronics > Audio > Audio Components > Headphones",
     "shipping": {
-      "country": "UK",
+      "country": "TW",
       "service": "Standard",
-      "price": "4.95 GBP"
-    },
-    "ios_url": "example-ios://electronic",
-    "ios_app_store_id": "42",
-    "ios_app_name": "Electronic Example iOS",
-    "iphone_url": "example-iphone://electronic",
-    "iphone_app_store_id": "43",
-    "iphone_app_name": "Electronic Example iPhone",
-    "ipad_url": "example-ipad://electronic",
-    "ipad_app_store_id": "44",
-    "ipad_app_name": "Electronic Example iPad",
-    "android_url": "example-android://electronic",
-    "android_package": "com.electronic",
-    "android_app_name": "Electronic Example Android",
-    "windows_phone_url": "example-windows://electronic",
-    "windows_phone_app_id": "64ec0d1b-5b3b-4c77-a86b-5e12d465edc0",
-    "windows_phone_app_name": "Electronic Example Windows"
+      "price": "60.00 TWD"
+    }
   },
   {
     "id": "DB_16",
@@ -507,25 +282,10 @@
     "brand": "Sam Store",
     "google_product_category": "Electronics > Electronics Accessories > Computer Components > Input Devices > Mice & Trackballs",
     "shipping": {
-      "country": "UK",
+      "country": "TW",
       "service": "Standard",
-      "price": "4.95 GBP"
-    },
-    "ios_url": "example-ios://electronic",
-    "ios_app_store_id": "42",
-    "ios_app_name": "Electronic Example iOS",
-    "iphone_url": "example-iphone://electronic",
-    "iphone_app_store_id": "43",
-    "iphone_app_name": "Electronic Example iPhone",
-    "ipad_url": "example-ipad://electronic",
-    "ipad_app_store_id": "44",
-    "ipad_app_name": "Electronic Example iPad",
-    "android_url": "example-android://electronic",
-    "android_package": "com.electronic",
-    "android_app_name": "Electronic Example Android",
-    "windows_phone_url": "example-windows://electronic",
-    "windows_phone_app_id": "64ec0d1b-5b3b-4c77-a86b-5e12d465edc0",
-    "windows_phone_app_name": "Electronic Example Windows"
+      "price": "60.00 TWD"
+    }
   },
   {
     "id": "DB_17",
@@ -540,25 +300,10 @@
     "brand": "Sam Store",
     "google_product_category": "Food, Beverages & Tobacco > Food Items > Bakery > Cookies",
     "shipping": {
-      "country": "UK",
+      "country": "TW",
       "service": "Standard",
-      "price": "4.95 GBP"
-    },
-    "ios_url": "example-ios://electronic",
-    "ios_app_store_id": "42",
-    "ios_app_name": "Electronic Example iOS",
-    "iphone_url": "example-iphone://electronic",
-    "iphone_app_store_id": "43",
-    "iphone_app_name": "Electronic Example iPhone",
-    "ipad_url": "example-ipad://electronic",
-    "ipad_app_store_id": "44",
-    "ipad_app_name": "Electronic Example iPad",
-    "android_url": "example-android://electronic",
-    "android_package": "com.electronic",
-    "android_app_name": "Electronic Example Android",
-    "windows_phone_url": "example-windows://electronic",
-    "windows_phone_app_id": "64ec0d1b-5b3b-4c77-a86b-5e12d465edc0",
-    "windows_phone_app_name": "Electronic Example Windows"
+      "price": "60.00 TWD"
+    }
   },
   {
     "id": "DB_18",
@@ -573,25 +318,10 @@
     "brand": "Sam Store",
     "google_product_category": "Food, Beverages & Tobacco > Food Items > Snack Foods > Nuts & Seeds",
     "shipping": {
-      "country": "UK",
+      "country": "TW",
       "service": "Standard",
-      "price": "4.95 GBP"
-    },
-    "ios_url": "example-ios://electronic",
-    "ios_app_store_id": "42",
-    "ios_app_name": "Electronic Example iOS",
-    "iphone_url": "example-iphone://electronic",
-    "iphone_app_store_id": "43",
-    "iphone_app_name": "Electronic Example iPhone",
-    "ipad_url": "example-ipad://electronic",
-    "ipad_app_store_id": "44",
-    "ipad_app_name": "Electronic Example iPad",
-    "android_url": "example-android://electronic",
-    "android_package": "com.electronic",
-    "android_app_name": "Electronic Example Android",
-    "windows_phone_url": "example-windows://electronic",
-    "windows_phone_app_id": "64ec0d1b-5b3b-4c77-a86b-5e12d465edc0",
-    "windows_phone_app_name": "Electronic Example Windows"
+      "price": "60.00 TWD"
+    }
   },
   {
     "id": "DB_19",
@@ -606,24 +336,9 @@
     "brand": "Sam Store",
     "google_product_category": "Food, Beverages & Tobacco > Food Items > Candy",
     "shipping": {
-      "country": "UK",
+      "country": "TW",
       "service": "Standard",
-      "price": "4.95 GBP"
-    },
-    "ios_url": "example-ios://electronic",
-    "ios_app_store_id": "42",
-    "ios_app_name": "Electronic Example iOS",
-    "iphone_url": "example-iphone://electronic",
-    "iphone_app_store_id": "43",
-    "iphone_app_name": "Electronic Example iPhone",
-    "ipad_url": "example-ipad://electronic",
-    "ipad_app_store_id": "44",
-    "ipad_app_name": "Electronic Example iPad",
-    "android_url": "example-android://electronic",
-    "android_package": "com.electronic",
-    "android_app_name": "Electronic Example Android",
-    "windows_phone_url": "example-windows://electronic",
-    "windows_phone_app_id": "64ec0d1b-5b3b-4c77-a86b-5e12d465edc0",
-    "windows_phone_app_name": "Electronic Example Windows"
+      "price": "60.00 TWD"
+    }
   }
 ]

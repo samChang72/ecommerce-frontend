@@ -54,25 +54,10 @@ const generateFacebookFeed = (products, stock) => {
     brand: BRAND,
     google_product_category: product.googleCategory,
     shipping: {
-      country: 'UK',
+      country: 'TW',
       service: 'Standard',
-      price: '4.95 GBP'
-    },
-    ios_url: 'example-ios://electronic',
-    ios_app_store_id: '42',
-    ios_app_name: 'Electronic Example iOS',
-    iphone_url: 'example-iphone://electronic',
-    iphone_app_store_id: '43',
-    iphone_app_name: 'Electronic Example iPhone',
-    ipad_url: 'example-ipad://electronic',
-    ipad_app_store_id: '44',
-    ipad_app_name: 'Electronic Example iPad',
-    android_url: 'example-android://electronic',
-    android_package: 'com.electronic',
-    android_app_name: 'Electronic Example Android',
-    windows_phone_url: 'example-windows://electronic',
-    windows_phone_app_id: '64ec0d1b-5b3b-4c77-a86b-5e12d465edc0',
-    windows_phone_app_name: 'Electronic Example Windows'
+      price: '60.00 TWD'
+    }
   }))
 }
 
@@ -101,26 +86,11 @@ const generateDataXml = (products, stock) => {
 		<g:quantity_to_sell_on_facebook>${qty}</g:quantity_to_sell_on_facebook>
 		<g:price>${product.price}.00 TWD</g:price>
 		<g:shipping>
-			<g:country>UK</g:country>
+			<g:country>TW</g:country>
 			<g:service>Standard</g:service>
-			<g:price>4.95 GBP</g:price>
+			<g:price>60.00 TWD</g:price>
 		</g:shipping>
 		<g:google_product_category>${escapeXml(product.googleCategory)}</g:google_product_category>
-		<applink property="ios_url" content="example-ios://electronic" />
-		<applink property="ios_app_store_id" content="42" />
-		<applink property="ios_app_name" content="Electronic Example iOS" />
-		<applink property="iphone_url" content="example-iphone://electronic" />
-		<applink property="iphone_app_store_id" content="43" />
-		<applink property="iphone_app_name" content="Electronic Example iPhone" />
-		<applink property="ipad_url" content="example-ipad://electronic" />
-		<applink property="ipad_app_store_id" content="44" />
-		<applink property="ipad_app_name" content="Electronic Example iPad" />
-		<applink property="android_url" content="example-android://electronic" />
-		<applink property="android_package" content="com.electronic" />
-		<applink property="android_app_name" content="Electronic Example Android" />
-		<applink property="windows_phone_url" content="example-windows://electronic" />
-		<applink property="windows_phone_app_id" content="64ec0d1b-5b3b-4c77-a86b-5e12d465edc0" />
-		<applink property="windows_phone_app_name" content="Electronic Example Windows" />
 	</entry>
 `
   }).join('\n')
