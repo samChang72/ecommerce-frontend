@@ -46,6 +46,13 @@ export default {
       return jsonResponse(405, { error: 'method not allowed' })
     }
 
+    // 速率限制（在解析 payload 前執行，惡意流量不進入後續邏輯）
+    const clientIp = request.headers.get('CF-Connecting-IP') || 'unknown'
+    const { success } = await env.ORDER_RATE_LIMITER.limit({ key: clientIp })
+    if (!success) {
+      return jsonResponse(429, { error: '請求過於頻繁，請稍後再試' })
+    }
+
     let order
     try {
       order = await request.json()
