@@ -6,20 +6,20 @@
 	<entry>
 		<g:id>DB_1</g:id>
 		<g:title>可樂</g:title>
-		<g:description>可樂</g:description>
+		<g:description>經典風味碳酸可樂，冰涼暢快解渴，暢飲無負擔。</g:description>
 		<g:link>https://samchang72.github.io/ecommerce-frontend/#/product/1</g:link>
 		<g:image_link>https://samchang72.github.io/ecommerce-frontend/image/cokev2.png</g:image_link>
-		<g:brand>Example</g:brand>
+		<g:brand>Sam Store</g:brand>
 		<g:condition>new</g:condition>
 		<g:availability>in stock</g:availability>
-		<g:quantity_to_sell_on_facebook>20</g:quantity_to_sell_on_facebook>
+		<g:quantity_to_sell_on_facebook>10000</g:quantity_to_sell_on_facebook>
 		<g:price>30.00 TWD</g:price>
 		<g:shipping>
 			<g:country>UK</g:country>
 			<g:service>Standard</g:service>
 			<g:price>4.95 GBP</g:price>
 		</g:shipping>
-		<g:google_product_category>Animals &gt; Pet Supplies</g:google_product_category>
+		<g:google_product_category>Food, Beverages &amp; Tobacco &gt; Beverages &gt; Soda</g:google_product_category>
 		<applink property="ios_url" content="example-ios://electronic" />
 		<applink property="ios_app_store_id" content="42" />
 		<applink property="ios_app_name" content="Electronic Example iOS" />
@@ -40,20 +40,20 @@
 	<entry>
 		<g:id>DB_2</g:id>
 		<g:title>綠茶</g:title>
-		<g:description>綠茶</g:description>
+		<g:description>清新無糖綠茶，回甘順口，日常補水首選。</g:description>
 		<g:link>https://samchang72.github.io/ecommerce-frontend/#/product/2</g:link>
 		<g:image_link>https://samchang72.github.io/ecommerce-frontend/image/greenv2.png</g:image_link>
-		<g:brand>Example</g:brand>
+		<g:brand>Sam Store</g:brand>
 		<g:condition>new</g:condition>
 		<g:availability>in stock</g:availability>
-		<g:quantity_to_sell_on_facebook>20</g:quantity_to_sell_on_facebook>
+		<g:quantity_to_sell_on_facebook>10000</g:quantity_to_sell_on_facebook>
 		<g:price>25.00 TWD</g:price>
 		<g:shipping>
 			<g:country>UK</g:country>
 			<g:service>Standard</g:service>
 			<g:price>4.95 GBP</g:price>
 		</g:shipping>
-		<g:google_product_category>Animals &gt; Pet Supplies</g:google_product_category>
+		<g:google_product_category>Food, Beverages &amp; Tobacco &gt; Beverages &gt; Tea &amp; Infusions</g:google_product_category>
 		<applink property="ios_url" content="example-ios://electronic" />
 		<applink property="ios_app_store_id" content="42" />
 		<applink property="ios_app_name" content="Electronic Example iOS" />
@@ -74,20 +74,20 @@
 	<entry>
 		<g:id>DB_3</g:id>
 		<g:title>手機</g:title>
-		<g:description>手機</g:description>
+		<g:description>高效能智慧型手機，大螢幕搭配長效電池，拍照追劇都順暢。</g:description>
 		<g:link>https://samchang72.github.io/ecommerce-frontend/#/product/3</g:link>
 		<g:image_link>https://samchang72.github.io/ecommerce-frontend/image/phonev2.png</g:image_link>
-		<g:brand>Example</g:brand>
+		<g:brand>Sam Store</g:brand>
 		<g:condition>new</g:condition>
 		<g:availability>in stock</g:availability>
-		<g:quantity_to_sell_on_facebook>20</g:quantity_to_sell_on_facebook>
+		<g:quantity_to_sell_on_facebook>10000</g:quantity_to_sell_on_facebook>
 		<g:price>15000.00 TWD</g:price>
 		<g:shipping>
 			<g:country>UK</g:country>
 			<g:service>Standard</g:service>
 			<g:price>4.95 GBP</g:price>
 		</g:shipping>
-		<g:google_product_category>Animals &gt; Pet Supplies</g:google_product_category>
+		<g:google_product_category>Electronics &gt; Communications &gt; Telephony &gt; Mobile Phones</g:google_product_category>
 		<applink property="ios_url" content="example-ios://electronic" />
 		<applink property="ios_app_store_id" content="42" />
 		<applink property="ios_app_name" content="Electronic Example iOS" />
@@ -108,20 +108,20 @@
 	<entry>
 		<g:id>DB_4</g:id>
 		<g:title>筆電</g:title>
-		<g:description>筆電</g:description>
+		<g:description>輕薄高效筆記型電腦，辦公娛樂兩相宜，攜帶方便。</g:description>
 		<g:link>https://samchang72.github.io/ecommerce-frontend/#/product/4</g:link>
 		<g:image_link>https://samchang72.github.io/ecommerce-frontend/image/notebookv2.png</g:image_link>
-		<g:brand>Example</g:brand>
+		<g:brand>Sam Store</g:brand>
 		<g:condition>new</g:condition>
 		<g:availability>in stock</g:availability>
-		<g:quantity_to_sell_on_facebook>20</g:quantity_to_sell_on_facebook>
+		<g:quantity_to_sell_on_facebook>10000</g:quantity_to_sell_on_facebook>
 		<g:price>45000.00 TWD</g:price>
 		<g:shipping>
 			<g:country>UK</g:country>
 			<g:service>Standard</g:service>
 			<g:price>4.95 GBP</g:price>
 		</g:shipping>
-		<g:google_product_category>Animals &gt; Pet Supplies</g:google_product_category>
+		<g:google_product_category>Electronics &gt; Computers &gt; Laptops</g:google_product_category>
 		<applink property="ios_url" content="example-ios://electronic" />
 		<applink property="ios_app_store_id" content="42" />
 		<applink property="ios_app_name" content="Electronic Example iOS" />
@@ -142,20 +142,20 @@
 	<entry>
 		<g:id>DB_5</g:id>
 		<g:title>洋芋片</g:title>
-		<g:description>洋芋片</g:description>
+		<g:description>香脆原味洋芋片，鹹香涮嘴，追劇零食首選。</g:description>
 		<g:link>https://samchang72.github.io/ecommerce-frontend/#/product/5</g:link>
 		<g:image_link>https://samchang72.github.io/ecommerce-frontend/image/chipsv2.png</g:image_link>
-		<g:brand>Example</g:brand>
+		<g:brand>Sam Store</g:brand>
 		<g:condition>new</g:condition>
 		<g:availability>in stock</g:availability>
-		<g:quantity_to_sell_on_facebook>20</g:quantity_to_sell_on_facebook>
+		<g:quantity_to_sell_on_facebook>10000</g:quantity_to_sell_on_facebook>
 		<g:price>50.00 TWD</g:price>
 		<g:shipping>
 			<g:country>UK</g:country>
 			<g:service>Standard</g:service>
 			<g:price>4.95 GBP</g:price>
 		</g:shipping>
-		<g:google_product_category>Animals &gt; Pet Supplies</g:google_product_category>
+		<g:google_product_category>Food, Beverages &amp; Tobacco &gt; Food Items &gt; Snack Foods</g:google_product_category>
 		<applink property="ios_url" content="example-ios://electronic" />
 		<applink property="ios_app_store_id" content="42" />
 		<applink property="ios_app_name" content="Electronic Example iOS" />
@@ -176,20 +176,20 @@
 	<entry>
 		<g:id>DB_6</g:id>
 		<g:title>巧克力</g:title>
-		<g:description>巧克力</g:description>
+		<g:description>香濃絲滑巧克力，濃郁可可風味，甜蜜享受。</g:description>
 		<g:link>https://samchang72.github.io/ecommerce-frontend/#/product/6</g:link>
 		<g:image_link>https://samchang72.github.io/ecommerce-frontend/image/chocolatev2.png</g:image_link>
-		<g:brand>Example</g:brand>
+		<g:brand>Sam Store</g:brand>
 		<g:condition>new</g:condition>
 		<g:availability>in stock</g:availability>
-		<g:quantity_to_sell_on_facebook>20</g:quantity_to_sell_on_facebook>
+		<g:quantity_to_sell_on_facebook>10000</g:quantity_to_sell_on_facebook>
 		<g:price>60.00 TWD</g:price>
 		<g:shipping>
 			<g:country>UK</g:country>
 			<g:service>Standard</g:service>
 			<g:price>4.95 GBP</g:price>
 		</g:shipping>
-		<g:google_product_category>Animals &gt; Pet Supplies</g:google_product_category>
+		<g:google_product_category>Food, Beverages &amp; Tobacco &gt; Food Items &gt; Candy</g:google_product_category>
 		<applink property="ios_url" content="example-ios://electronic" />
 		<applink property="ios_app_store_id" content="42" />
 		<applink property="ios_app_name" content="Electronic Example iOS" />
@@ -210,20 +210,20 @@
 	<entry>
 		<g:id>DB_7</g:id>
 		<g:title>素面短T</g:title>
-		<g:description>素面短T</g:description>
+		<g:description>100% 純棉素面短袖上衣，親膚透氣，百搭好穿。</g:description>
 		<g:link>https://samchang72.github.io/ecommerce-frontend/#/product/7</g:link>
 		<g:image_link>https://samchang72.github.io/ecommerce-frontend/image/白色素面短Tv2.png</g:image_link>
-		<g:brand>Example</g:brand>
+		<g:brand>Sam Store</g:brand>
 		<g:condition>new</g:condition>
 		<g:availability>in stock</g:availability>
-		<g:quantity_to_sell_on_facebook>20</g:quantity_to_sell_on_facebook>
+		<g:quantity_to_sell_on_facebook>10000</g:quantity_to_sell_on_facebook>
 		<g:price>390.00 TWD</g:price>
 		<g:shipping>
 			<g:country>UK</g:country>
 			<g:service>Standard</g:service>
 			<g:price>4.95 GBP</g:price>
 		</g:shipping>
-		<g:google_product_category>Animals &gt; Pet Supplies</g:google_product_category>
+		<g:google_product_category>Apparel &amp; Accessories &gt; Clothing &gt; Shirts &amp; Tops</g:google_product_category>
 		<applink property="ios_url" content="example-ios://electronic" />
 		<applink property="ios_app_store_id" content="42" />
 		<applink property="ios_app_name" content="Electronic Example iOS" />
@@ -244,20 +244,20 @@
 	<entry>
 		<g:id>DB_8</g:id>
 		<g:title>五分袖西裝外套</g:title>
-		<g:description>五分袖西裝外套</g:description>
+		<g:description>俐落剪裁五分袖西裝外套，修身有型，通勤與正式場合皆適合。</g:description>
 		<g:link>https://samchang72.github.io/ecommerce-frontend/#/product/8</g:link>
 		<g:image_link>https://samchang72.github.io/ecommerce-frontend/image/黑色五分袖西裝v2.png</g:image_link>
-		<g:brand>Example</g:brand>
+		<g:brand>Sam Store</g:brand>
 		<g:condition>new</g:condition>
 		<g:availability>in stock</g:availability>
-		<g:quantity_to_sell_on_facebook>20</g:quantity_to_sell_on_facebook>
+		<g:quantity_to_sell_on_facebook>10000</g:quantity_to_sell_on_facebook>
 		<g:price>1290.00 TWD</g:price>
 		<g:shipping>
 			<g:country>UK</g:country>
 			<g:service>Standard</g:service>
 			<g:price>4.95 GBP</g:price>
 		</g:shipping>
-		<g:google_product_category>Animals &gt; Pet Supplies</g:google_product_category>
+		<g:google_product_category>Apparel &amp; Accessories &gt; Clothing &gt; Outerwear &gt; Coats &amp; Jackets</g:google_product_category>
 		<applink property="ios_url" content="example-ios://electronic" />
 		<applink property="ios_app_store_id" content="42" />
 		<applink property="ios_app_name" content="Electronic Example iOS" />
@@ -278,20 +278,20 @@
 	<entry>
 		<g:id>DB_9</g:id>
 		<g:title>牛仔短褲</g:title>
-		<g:description>牛仔短褲</g:description>
+		<g:description>經典牛仔短褲，耐穿有型，夏日休閒穿搭必備。</g:description>
 		<g:link>https://samchang72.github.io/ecommerce-frontend/#/product/9</g:link>
 		<g:image_link>https://samchang72.github.io/ecommerce-frontend/image/黑色牛仔短褲v2.png</g:image_link>
-		<g:brand>Example</g:brand>
+		<g:brand>Sam Store</g:brand>
 		<g:condition>new</g:condition>
 		<g:availability>in stock</g:availability>
-		<g:quantity_to_sell_on_facebook>20</g:quantity_to_sell_on_facebook>
+		<g:quantity_to_sell_on_facebook>10000</g:quantity_to_sell_on_facebook>
 		<g:price>790.00 TWD</g:price>
 		<g:shipping>
 			<g:country>UK</g:country>
 			<g:service>Standard</g:service>
 			<g:price>4.95 GBP</g:price>
 		</g:shipping>
-		<g:google_product_category>Animals &gt; Pet Supplies</g:google_product_category>
+		<g:google_product_category>Apparel &amp; Accessories &gt; Clothing &gt; Shorts</g:google_product_category>
 		<applink property="ios_url" content="example-ios://electronic" />
 		<applink property="ios_app_store_id" content="42" />
 		<applink property="ios_app_name" content="Electronic Example iOS" />
@@ -312,20 +312,20 @@
 	<entry>
 		<g:id>DB_10</g:id>
 		<g:title>高跟涼鞋</g:title>
-		<g:description>高跟涼鞋</g:description>
+		<g:description>優雅膚色高跟涼鞋，修飾腿型，宴會約會百搭。</g:description>
 		<g:link>https://samchang72.github.io/ecommerce-frontend/#/product/10</g:link>
 		<g:image_link>https://samchang72.github.io/ecommerce-frontend/image/膚色高跟涼鞋v2.png</g:image_link>
-		<g:brand>Example</g:brand>
+		<g:brand>Sam Store</g:brand>
 		<g:condition>new</g:condition>
 		<g:availability>in stock</g:availability>
-		<g:quantity_to_sell_on_facebook>20</g:quantity_to_sell_on_facebook>
+		<g:quantity_to_sell_on_facebook>10000</g:quantity_to_sell_on_facebook>
 		<g:price>890.00 TWD</g:price>
 		<g:shipping>
 			<g:country>UK</g:country>
 			<g:service>Standard</g:service>
 			<g:price>4.95 GBP</g:price>
 		</g:shipping>
-		<g:google_product_category>Animals &gt; Pet Supplies</g:google_product_category>
+		<g:google_product_category>Apparel &amp; Accessories &gt; Shoes</g:google_product_category>
 		<applink property="ios_url" content="example-ios://electronic" />
 		<applink property="ios_app_store_id" content="42" />
 		<applink property="ios_app_name" content="Electronic Example iOS" />
@@ -346,20 +346,20 @@
 	<entry>
 		<g:id>DB_11</g:id>
 		<g:title>咖啡</g:title>
-		<g:description>咖啡</g:description>
+		<g:description>香醇即飲咖啡，濃郁醇厚，提振一天精神。</g:description>
 		<g:link>https://samchang72.github.io/ecommerce-frontend/#/product/11</g:link>
 		<g:image_link>https://samchang72.github.io/ecommerce-frontend/image/coffee.png</g:image_link>
-		<g:brand>Example</g:brand>
+		<g:brand>Sam Store</g:brand>
 		<g:condition>new</g:condition>
 		<g:availability>in stock</g:availability>
-		<g:quantity_to_sell_on_facebook>20</g:quantity_to_sell_on_facebook>
+		<g:quantity_to_sell_on_facebook>10000</g:quantity_to_sell_on_facebook>
 		<g:price>45.00 TWD</g:price>
 		<g:shipping>
 			<g:country>UK</g:country>
 			<g:service>Standard</g:service>
 			<g:price>4.95 GBP</g:price>
 		</g:shipping>
-		<g:google_product_category>Animals &gt; Pet Supplies</g:google_product_category>
+		<g:google_product_category>Food, Beverages &amp; Tobacco &gt; Beverages &gt; Coffee</g:google_product_category>
 		<applink property="ios_url" content="example-ios://electronic" />
 		<applink property="ios_app_store_id" content="42" />
 		<applink property="ios_app_name" content="Electronic Example iOS" />
@@ -380,20 +380,20 @@
 	<entry>
 		<g:id>DB_12</g:id>
 		<g:title>礦泉水</g:title>
-		<g:description>礦泉水</g:description>
+		<g:description>天然純淨礦泉水，清爽甘甜，隨時補充水分。</g:description>
 		<g:link>https://samchang72.github.io/ecommerce-frontend/#/product/12</g:link>
 		<g:image_link>https://samchang72.github.io/ecommerce-frontend/image/water.png</g:image_link>
-		<g:brand>Example</g:brand>
+		<g:brand>Sam Store</g:brand>
 		<g:condition>new</g:condition>
 		<g:availability>in stock</g:availability>
-		<g:quantity_to_sell_on_facebook>20</g:quantity_to_sell_on_facebook>
+		<g:quantity_to_sell_on_facebook>10000</g:quantity_to_sell_on_facebook>
 		<g:price>20.00 TWD</g:price>
 		<g:shipping>
 			<g:country>UK</g:country>
 			<g:service>Standard</g:service>
 			<g:price>4.95 GBP</g:price>
 		</g:shipping>
-		<g:google_product_category>Animals &gt; Pet Supplies</g:google_product_category>
+		<g:google_product_category>Food, Beverages &amp; Tobacco &gt; Beverages &gt; Water</g:google_product_category>
 		<applink property="ios_url" content="example-ios://electronic" />
 		<applink property="ios_app_store_id" content="42" />
 		<applink property="ios_app_name" content="Electronic Example iOS" />
@@ -414,20 +414,20 @@
 	<entry>
 		<g:id>DB_13</g:id>
 		<g:title>運動飲料</g:title>
-		<g:description>運動飲料</g:description>
+		<g:description>補給電解質運動飲料，運動後迅速補水解渴。</g:description>
 		<g:link>https://samchang72.github.io/ecommerce-frontend/#/product/13</g:link>
 		<g:image_link>https://samchang72.github.io/ecommerce-frontend/image/sportsdrink.png</g:image_link>
-		<g:brand>Example</g:brand>
+		<g:brand>Sam Store</g:brand>
 		<g:condition>new</g:condition>
 		<g:availability>in stock</g:availability>
-		<g:quantity_to_sell_on_facebook>20</g:quantity_to_sell_on_facebook>
+		<g:quantity_to_sell_on_facebook>10000</g:quantity_to_sell_on_facebook>
 		<g:price>35.00 TWD</g:price>
 		<g:shipping>
 			<g:country>UK</g:country>
 			<g:service>Standard</g:service>
 			<g:price>4.95 GBP</g:price>
 		</g:shipping>
-		<g:google_product_category>Animals &gt; Pet Supplies</g:google_product_category>
+		<g:google_product_category>Food, Beverages &amp; Tobacco &gt; Beverages &gt; Sports &amp; Energy Drinks</g:google_product_category>
 		<applink property="ios_url" content="example-ios://electronic" />
 		<applink property="ios_app_store_id" content="42" />
 		<applink property="ios_app_name" content="Electronic Example iOS" />
@@ -448,20 +448,20 @@
 	<entry>
 		<g:id>DB_14</g:id>
 		<g:title>平板電腦</g:title>
-		<g:description>平板電腦</g:description>
+		<g:description>輕巧大螢幕平板電腦，娛樂閱讀與工作兼具。</g:description>
 		<g:link>https://samchang72.github.io/ecommerce-frontend/#/product/14</g:link>
 		<g:image_link>https://samchang72.github.io/ecommerce-frontend/image/tablet.png</g:image_link>
-		<g:brand>Example</g:brand>
+		<g:brand>Sam Store</g:brand>
 		<g:condition>new</g:condition>
 		<g:availability>in stock</g:availability>
-		<g:quantity_to_sell_on_facebook>20</g:quantity_to_sell_on_facebook>
+		<g:quantity_to_sell_on_facebook>10000</g:quantity_to_sell_on_facebook>
 		<g:price>12000.00 TWD</g:price>
 		<g:shipping>
 			<g:country>UK</g:country>
 			<g:service>Standard</g:service>
 			<g:price>4.95 GBP</g:price>
 		</g:shipping>
-		<g:google_product_category>Animals &gt; Pet Supplies</g:google_product_category>
+		<g:google_product_category>Electronics &gt; Computers &gt; Tablet Computers</g:google_product_category>
 		<applink property="ios_url" content="example-ios://electronic" />
 		<applink property="ios_app_store_id" content="42" />
 		<applink property="ios_app_name" content="Electronic Example iOS" />
@@ -482,20 +482,20 @@
 	<entry>
 		<g:id>DB_15</g:id>
 		<g:title>藍牙耳機</g:title>
-		<g:description>藍牙耳機</g:description>
+		<g:description>真無線藍牙耳機，穩定連線與清晰音質，聽歌通話皆宜。</g:description>
 		<g:link>https://samchang72.github.io/ecommerce-frontend/#/product/15</g:link>
 		<g:image_link>https://samchang72.github.io/ecommerce-frontend/image/earbuds.png</g:image_link>
-		<g:brand>Example</g:brand>
+		<g:brand>Sam Store</g:brand>
 		<g:condition>new</g:condition>
 		<g:availability>in stock</g:availability>
-		<g:quantity_to_sell_on_facebook>20</g:quantity_to_sell_on_facebook>
+		<g:quantity_to_sell_on_facebook>10000</g:quantity_to_sell_on_facebook>
 		<g:price>2990.00 TWD</g:price>
 		<g:shipping>
 			<g:country>UK</g:country>
 			<g:service>Standard</g:service>
 			<g:price>4.95 GBP</g:price>
 		</g:shipping>
-		<g:google_product_category>Animals &gt; Pet Supplies</g:google_product_category>
+		<g:google_product_category>Electronics &gt; Audio &gt; Audio Components &gt; Headphones</g:google_product_category>
 		<applink property="ios_url" content="example-ios://electronic" />
 		<applink property="ios_app_store_id" content="42" />
 		<applink property="ios_app_name" content="Electronic Example iOS" />
@@ -516,20 +516,20 @@
 	<entry>
 		<g:id>DB_16</g:id>
 		<g:title>無線滑鼠</g:title>
-		<g:description>無線滑鼠</g:description>
+		<g:description>人體工學無線滑鼠，靈敏順手，辦公居家兼用。</g:description>
 		<g:link>https://samchang72.github.io/ecommerce-frontend/#/product/16</g:link>
 		<g:image_link>https://samchang72.github.io/ecommerce-frontend/image/mouse.png</g:image_link>
-		<g:brand>Example</g:brand>
+		<g:brand>Sam Store</g:brand>
 		<g:condition>new</g:condition>
 		<g:availability>in stock</g:availability>
-		<g:quantity_to_sell_on_facebook>20</g:quantity_to_sell_on_facebook>
+		<g:quantity_to_sell_on_facebook>10000</g:quantity_to_sell_on_facebook>
 		<g:price>590.00 TWD</g:price>
 		<g:shipping>
 			<g:country>UK</g:country>
 			<g:service>Standard</g:service>
 			<g:price>4.95 GBP</g:price>
 		</g:shipping>
-		<g:google_product_category>Animals &gt; Pet Supplies</g:google_product_category>
+		<g:google_product_category>Electronics &gt; Electronics Accessories &gt; Computer Components &gt; Input Devices &gt; Mice &amp; Trackballs</g:google_product_category>
 		<applink property="ios_url" content="example-ios://electronic" />
 		<applink property="ios_app_store_id" content="42" />
 		<applink property="ios_app_name" content="Electronic Example iOS" />
@@ -550,20 +550,20 @@
 	<entry>
 		<g:id>DB_17</g:id>
 		<g:title>餅乾</g:title>
-		<g:description>餅乾</g:description>
+		<g:description>香酥可口餅乾，一口接一口，下午茶良伴。</g:description>
 		<g:link>https://samchang72.github.io/ecommerce-frontend/#/product/17</g:link>
 		<g:image_link>https://samchang72.github.io/ecommerce-frontend/image/cookies.png</g:image_link>
-		<g:brand>Example</g:brand>
+		<g:brand>Sam Store</g:brand>
 		<g:condition>new</g:condition>
 		<g:availability>in stock</g:availability>
-		<g:quantity_to_sell_on_facebook>20</g:quantity_to_sell_on_facebook>
+		<g:quantity_to_sell_on_facebook>10000</g:quantity_to_sell_on_facebook>
 		<g:price>40.00 TWD</g:price>
 		<g:shipping>
 			<g:country>UK</g:country>
 			<g:service>Standard</g:service>
 			<g:price>4.95 GBP</g:price>
 		</g:shipping>
-		<g:google_product_category>Animals &gt; Pet Supplies</g:google_product_category>
+		<g:google_product_category>Food, Beverages &amp; Tobacco &gt; Food Items &gt; Bakery &gt; Cookies</g:google_product_category>
 		<applink property="ios_url" content="example-ios://electronic" />
 		<applink property="ios_app_store_id" content="42" />
 		<applink property="ios_app_name" content="Electronic Example iOS" />
@@ -584,20 +584,20 @@
 	<entry>
 		<g:id>DB_18</g:id>
 		<g:title>堅果</g:title>
-		<g:description>堅果</g:description>
+		<g:description>綜合堅果低溫烘焙不加鹽，健康涮嘴的營養點心。</g:description>
 		<g:link>https://samchang72.github.io/ecommerce-frontend/#/product/18</g:link>
 		<g:image_link>https://samchang72.github.io/ecommerce-frontend/image/nuts.png</g:image_link>
-		<g:brand>Example</g:brand>
+		<g:brand>Sam Store</g:brand>
 		<g:condition>new</g:condition>
 		<g:availability>in stock</g:availability>
-		<g:quantity_to_sell_on_facebook>20</g:quantity_to_sell_on_facebook>
+		<g:quantity_to_sell_on_facebook>10000</g:quantity_to_sell_on_facebook>
 		<g:price>120.00 TWD</g:price>
 		<g:shipping>
 			<g:country>UK</g:country>
 			<g:service>Standard</g:service>
 			<g:price>4.95 GBP</g:price>
 		</g:shipping>
-		<g:google_product_category>Animals &gt; Pet Supplies</g:google_product_category>
+		<g:google_product_category>Food, Beverages &amp; Tobacco &gt; Food Items &gt; Snack Foods &gt; Nuts &amp; Seeds</g:google_product_category>
 		<applink property="ios_url" content="example-ios://electronic" />
 		<applink property="ios_app_store_id" content="42" />
 		<applink property="ios_app_name" content="Electronic Example iOS" />
@@ -618,20 +618,20 @@
 	<entry>
 		<g:id>DB_19</g:id>
 		<g:title>軟糖</g:title>
-		<g:description>軟糖</g:description>
+		<g:description>Q 彈水果軟糖，酸甜多層次，療癒每一刻。</g:description>
 		<g:link>https://samchang72.github.io/ecommerce-frontend/#/product/19</g:link>
 		<g:image_link>https://samchang72.github.io/ecommerce-frontend/image/gummy.png</g:image_link>
-		<g:brand>Example</g:brand>
+		<g:brand>Sam Store</g:brand>
 		<g:condition>new</g:condition>
 		<g:availability>in stock</g:availability>
-		<g:quantity_to_sell_on_facebook>20</g:quantity_to_sell_on_facebook>
+		<g:quantity_to_sell_on_facebook>10000</g:quantity_to_sell_on_facebook>
 		<g:price>35.00 TWD</g:price>
 		<g:shipping>
 			<g:country>UK</g:country>
 			<g:service>Standard</g:service>
 			<g:price>4.95 GBP</g:price>
 		</g:shipping>
-		<g:google_product_category>Animals &gt; Pet Supplies</g:google_product_category>
+		<g:google_product_category>Food, Beverages &amp; Tobacco &gt; Food Items &gt; Candy</g:google_product_category>
 		<applink property="ios_url" content="example-ios://electronic" />
 		<applink property="ios_app_store_id" content="42" />
 		<applink property="ios_app_name" content="Electronic Example iOS" />

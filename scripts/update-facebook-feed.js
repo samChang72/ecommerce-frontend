@@ -27,38 +27,32 @@ const getStockFromJson = () => {
   }
 }
 
+// 品牌名稱（Meta 目錄要求的 brand 欄位，需要換品牌時改這裡）
+const BRAND = 'Sam Store'
+
+// XML 特殊字元逃逸（分類名稱含有 & 與 >，未逃逸會導致 feed 解析失敗）
+const escapeXml = (str) => String(str)
+  .replace(/&/g, '&amp;')
+  .replace(/</g, '&lt;')
+  .replace(/>/g, '&gt;')
+  .replace(/"/g, '&quot;')
+
 // 生成 Facebook Feed 的函數
 const generateFacebookFeed = (products, stock) => {
   const baseUrl = 'https://samchang72.github.io/ecommerce-frontend'
-  
-  const getSpecificCategory = (type, name) => {
-    if (type === '3C') {
-      if (name.includes('手機')) return 'Electronics > Communications > Telephony'
-      if (name.includes('筆電') || name.includes('電腦')) return 'Electronics > Computers'
-      return 'Electronics'
-    }
-    if (type === '衣著') {
-      if (name.includes('短褲') || name.includes('長褲')) return 'Apparel & Accessories > Clothing > Pants'
-      if (name.includes('鞋') || name.includes('淼鞋') || name.includes('高跟')) return 'Apparel & Accessories > Shoes'
-      if (name.includes('外套') || name.includes('西裝')) return 'Apparel & Accessories > Clothing > Outerwear'
-      return 'Apparel & Accessories > Clothing'
-    }
-    if (type === '飲料') return 'Food, Beverages & Tobacco > Beverages'
-    if (type === '零食') return 'Food, Beverages & Tobacco > Food Items'
-    return 'General'
-  }
-  
+
   return products.map(product => ({
     id: `DB_${product.id}`,
     title: product.name,
-    description: product.name,
+    description: product.description,
     availability: (stock[String(product.id)] ?? 0) > 0 ? 'in stock' : 'out of stock',
+    quantity_to_sell_on_facebook: stock[String(product.id)] ?? 0,
     condition: 'new',
     price: `${product.price}.00 TWD`,
     link: `${baseUrl}/#/product/${product.id}`,
     image_link: `https://samchang72.github.io${product.image}`,
-    brand: 'Example',
-    google_product_category: 'Animals > Pet Supplies',
+    brand: BRAND,
+    google_product_category: product.googleCategory,
     shipping: {
       country: 'UK',
       service: 'Standard',
@@ -97,11 +91,11 @@ const generateDataXml = (products, stock) => {
     const qty = stock[String(product.id)] ?? 0
     return `	<entry>
 		<g:id>DB_${product.id}</g:id>
-		<g:title>${product.name}</g:title>
-		<g:description>${product.name}</g:description>
+		<g:title>${escapeXml(product.name)}</g:title>
+		<g:description>${escapeXml(product.description)}</g:description>
 		<g:link>${baseUrl}/#/product/${product.id}</g:link>
 		<g:image_link>https://samchang72.github.io${product.image}</g:image_link>
-		<g:brand>Example</g:brand>
+		<g:brand>${escapeXml(BRAND)}</g:brand>
 		<g:condition>new</g:condition>
 		<g:availability>${qty > 0 ? 'in stock' : 'out of stock'}</g:availability>
 		<g:quantity_to_sell_on_facebook>${qty}</g:quantity_to_sell_on_facebook>
@@ -111,7 +105,7 @@ const generateDataXml = (products, stock) => {
 			<g:service>Standard</g:service>
 			<g:price>4.95 GBP</g:price>
 		</g:shipping>
-		<g:google_product_category>Animals &gt; Pet Supplies</g:google_product_category>
+		<g:google_product_category>${escapeXml(product.googleCategory)}</g:google_product_category>
 		<applink property="ios_url" content="example-ios://electronic" />
 		<applink property="ios_app_store_id" content="42" />
 		<applink property="ios_app_name" content="Electronic Example iOS" />
@@ -153,16 +147,16 @@ const generateRssXml = (products, stock) => {
     const qty = stock[String(product.id)] ?? 0
     return `<item>
 <g:id>DB_${product.id}</g:id>
-<g:title>${product.name}</g:title>
-<g:description>${product.name}</g:description>
+<g:title>${escapeXml(product.name)}</g:title>
+<g:description>${escapeXml(product.description)}</g:description>
 <g:link>${baseUrl}/#/product/${product.id}</g:link>
 <g:image_link>https://samchang72.github.io${product.image}</g:image_link>
-<g:brand>Example</g:brand>
+<g:brand>${escapeXml(BRAND)}</g:brand>
 <g:condition>new</g:condition>
 <g:availability>${qty > 0 ? 'in stock' : 'out of stock'}</g:availability>
 <g:quantity_to_sell_on_facebook>${qty}</g:quantity_to_sell_on_facebook>
 <g:price>${product.price}.00 TWD</g:price>
-<g:google_product_category>Animals &gt; Pet Supplies</g:google_product_category>
+<g:google_product_category>${escapeXml(product.googleCategory)}</g:google_product_category>
 </item>`
   }).join('\n')
 
