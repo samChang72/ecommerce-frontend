@@ -17,6 +17,9 @@
           <div class="product-category">{{ product.type }}</div>
           <h1 class="product-name">{{ product.name }}</h1>
           <div class="product-price">${{ product.price }}</div>
+          <div v-if="getStock(product.id) !== null" class="product-stock">
+            庫存: {{ getStock(product.id) }} 件
+          </div>
           
           <div class="product-description">
             <h3>商品描述</h3>
@@ -61,7 +64,7 @@ export default {
     const route = useRoute()
     const router = useRouter()
     const cartStore = useCartStore()
-    const { loadStock, isSoldOut } = useStock()
+    const { loadStock, isSoldOut, getStock } = useStock()
     
     // 根據路由參數找到對應產品
     const product = computed(() => {
@@ -140,7 +143,8 @@ export default {
       product,
       handleAddToCart,
       goBack,
-      isSoldOut
+      isSoldOut,
+      getStock
     }
   }
 }
@@ -219,6 +223,11 @@ export default {
   font-size: 24px;
   color: #007bff;
   font-weight: bold;
+}
+
+.product-stock {
+  font-size: 15px;
+  color: #6c757d;
 }
 
 .product-description h3 {

@@ -20,5 +20,11 @@ export function useStock() {
     return (stock.value[String(productId)] ?? 0) === 0
   }
 
-  return { stock, loadStock, isSoldOut }
+  // 取得庫存數量；尚未載入或載入失敗時回傳 null（呼叫端不顯示數量）
+  const getStock = (productId) => {
+    if (!stock.value) return null
+    return stock.value[String(productId)] ?? 0
+  }
+
+  return { stock, loadStock, isSoldOut, getStock }
 }

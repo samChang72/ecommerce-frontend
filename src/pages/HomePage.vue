@@ -24,6 +24,9 @@
             <div class="product-info">
               <strong>{{ product.name }}</strong>
               <p class="price">價格: ${{ product.price }}</p>
+              <p v-if="getStock(product.id) !== null" class="stock">
+                庫存: {{ getStock(product.id) }} 件
+              </p>
             </div>
           </router-link>
           <button
@@ -49,7 +52,7 @@ export default {
   name: 'HomePage',
   setup() {
     const cartStore = useCartStore()
-    const { loadStock, isSoldOut } = useStock()
+    const { loadStock, isSoldOut, getStock } = useStock()
 
     // 載入部署版庫存資料（失敗時 fallback 為可購買）
     onMounted(loadStock)
@@ -101,7 +104,8 @@ export default {
       products,
       filteredProducts,
       addToCart,
-      isSoldOut
+      isSoldOut,
+      getStock
     }
   }
 }
@@ -211,6 +215,11 @@ export default {
   color: #007bff;
   font-weight: 600;
   font-size: 14px;
+}
+
+.stock {
+  color: #6c757d;
+  font-size: 13px;
 }
 
 .add-to-cart-btn {
