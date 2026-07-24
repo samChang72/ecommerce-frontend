@@ -1,0 +1,47 @@
+name: purchase-inventory-sync
+
+on:
+  repository_dispatch:
+    types: [purchase]
+
+# 序列化執行：同時多筆訂單依序排隊，避免庫存互相覆蓋
+concurrency:
+  group: inventory-sync
+  cancel-in-progress: false
+
+permissions:
+  contents: write
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: main
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      - name: 扣減庫存
+        env:
+          PAYLOAD: ${{ toJSON(github.event.client_payload) }}
+        run: node scripts/decrement-stock.js "$PAYLOAD"
+
+      - name: 重新產生 feed 與部署版庫存
+        run: node scripts/update-facebook-feed.js
+
+      - name: Commit 並 push
+        env:
+          ORDER_ID: ${{ github.event.client_payload.order_id }}
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add data/stock.json docs/stock.json docs/data.xml docs/data-rss.xml docs/facebook-feed.json
+          if git diff --cached --quiet; then
+            echo "無變更，跳過 commit"
+            exit 0
+          fi
+          git commit -m "chore: 訂單 ${ORDER_ID} 扣減庫存"
+          git push || (git pull --rebase && git push)
